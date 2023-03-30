@@ -37,6 +37,16 @@
         <Style TargetType="{x:Type MenuItem}">
             <Setter Property="Background" Value="Transparent"/>
         </Style>
+        <Storyboard x:Key="PreviewPageAnim">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PreviewBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
 
     <Grid x:Name="MasterUIGrid">
@@ -101,6 +111,14 @@
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="About"/>
             </Border>
         </StackPanel>
-        <StackPanel x:Name="RightPreviewStack" Width="995" HorizontalAlignment="Right" Margin="0,50,50,150"/>
+        <Grid x:Name="RightPreviewGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Width="994" Height="660" Margin="0,50,50,0">
+            <Border x:Name="PreviewBorder" BorderBrush="White" BorderThickness="5,5,5,5" Background="#FFB4DCFF" CornerRadius="20,20,20,20" Margin="0,0,0,80"/>
+            <Border x:Name="Start_Border" CornerRadius="0,20,0,20" Cursor="Hand" UseLayoutRounding="True" Background="#FFF0F0F0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" Height="50">
+                <Border.Effect>
+                    <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
+                </Border.Effect>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="START"/>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
