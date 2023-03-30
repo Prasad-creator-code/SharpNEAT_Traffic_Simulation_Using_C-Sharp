@@ -1,0 +1,106 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NEATDrive_WPF"
+        x:Name="ConfigurationWindow1" x:Class="NEATDrive_WPF.ConfigurationWindow"
+        mc:Ignorable="d"
+        Title="NEATDrive 0.69 Configuration" Cursor="Arrow" FontFamily="Artifakt Element Light" FontSize="16" Icon="/Resources/Images/Logos/Logo.png" RenderTransformOrigin="0.5,0.5" Left="0" Top="0" AllowDrop="True" WindowState="Maximized" Topmost="True" Width="1366" Height="768" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ResizeMode="NoResize">
+
+
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="Cyan" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF64C8FF" Offset="0.2"/>
+            <GradientStop Color="#FF0064FF" Offset="0.8"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.FocusVisualStyle>
+        <Style/>
+    </Window.FocusVisualStyle>
+    <Window.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform ScaleX="1"/>
+            <SkewTransform/>
+            <RotateTransform Angle="0"/>
+            <TranslateTransform/>
+        </TransformGroup>
+    </Window.RenderTransform>
+
+    <Window.Resources>
+        <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="MasterUIGrid">
+        <StackPanel x:Name="LeftMenuStack" Width="300" HorizontalAlignment="Left" Margin="0,0,0,17">
+            <Menu x:Name="MenuBar" UseLayoutRounding="True" BorderThickness="1,1,1,1" Padding="5,5,5,5" Width="120" Height="35" HorizontalAlignment="Left">
+                <Menu.BorderBrush>
+                    <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                        <GradientStop Color="#FF003264"/>
+                        <GradientStop Color="#FF64C8FF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Menu.BorderBrush>
+                <Menu.Background>
+                    <LinearGradientBrush SpreadMethod="Reflect">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF64C8FF" Offset="1"/>
+                        <GradientStop Color="White"/>
+                    </LinearGradientBrush>
+                </Menu.Background>
+                <MenuItem Header="_File" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <MenuItem Header="_New"/>
+                    <MenuItem Header="_Open"/>
+                    <Separator/>
+                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="Save _As"/>
+                    <Separator/>
+                    <MenuItem Header="_Exit" Click="MenuItem_Exit_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="_Cut"/>
+                    <MenuItem Header="_Copy"/>
+                    <MenuItem Header="_Paste"/>
+                </MenuItem>
+                <MenuItem Header="_View">
+                    <MenuItem Header="_Zoom In"/>
+                    <MenuItem Header="_Zoom Out"/>
+                    <Separator/>
+                    <MenuItem Header="_Full Screen"/>
+                </MenuItem>
+            </Menu>
+            <Border x:Name="HomeButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0">
+                <Border.Effect>
+                    <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
+                </Border.Effect>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="Home"/>
+            </Border>
+            <Border x:Name="ParametersButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0">
+                <Border.Effect>
+                    <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
+                </Border.Effect>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="Parameters"/>
+            </Border>
+            <Border x:Name="MetricsButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0">
+                <Border.Effect>
+                    <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
+                </Border.Effect>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="Metrics"/>
+            </Border>
+            <Border x:Name="AboutButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0">
+                <Border.Effect>
+                    <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
+                </Border.Effect>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="About"/>
+            </Border>
+        </StackPanel>
+        <StackPanel x:Name="RightPreviewStack" Width="995" HorizontalAlignment="Right" Margin="0,50,50,150"/>
+    </Grid>
+</Window>

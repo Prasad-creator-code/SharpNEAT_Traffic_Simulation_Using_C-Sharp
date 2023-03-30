@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Logo Rotator.png" />
+    <None Remove="Logo_Mix.png" />
+    <None Remove="Resources\Images\Props\Layer 1.png" />
+    <None Remove="Resources\Images\Props\Ped_car.png" />
+    <None Remove="Resources\Images\Props\PotHole1.png" />
+    <None Remove="Resources\Images\Props\Sports_car.png" />
+    <None Remove="Resources\Images\Props\Taxi Closed.png" />
+    <None Remove="Resources\Images\Props\Taxi Open Left.png" />
+    <None Remove="Resources\Images\Props\Taxi Open Right.png" />
+    <None Remove="Resources\Images\Roads\Road_1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Props\Layer 1.png" />
+    <Resource Include="Resources\Images\Props\Ped_car.png" />
+    <Resource Include="Resources\Images\Props\PotHole1.png" />
+    <Resource Include="Resources\Images\Props\Sports_car.png" />
+    <Resource Include="Resources\Images\Props\Taxi Closed.png" />
+    <Resource Include="Resources\Images\Props\Taxi Open Left.png" />
+    <Resource Include="Resources\Images\Props\Taxi Open Right.png" />
+    <Resource Include="Resources\Images\Roads\Road_1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Allegro" Version="5.2.8" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0-preview2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\Logo Rotator.png" />
+    <Resource Include="Resources\Images\Logos\Logo_Mix.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\Logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
