@@ -37,12 +37,10 @@ namespace NEATDrive_WPF
         {
             if (enable)
             {
-                //SimGrid.IsEnabled = true;
                 SimGrid.Visibility = Visibility.Visible;
             }
             else
             {
-                //SimGrid.IsEnabled = false;
                 SimGrid.Visibility = Visibility.Hidden;
             }
 
