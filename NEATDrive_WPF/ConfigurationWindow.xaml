@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:NEATDrive_WPF"
         x:Name="ConfigurationWindow1" x:Class="NEATDrive_WPF.ConfigurationWindow"
         mc:Ignorable="d"
-        Title="NEATDrive 0.69 Configuration" Cursor="Arrow" FontFamily="Artifakt Element Light" FontSize="16" Icon="/Resources/Images/Logos/Logo.png" RenderTransformOrigin="0.5,0.5" Left="0" Top="0" AllowDrop="True" WindowState="Maximized" Topmost="True" Width="1366" Height="768" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ResizeMode="NoResize">
+        Title="NEATDrive 0.69 Configuration" Cursor="Arrow" FontFamily="Artifakt Element Light" FontSize="16" Icon="/Resources/Images/Logos/Logo.png" RenderTransformOrigin="0.5,0.5" Left="0" Top="0" AllowDrop="True" WindowState="Maximized" Topmost="True" Width="1366" Height="768" SnapsToDevicePixels="True" WindowStartupLocation="CenterOwner" WindowStyle="ThreeDBorderWindow" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" Loaded="ConfigurationWindow1_Loaded" BorderThickness="10,10,10,10">
 
 
     <Window.BorderBrush>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black"/>
-            <GradientStop Color="Cyan" Offset="1"/>
+            <GradientStop Color="White" Offset="1"/>
+            <GradientStop Color="White" Offset="0"/>
         </LinearGradientBrush>
     </Window.BorderBrush>
     <Window.Background>
@@ -40,7 +40,7 @@
         <Storyboard x:Key="PreviewPageAnim">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PreviewBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="1">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <QuinticEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -50,6 +50,10 @@
     </Window.Resources>
 
     <Grid x:Name="MasterUIGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="322*"/>
+            <ColumnDefinition Width="361*"/>
+        </Grid.ColumnDefinitions>
         <StackPanel x:Name="LeftMenuStack" Width="300" HorizontalAlignment="Left" Margin="0,0,0,17">
             <Menu x:Name="MenuBar" UseLayoutRounding="True" BorderThickness="1,1,1,1" Padding="5,5,5,5" Width="120" Height="35" HorizontalAlignment="Left">
                 <Menu.BorderBrush>
@@ -86,7 +90,7 @@
                     <MenuItem Header="_Full Screen"/>
                 </MenuItem>
             </Menu>
-            <Border x:Name="HomeButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0">
+            <Border x:Name="HomeButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0" MouseDown="HomeButton_Border_MouseDown">
                 <Border.Effect>
                     <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
                 </Border.Effect>
@@ -111,14 +115,23 @@
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="About"/>
             </Border>
         </StackPanel>
-        <Grid x:Name="RightPreviewGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Width="994" Height="660" Margin="0,50,50,0">
+        <Grid x:Name="RightPreviewGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Width="994" Height="660" Margin="0,50,50,0" Grid.ColumnSpan="2">
             <Border x:Name="PreviewBorder" BorderBrush="White" BorderThickness="5,5,5,5" Background="#FFB4DCFF" CornerRadius="20,20,20,20" Margin="0,0,0,80"/>
-            <Border x:Name="Start_Border" CornerRadius="0,20,0,20" Cursor="Hand" UseLayoutRounding="True" Background="#FFF0F0F0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" Height="50">
+            <Border x:Name="Start_Border" CornerRadius="0,20,0,20" Cursor="Hand" UseLayoutRounding="True" Background="#FFF0F0F0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" Height="50" MouseDown="Start_Border_MouseDown">
                 <Border.Effect>
                     <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
                 </Border.Effect>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="START"/>
             </Border>
+            <Grid x:Name="SimGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80">
+                <Canvas x:Name="SimulationCanvas" HorizontalAlignment="Left" Width="744" Height="500" VerticalAlignment="Top" Margin="125,50,0,0">
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="/Resources/Images/BackgroundTextures/Grass-1.jpg" TileMode="Tile" Stretch="Fill"/>
+                    </Canvas.Background>
+                    <Image x:Name="RoadImage" Height="500" Canvas.Left="117" Width="754" Source="/Resources/Images/Roads/Road_1.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Image x:Name="Car" Height="100" Canvas.Left="261" Canvas.Top="390" Width="100" Source="/Resources/Images/Props/Sports_car.png"/>
+                </Canvas>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

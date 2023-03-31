@@ -27,8 +27,54 @@ namespace NEATDrive_WPF
         {
             InitializeComponent();
 
+            DisableOnStart();
             fadeInPreview = (Storyboard)FindResource("PreviewPageAnim");
+            fadeInPreview.Begin();
         }
+
+        #region Activation Methods
+        void EnableSimGrid(bool enable)
+        {
+            if (enable)
+            {
+                //SimGrid.IsEnabled = true;
+                SimGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                //SimGrid.IsEnabled = false;
+                SimGrid.Visibility = Visibility.Hidden;
+            }
+
+        }
+        #endregion
+
+        #region Enable These
+        void EnableOnStart()
+        {
+
+        }
+        #endregion
+
+        #region Disable These
+        void DisableOnStart()
+        {
+            EnableSimGrid(false);
+        }
+
+        #endregion
+
+        #region On Config Window Events
+        private void ConfigurationWindow1_Loaded(object sender, RoutedEventArgs e)
+        {
+            /// <summary>
+            /// On Configuration Window is Loaded
+            /// </summary>
+            
+            fadeInPreview.Begin();
+            DisableOnStart();
+        }
+        #endregion
 
         #region Menu Bar Events
         void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
@@ -36,7 +82,21 @@ namespace NEATDrive_WPF
             this.Close();
         }
 
+
         #endregion
+
+        #region Left Side Options Bar Events
+        private void HomeButton_Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Start_Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            EnableSimGrid(true);
+        }
+        #endregion
+
 
     }
 }
