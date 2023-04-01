@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NEATDrive_WPF"
         x:Name="ConfigurationWindow1" x:Class="NEATDrive_WPF.ConfigurationWindow"
         mc:Ignorable="d"
-        Title="NEATDrive 0.69 Configuration" Cursor="Arrow" FontFamily="Artifakt Element Light" FontSize="16" Icon="/Resources/Images/Logos/Logo.png" RenderTransformOrigin="0.5,0.5" Left="0" Top="0" AllowDrop="True" WindowState="Maximized" Topmost="True" Width="1366" Height="768" SnapsToDevicePixels="True" WindowStartupLocation="CenterOwner" WindowStyle="ThreeDBorderWindow" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" Loaded="ConfigurationWindow1_Loaded" BorderThickness="10,10,10,10">
+        Title="NEATDrive 0.69 Configuration" Cursor="Arrow" FontFamily="Artifakt Element Light" FontSize="16" Icon="/Resources/Images/Logos/Logo.png" RenderTransformOrigin="0.5,0.5" Left="0" Top="0" AllowDrop="True" WindowState="Maximized" Topmost="True" Width="1366" Height="768" SnapsToDevicePixels="True" WindowStartupLocation="CenterOwner" WindowStyle="ThreeDBorderWindow" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" Loaded="ConfigurationWindow1_Loaded" BorderThickness="10,10,10,10" KeyDown="ConfigurationWindow1_KeyDown" KeyUp="ConfigurationWindow1_KeyUp">
 
 
     <Window.BorderBrush>
@@ -129,7 +129,7 @@
                         <ImageBrush ImageSource="/Resources/Images/BackgroundTextures/Grass-1.jpg" TileMode="Tile" Stretch="Fill"/>
                     </Canvas.Background>
                     <Image x:Name="RoadImage" Height="500" Canvas.Left="117" Width="754" Source="/Resources/Images/Roads/Road_1.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Image x:Name="Car" Height="100" Canvas.Left="261" Canvas.Top="390" Width="100" Source="/Resources/Images/Props/Sports_car.png"/>
+                    <Rectangle x:Name="player" Height="50" Canvas.Left="261" Canvas.Top="390" Width="25" Fill="Yellow"/>
                 </Canvas>
             </Grid>
         </Grid>

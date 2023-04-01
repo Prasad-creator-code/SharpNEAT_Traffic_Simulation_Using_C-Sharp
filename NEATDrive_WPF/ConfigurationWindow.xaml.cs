@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NEATDrive_WPF.DrivingScripts;
+using System;
+using System.Diagnostics;
 using System.Windows;
-using System.Windows.Automation;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace NEATDrive_WPF
 {
@@ -21,7 +13,9 @@ namespace NEATDrive_WPF
     /// </summary>
     public partial class ConfigurationWindow : Window
     {
-        Storyboard fadeInPreview;
+        readonly Storyboard fadeInPreview;
+
+        DriveManager driveManager;
 
         public ConfigurationWindow()
         {
@@ -30,6 +24,8 @@ namespace NEATDrive_WPF
             DisableOnStart();
             fadeInPreview = (Storyboard)FindResource("PreviewPageAnim");
             fadeInPreview.Begin();
+            
+
         }
 
         #region Activation Methods
@@ -48,7 +44,7 @@ namespace NEATDrive_WPF
         #endregion
 
         #region Enable These
-        void EnableOnStart()
+        static void EnableOnStart()
         {
 
         }
@@ -89,12 +85,51 @@ namespace NEATDrive_WPF
 
         }
 
+        #endregion
+
+        #region Right Side Options Bar Events
+
         private void Start_Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             EnableSimGrid(true);
+            ApplicationManager.instance?.FocusCanvas(SimulationCanvas);
+            driveManager = new(this);
+            /*if (driveManager.isSimStart())
+            {*/
+            driveManager.InitTimer();
+                
+            driveManager.StartSim();
+            
+            
         }
+
+        internal void SimLoop(object? sender, EventArgs e)
+        {
+            driveManager.UpdateCarPosition();
+            //UpdateCarPhysics();
+        }
+        void UpdateCarPhysics()
+        {
+
+        }
+
         #endregion
 
+        #region Window Sim Controls
+        private void ConfigurationWindow1_KeyDown(object sender, KeyEventArgs e)
+        {
+            driveManager.DirectionalDrivePress(e);
 
+        }
+        private void ConfigurationWindow1_KeyUp(object sender, KeyEventArgs e)
+        {
+            driveManager.DirectionalDriveRelease(e);
+
+        }
+
+
+        #endregion
+
+        
     }
 }
