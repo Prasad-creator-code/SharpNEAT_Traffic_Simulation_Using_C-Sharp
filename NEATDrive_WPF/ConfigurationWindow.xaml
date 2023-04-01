@@ -50,11 +50,15 @@
     </Window.Resources>
 
     <Grid x:Name="MasterUIGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="353*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="322*"/>
             <ColumnDefinition Width="361*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="LeftMenuStack" Width="300" HorizontalAlignment="Left" Margin="0,0,0,17">
+        <StackPanel x:Name="LeftMenuStack" Width="300" HorizontalAlignment="Left" Margin="0,0,0,17" Grid.RowSpan="2">
             <Menu x:Name="MenuBar" UseLayoutRounding="True" BorderThickness="1,1,1,1" Padding="5,5,5,5" Width="120" Height="35" HorizontalAlignment="Left">
                 <Menu.BorderBrush>
                     <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
@@ -115,7 +119,7 @@
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="About"/>
             </Border>
         </StackPanel>
-        <Grid x:Name="RightPreviewGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Width="994" Height="660" Margin="0,50,50,0" Grid.ColumnSpan="2">
+        <Grid x:Name="RightPreviewGrid" HorizontalAlignment="Left" VerticalAlignment="Center" Width="994" Height="660" Margin="302,0,0,0" Grid.ColumnSpan="2" Grid.Row="1">
             <Border x:Name="PreviewBorder" BorderBrush="White" BorderThickness="5,5,5,5" Background="#FFB4DCFF" CornerRadius="20,20,20,20" Margin="0,0,0,80"/>
             <Border x:Name="Start_Border" CornerRadius="0,20,0,20" Cursor="Hand" UseLayoutRounding="True" Background="#FFF0F0F0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" Height="50" MouseDown="Start_Border_MouseDown">
                 <Border.Effect>
@@ -126,10 +130,20 @@
             <Grid x:Name="SimGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80">
                 <Canvas x:Name="SimulationCanvas" HorizontalAlignment="Left" Width="744" Height="500" VerticalAlignment="Top" Margin="125,50,0,0">
                     <Canvas.Background>
-                        <ImageBrush ImageSource="/Resources/Images/BackgroundTextures/Grass-1.jpg" TileMode="Tile" Stretch="Fill"/>
+                        <ImageBrush ImageSource="Resources/Images/BackgroundTextures/Grass-1.jpg" TileMode="Tile" Stretch="Fill"/>
                     </Canvas.Background>
-                    <Image x:Name="RoadImage" Height="500" Canvas.Left="117" Width="754" Source="/Resources/Images/Roads/Road_1.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Rectangle x:Name="player" Height="50" Canvas.Left="261" Canvas.Top="390" Width="25" Fill="Yellow"/>
+                    <Rectangle x:Name="CollisionRect" Height="504" Width="734" HorizontalAlignment="Center" VerticalAlignment="Top" Fill="#7F000000"/>
+                    <Canvas x:Name="Road" Height="500" Width="744">
+                        <Canvas.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/Road_1.png" Stretch="Fill"/>
+                        </Canvas.Background>
+                    </Canvas>
+                    <Rectangle x:Name="player" Height="50" Canvas.Left="261" Canvas.Top="390" Width="25">
+
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Resources/Images/Props/Sports_car.png"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
                 </Canvas>
             </Grid>
         </Grid>

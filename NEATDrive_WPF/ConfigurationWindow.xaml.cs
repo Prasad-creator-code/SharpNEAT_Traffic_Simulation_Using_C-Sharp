@@ -106,11 +106,6 @@ namespace NEATDrive_WPF
         internal void SimLoop(object? sender, EventArgs e)
         {
             driveManager.UpdateCarPosition();
-            //UpdateCarPhysics();
-        }
-        void UpdateCarPhysics()
-        {
-
         }
 
         #endregion

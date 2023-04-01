@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Reflection.Metadata;
+using System.Runtime.ConstrainedExecution;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Point = System.Drawing.Point;
 
 namespace NEATDrive_WPF.DrivingScripts
 {
@@ -22,7 +24,7 @@ namespace NEATDrive_WPF.DrivingScripts
 
         public DispatcherTimer simTimer = new();
         List<Rectangle> itemRemover = new();
-
+        
         ConfigurationWindow simWindow;
 
         Random rand= new();
@@ -31,6 +33,7 @@ namespace NEATDrive_WPF.DrivingScripts
         ImageBrush starImage = new();
 
         Rect playerHitBox;
+        bool isColliding;
 
         double carSpeed = 0;
         double carAcceleration = 0.25;
@@ -70,19 +73,17 @@ namespace NEATDrive_WPF.DrivingScripts
             //isTurningRight = false;
             //simOver = false;
             //powerMode = false;
-
-            //score = 0;
-
-
-            playerImage.ImageSource = new BitmapImage(new Uri("D:\\Comp Engg Files\\BE-A Sem II\\Project\\C# Version\\NEAT-master\\NeatTest\\NEATDrive_WPF\\Resources\\Images\\Props\\Sports_car.png"));
+            playerImage.ImageSource = new BitmapImage(new Uri("Resources\\Images\\Props\\Sports_car.png"));
 
             simWindow.player.Fill = playerImage;
+
+            //score = 0;
 
             //foreach (var item in itemRemover) 
             //{
 
             //}
-        
+
         }
 
         public void InitTimer()
@@ -97,56 +98,124 @@ namespace NEATDrive_WPF.DrivingScripts
         }
 
         #region DrivePhysics
+        List<Point> roadPolygon = new List<Point>()
+        {
+            new Point(0, 0),
+            new Point(100, 0),
+            new Point(100, 50),
+            new Point(0, 50)
+        };
+        private bool IsInsidePolygon(Point point, List<Point> polygon)
+        {
+            bool inside = false;
+            int j = polygon.Count - 1;
+
+            for (int i = 0; i < polygon.Count; i++)
+            {
+                if (((polygon[i].Y <= point.Y && point.Y < polygon[j].Y) || (polygon[j].Y <= point.Y && point.Y < polygon[i].Y)) &&
+                    (point.X > (polygon[j].X - polygon[i].X) * (point.Y - polygon[i].Y) / (polygon[j].Y - polygon[i].Y) + polygon[i].X))
+                {
+                    inside = !inside;
+                }
+
+                j = i;
+            }
+
+            return inside;
+        }
+        private Point GetRandomPositionOnRoad()
+        {
+            Random rand = new Random();
+            Point randomPoint = new Point(rand.Next(0, 100), rand.Next(0, 50));
+
+            while (!IsInsidePolygon(randomPoint, roadPolygon))
+            {
+                randomPoint = new Point(rand.Next(0, 100), rand.Next(0, 50));
+            }
+
+            return randomPoint;
+        }
+        private bool IsColliding(double x, double y, double width, double height)
+        {
+            Rect carRect = new Rect(x, y, width, height);
+            Rect collisionRect = new Rect(simWindow.CollisionRect.RadiusX, simWindow.CollisionRect.RadiusY, simWindow.CollisionRect.Width, simWindow.CollisionRect.Height);
+
+            if (carRect.IntersectsWith(collisionRect))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public void UpdateCarPosition()
         {
-            if(isTurningLeft && carSpeed>=1)
+            // Get current position of car
+            double carLeft = Canvas.GetLeft(simWindow.player);
+            double carTop = Canvas.GetTop(simWindow.player);
+
+            // Check if car is within boundaries of road
+            if (IsColliding(carLeft, carTop, simWindow.player.Width, simWindow.player.Height))
             {
-                carRotation -= 1 * carTurningSpeed;
-            }
-            if(isTurningRight && carSpeed >= 1)
-            {
-                carRotation += 1 * carTurningSpeed;
-            }
-            if (isAccelerating)
-            {
-                
-                carSpeed += carAcceleration;
-                if (carSpeed > carMaxSpeed)
-                {
-                    carSpeed = carMaxSpeed;
-                }
-            }
-            else if (isBraking)
-            {
-                carSpeed -= carAcceleration;
-                if (carSpeed < 0)
-                {
-                    carSpeed = 0;
-                }
+                // If car is offroad, reset its position to a random point on the road
+                Point roadPoint = GetRandomPositionOnRoad();
+                Canvas.SetLeft(simWindow.player, roadPoint.X);
+                Canvas.SetTop(simWindow.player, roadPoint.Y);
             }
             else
             {
-                carSpeed -= carFriction;
-                if (carSpeed < 0)
+                // If car is on the road, update its position as usual
+                if (isTurningLeft && carSpeed >= 1)
                 {
-                    carSpeed = 0;
+                    carRotation -= 1 * carTurningSpeed;
                 }
+                if (isTurningRight && carSpeed >= 1)
+                {
+                    carRotation += 1 * carTurningSpeed;
+                }
+                if (isAccelerating)
+                {
+
+                    carSpeed += carAcceleration;
+                    if (carSpeed > carMaxSpeed)
+                    {
+                        carSpeed = carMaxSpeed;
+                    }
+                }
+                else if (isBraking)
+                {
+                    carSpeed -= carAcceleration;
+                    if (carSpeed < 0)
+                    {
+                        carSpeed = 0;
+                    }
+                }
+                else
+                {
+                    carSpeed -= carFriction;
+                    if (carSpeed < 0)
+                    {
+                        carSpeed = 0;
+                    }
+                }
+
+                double carDirectionX = Math.Cos(carRotation * Math.PI / 180);
+                double carDirectionY = Math.Sin(carRotation * Math.PI / 180);
+
+                carPositionX += carDirectionX * carSpeed;
+                carPositionY += carDirectionY * carSpeed;
+
+                Canvas.SetLeft(simWindow.player, carPositionX);
+                Canvas.SetTop(simWindow.player, carPositionY);
+
+                double angle = Math.Atan2(carDirectionY, carDirectionX) + Math.PI / 2;
+                angle *= 180 / Math.PI;
+                angle = Math.Round(angle, 2);
+                RotateTransform rotation = new RotateTransform(angle);
+                simWindow.player.RenderTransform = rotation;
+
             }
-
-            double carDirectionX = Math.Cos(carRotation * Math.PI / 180);
-            double carDirectionY = Math.Sin(carRotation * Math.PI / 180);
-
-            carPositionX += carDirectionX * carSpeed;
-            carPositionY += carDirectionY * carSpeed;
-
-            Canvas.SetLeft(simWindow.player, carPositionX);
-            Canvas.SetTop(simWindow.player, carPositionY);
-
-            double angle = Math.Atan2(carDirectionY, carDirectionX) + Math.PI / 2;
-            angle *= 180 / Math.PI;
-            angle = Math.Round(angle, 2);
-            RotateTransform rotation = new RotateTransform(angle);
-            simWindow.player.RenderTransform = rotation;
+            
         }
         #endregion
 
