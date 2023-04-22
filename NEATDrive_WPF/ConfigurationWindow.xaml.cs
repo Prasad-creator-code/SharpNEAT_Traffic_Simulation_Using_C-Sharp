@@ -24,8 +24,6 @@ namespace NEATDrive_WPF
             DisableOnStart();
             fadeInPreview = (Storyboard)FindResource("PreviewPageAnim");
             fadeInPreview.Begin();
-            
-
         }
 
         #region Activation Methods
@@ -91,14 +89,14 @@ namespace NEATDrive_WPF
 
         private void Start_Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            EnableSimGrid(true);
-            ApplicationManager.instance?.FocusCanvas(SimulationCanvas);
-            driveManager = new(this);
+            //EnableSimGrid(true);
+            //ApplicationManager.instance?.FocusCanvas(SimulationCanvas);
+            //driveManager = new(this);
             /*if (driveManager.isSimStart())
             {*/
-            driveManager.InitTimer();
+            //driveManager.InitTimer();
                 
-            driveManager.StartSim();
+            //driveManager.StartSim();
             
             
         }
@@ -121,8 +119,6 @@ namespace NEATDrive_WPF
             driveManager.DirectionalDriveRelease(e);
 
         }
-
-
         #endregion
 
         

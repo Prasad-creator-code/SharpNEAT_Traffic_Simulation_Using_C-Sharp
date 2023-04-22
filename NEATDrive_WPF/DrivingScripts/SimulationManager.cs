@@ -11,6 +11,7 @@ namespace NEATDrive_WPF.DrivingScripts
     /// </summary>
     class SimulationManager
     {
-    }
+        public static SimulationManager? instance;
 
+    }
 }

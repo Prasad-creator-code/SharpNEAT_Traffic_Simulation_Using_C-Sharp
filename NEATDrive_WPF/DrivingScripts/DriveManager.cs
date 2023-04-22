@@ -20,7 +20,7 @@ namespace NEATDrive_WPF.DrivingScripts
 
     class DriveManager
     {
-        
+        public static DriveManager? instance;
 
         public DispatcherTimer simTimer = new();
         List<Rectangle> itemRemover = new();
@@ -55,7 +55,8 @@ namespace NEATDrive_WPF.DrivingScripts
         double i;
 
         bool simStart=true,isAccelerating, isBraking, isTurningLeft, isTurningRight, simOver, powerMode;
-        
+            
+
         public DriveManager(ConfigurationWindow windowToRunSimOn)
         {
             simWindow=windowToRunSimOn;
@@ -73,10 +74,6 @@ namespace NEATDrive_WPF.DrivingScripts
             //isTurningRight = false;
             //simOver = false;
             //powerMode = false;
-            playerImage.ImageSource = new BitmapImage(new Uri("Resources\\Images\\Props\\Sports_car.png"));
-
-            simWindow.player.Fill = playerImage;
-
             //score = 0;
 
             //foreach (var item in itemRemover) 

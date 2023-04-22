@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEATDrive_WPF.DrivingScripts;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -19,7 +20,15 @@ namespace NEATDrive_WPF
             InitializeComponent();
             if(ApplicationManager.instance== null)
             {
-                ApplicationManager.instance = new ApplicationManager();
+                ApplicationManager.instance = new();
+            }
+            if(RoadManager.instance==null)
+            {
+                RoadManager.instance = new();
+            }
+            if(SimulationManager.instance==null)
+            {
+                SimulationManager.instance = new();
             }
             
         }
