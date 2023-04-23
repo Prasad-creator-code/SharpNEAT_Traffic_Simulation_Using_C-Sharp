@@ -11,7 +11,10 @@
     <None Remove="Logo Rotator.png" />
     <None Remove="Logo_Mix.png" />
     <None Remove="Resources\Images\BackgroundTextures\Grass-1.jpg" />
+    <None Remove="Resources\Images\Props\Cross.png" />
+    <None Remove="Resources\Images\Props\Grass_Cute.png" />
     <None Remove="Resources\Images\Props\Layer 1.png" />
+    <None Remove="Resources\Images\Props\pedestrian.png" />
     <None Remove="Resources\Images\Props\Ped_car.png" />
     <None Remove="Resources\Images\Props\PotHole1.png" />
     <None Remove="Resources\Images\Props\Sports_car.png" />
@@ -27,7 +30,10 @@
 
   <ItemGroup>
     <Resource Include="Resources\Images\BackgroundTextures\Grass-1.jpg" />
+    <Resource Include="Resources\Images\Props\Cross.png" />
+    <Resource Include="Resources\Images\Props\Grass_Cute.png" />
     <Resource Include="Resources\Images\Props\Layer 1.png" />
+    <Resource Include="Resources\Images\Props\pedestrian.png" />
     <Resource Include="Resources\Images\Props\Ped_car.png" />
     <Resource Include="Resources\Images\Props\PotHole1.png" />
     <Resource Include="Resources\Images\Props\Sports_car.png" />

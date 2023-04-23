@@ -16,6 +16,7 @@ namespace NEATDrive_WPF
         public static ApplicationManager? instance;
 
         public ConfigurationWindow configWindow = new();
+        public SimulationWindow simWindow = new();
 
         public void FocusCanvas(Canvas canvasToFocus)
         {

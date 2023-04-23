@@ -100,19 +100,19 @@
                 </Border.Effect>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="Home"/>
             </Border>
-            <Border x:Name="ParametersButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0">
+            <Border x:Name="ParametersButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0" MouseDown="ParametersButton_Border_MouseDown">
                 <Border.Effect>
                     <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
                 </Border.Effect>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="Parameters"/>
             </Border>
-            <Border x:Name="MetricsButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0">
+            <Border x:Name="MetricsButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0" MouseDown="MetricsButton_Border_MouseDown">
                 <Border.Effect>
                     <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
                 </Border.Effect>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="Metrics"/>
             </Border>
-            <Border x:Name="AboutButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0">
+            <Border x:Name="AboutButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0" MouseDown="AboutButton_Border_MouseDown">
                 <Border.Effect>
                     <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
                 </Border.Effect>
@@ -127,9 +127,9 @@
                 </Border.Effect>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="START"/>
             </Border>
-            <Grid x:Name="SimGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80">
+            <Grid x:Name="HomeGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80" d:IsHidden="True">
                 <Grid x:Name="CanvasGrid" Grid.Row="3" Grid.Column="3" Grid.RowSpan="3" Grid.ColumnSpan="3" Width="500" Height="500" HorizontalAlignment="Right" Margin="0,0,50,0" Focusable="True">
-                    <Border x:Name="Row1_1" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" CornerRadius="20,20,20,20" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+                    <Border x:Name="Row1_1" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" CornerRadius="20,20,20,20" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
                         <Border.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -142,7 +142,7 @@
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
                         </Border.Background>
                     </Border>
-                    <Border x:Name="Row1_2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
+                    <Border x:Name="Row1_2" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
                         <Border.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -155,7 +155,7 @@
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
                         </Border.Background>
                     </Border>
-                    <Border x:Name="Row1_3" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.RowSpan="1" Grid.ColumnSpan="1" Panel.ZIndex="-1" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
+                    <Border x:Name="Row1_3" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.RowSpan="1" Grid.ColumnSpan="1" Panel.ZIndex="-1" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
                         </Border.Background>
@@ -168,12 +168,12 @@
                             </TransformGroup>
                         </Border.RenderTransform>
                     </Border>
-                    <Border x:Name="Row2_1" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" Margin="-5,0,0,0" HorizontalAlignment="Left">
+                    <Border x:Name="Row2_1" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" Margin="-5,0,0,0" HorizontalAlignment="Left">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
                         </Border.Background>
                     </Border>
-                    <Border x:Name="Row2_2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
+                    <Border x:Name="Row2_2" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Chowk.png"/>
                         </Border.Background>
@@ -186,7 +186,7 @@
                             </TransformGroup>
                         </Border.RenderTransform>
                     </Border>
-                    <Border x:Name="Row2_3" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                    <Border x:Name="Row2_3" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
                         </Border.Background>
@@ -199,12 +199,12 @@
                             </TransformGroup>
                         </Border.RenderTransform>
                     </Border>
-                    <Border x:Name="Row3_1" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Left" CornerRadius="20,20,20,20">
+                    <Border x:Name="Row3_1" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Left" CornerRadius="20,20,20,20">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
                         </Border.Background>
                     </Border>
-                    <Border x:Name="Row3_2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+                    <Border x:Name="Row3_2" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
                         </Border.Background>
@@ -217,7 +217,7 @@
                             </TransformGroup>
                         </Border.RenderTransform>
                     </Border>
-                    <Border x:Name="Row3_3" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
+                    <Border x:Name="Row3_3" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
                         </Border.Background>
@@ -232,31 +232,223 @@
                     </Border>
                 </Grid>
                 <StackPanel x:Name="RoadMenuStack" Margin="100,50,0,0" HorizontalAlignment="Left" Width="200">
-                    <Border x:Name="TurnRoad_Border" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,20,0,0">
+                    <Border x:Name="TurnRoad_Border" BorderBrush="White" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,20,0,0">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
                         </Border.Background>
-                        <Button x:Name="TurnRoad_Button" Content="&#xD;&#xA;" Background="{x:Null}" Click="Button_Click"/>
+                        <Button x:Name="TurnRoad_Button" Content="&#xD;&#xA;" Background="{x:Null}" Click="Button_Click" SnapsToDevicePixels="False" BorderThickness="0,0,0,0"/>
                     </Border>
-                    <Border x:Name="StraightRoad_Border" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Padding="0,50,0,0" Margin="0,10,0,0">
+                    <Border x:Name="StraightRoad_Border" BorderBrush="White" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Padding="0,50,0,0" Margin="0,10,0,0">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Straight_Road.png"/>
                         </Border.Background>
-                        <Button x:Name="StraightRoad_Button" Content="&#xD;&#xA;" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-50,0,0" Background="{x:Null}"/>
+                        <Button x:Name="StraightRoad_Button" Content="&#xD;&#xA;" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-50,0,0" Background="{x:Null}" SnapsToDevicePixels="False" BorderThickness="0,0,0,0"/>
                     </Border>
-                    <Border x:Name="CenterRoad_Border" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,10,0,0">
+                    <Border x:Name="CenterRoad_Border" BorderBrush="White" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,10,0,0">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Chowk.png"/>
                         </Border.Background>
-                        <Button x:Name="CenterRoad_Button" Content="" Background="{x:Null}"/>
+                        <Button x:Name="CenterRoad_Button" Content="" Background="{x:Null}" SnapsToDevicePixels="False" BorderThickness="0,0,0,0"/>
                     </Border>
-                    <Border x:Name="ThreeWayRoad_Border" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,10,0,0">
+                    <Border x:Name="ThreeWayRoad_Border" BorderBrush="White" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,10,0,0">
                         <Border.Background>
                             <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
                         </Border.Background>
-                        <Button x:Name="ThreeWayRoad_Button" Content="" Background="{x:Null}"/>
+                        <Button x:Name="ThreeWayRoad_Button" Content="" Background="{x:Null}" SnapsToDevicePixels="False" BorderThickness="0,0,0,0"/>
                     </Border>
                 </StackPanel>
+                <Label x:Name="Home_Help" Content="Drag and Drop Road Types on the slots to the right. Click Right Mouse Button to delete and Left Mouse Button to Rotate Roads" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid x:Name="ParametersGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80">
+                <StackPanel x:Name="Left_SettingsMenuStack" Margin="100,50,0,0" HorizontalAlignment="Left" Width="250">
+                    <Grid x:Name="Population_Size_Grid" Height="50">
+                        <Label x:Name="Population_Size" Content="Population Size" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="Population_Size_Box" TextWrapping="Wrap" Text="220" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid x:Name="Initial_Conn_Prop_Grid" Height="50">
+                        <Label x:Name="Initial_Conn_Proportion" Content="Init Conn Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="Initial_Conn_Proportion_Box" TextWrapping="Wrap" Text="0.05" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid x:Name="No_of_Species_Grid" Height="50">
+                        <Label x:Name="No_of_Species_Text" Content="Number of Species" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="No_of_Species_Box" TextWrapping="Wrap" Text="10" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid x:Name="Elitism_Proportion_Grid" Height="50">
+                        <Label x:Name="Elitism_Proportion_Text" Content="Elitism Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="Elitism_Prop_Box" TextWrapping="Wrap" Text="0.2" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid x:Name="Selection_Proportion_Grid" Height="50">
+                        <Label x:Name="Selection_Proportion_Text" Content="Selection Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="Selection_Proportion_Box" TextWrapping="Wrap" Text="0.2" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid x:Name="Asexual_Repr_Grid" Height="200" Width="250">
+                        <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+                            <Label x:Name="Asexual_Repr" Content="Asexual Reproduction Settings" FontWeight="Bold"/>
+                        </Border>
+                        <Label x:Name="Mutate_Weights_Text" Content="Mutate Weights" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0"/>
+                        <TextBox x:Name="Mutate_Weights_Box" TextWrapping="Wrap" Text="0.988" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,5,0"/>
+                        <Label x:Name="Add_Neuron_Text" Content="Add Neuron" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,50"/>
+                        <TextBox x:Name="Add_Neuron_Box" TextWrapping="Wrap" Text="0.001" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,50"/>
+                        <Label x:Name="Add_Connection_Text" Content="Add Connection" HorizontalAlignment="Left" Height="140" VerticalAlignment="Bottom" Margin="1,0,0,-29"/>
+                        <TextBox x:Name="Add_Connection_Box" TextWrapping="Wrap" Text="0.01" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,85"/>
+                        <Label x:Name="Delete_Connection_Text" Content="Delete Connection" HorizontalAlignment="Left" Height="140" VerticalAlignment="Bottom" Margin="1,0,0,-60"/>
+                        <TextBox x:Name="Delete_Connection_Box" TextWrapping="Wrap" Text="0.001" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,57"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel x:Name="Right_SettingsMenuStack" Margin="0,50,100,0" HorizontalAlignment="Right" Width="300">
+                    <Grid x:Name="Asexual_Offspring_Prop_Grid" Height="50">
+                        <Label x:Name="Asexual_Offspring_Prop_Text" Content="Asexual Offspring Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="Asexual_Offspring_Prop_Box" TextWrapping="Wrap" Text="0.5" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid x:Name="Sexual_Offspring_Prop_Grid" Height="50">
+                        <Label x:Name="Sexual_Offspring_Prop_Text" Content="Sexual Offspring Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="Sexual_Offspring_Prop_Box" TextWrapping="Wrap" Text="0.5" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid x:Name="InterSpecies_Mating_Grid" Height="50">
+                        <Label x:Name="InterSpecies_Mating_Text" Content="Inter-species Mating Probability" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="InterSpecies_Mating_Box" TextWrapping="Wrap" Text="0.01" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid x:Name="Genome_Population_Grid" Height="200" Width="250">
+                        <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+                            <Label x:Name="Genome_Population_Label" Content="Genome Population" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        </Border>
+                        <Button x:Name="Create_Rand_Popu" Content="Create Random Population" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="50" Margin="0,50,0,0"/>
+                        <Button x:Name="Load_Experiment_Default" Content="Load Experiment Default" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" Margin="0,80,0,0"/>
+                    </Grid>
+                </StackPanel>
+                <Label x:Name="Param_Help" Content="Adjust NEAT Parameters for fine tuning and Performance Tweaking of the Application" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid x:Name="MetricsGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80" d:IsHidden="True">
+                <Grid x:Name="PerformanceGrid" Grid.Row="3" Grid.Column="3" Grid.RowSpan="3" Grid.ColumnSpan="3" Width="500" Height="500" HorizontalAlignment="Right" Margin="0,0,50,0" Focusable="True">
+                    <Border x:Name="Row1_7" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" CornerRadius="20,20,20,20" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
+                        </Border.Background>
+                    </Border>
+                    <Border x:Name="Row1_8" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
+                        </Border.Background>
+                    </Border>
+                    <Border x:Name="Row1_9" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.RowSpan="1" Grid.ColumnSpan="1" Panel.ZIndex="-1" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
+                        </Border.Background>
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="180"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border x:Name="Row2_7" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" Margin="-5,0,0,0" HorizontalAlignment="Left">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
+                        </Border.Background>
+                    </Border>
+                    <Border x:Name="Row2_8" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Chowk.png"/>
+                        </Border.Background>
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border x:Name="Row2_9" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
+                        </Border.Background>
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="180"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border x:Name="Row3_7" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Left" CornerRadius="20,20,20,20">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
+                        </Border.Background>
+                    </Border>
+                    <Border x:Name="Row3_8" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
+                        </Border.Background>
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="270"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border x:Name="Row3_9" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
+                        </Border.Background>
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="270"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                    </Border>
+                </Grid>
+                <StackPanel x:Name="MetricsMenuStack" Margin="100,50,0,0" HorizontalAlignment="Left" Width="200">
+                    <Border x:Name="TurnRoad_Border2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,20,0,0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
+                        </Border.Background>
+                        <Button x:Name="TurnRoad_Button2" Content="&#xA;" Background="{x:Null}" Click="Button_Click" SnapsToDevicePixels="False" BorderThickness="0,0,0,0"/>
+                    </Border>
+                    <Border x:Name="StraightRoad_Border2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Padding="0,50,0,0" Margin="0,10,0,0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Straight_Road.png"/>
+                        </Border.Background>
+                        <Button x:Name="StraightRoad_Button2" Content="&#xA;" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-50,0,0" Background="{x:Null}" SnapsToDevicePixels="False" BorderThickness="0,0,0,0"/>
+                    </Border>
+                    <Border x:Name="CenterRoad_Border2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,10,0,0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Chowk.png"/>
+                        </Border.Background>
+                        <Button x:Name="CenterRoad_Button2" Content="" Background="{x:Null}" SnapsToDevicePixels="False" BorderThickness="0,0,0,0"/>
+                    </Border>
+                    <Border x:Name="ThreeWayRoad_Border2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,10,0,0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
+                        </Border.Background>
+                        <Button x:Name="ThreeWayRoad_Button2" Content="" Background="{x:Null}" SnapsToDevicePixels="False" BorderThickness="0,0,0,0"/>
+                    </Border>
+                </StackPanel>
+                <Label x:Name="Metrics_Help" Content="Drag and Drop Road Types on the slots to the right. Click Right Mouse Button to delete and Left Mouse Button to Rotate Roads" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
     </Grid>

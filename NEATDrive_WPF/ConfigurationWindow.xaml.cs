@@ -27,61 +27,105 @@ namespace NEATDrive_WPF
         }
 
         #region Activation Methods
-        void EnableSimGrid(bool enable)
+        void EnableSimGrid(bool state)
         {
-            if (enable)
+            if (state)
             {
-                SimGrid.Visibility = Visibility.Visible;
+                HomeGrid.Visibility = Visibility.Visible;
             }
             else
             {
-                SimGrid.Visibility = Visibility.Hidden;
+                HomeGrid.Visibility = Visibility.Hidden;
             }
 
+        }
+
+        void EnableParamGrid(bool state)
+        {
+            if (state)
+            {
+                ParametersGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ParametersGrid.Visibility = Visibility.Hidden;
+            }
+        }
+        void EnableMetricsGrid(bool state)
+        {
+            if (state)
+            {
+                MetricsGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MetricsGrid.Visibility = Visibility.Hidden;
+            }
         }
         #endregion
 
         #region Enable These
         static void EnableOnStart()
-        {
+            {
 
-        }
-        #endregion
+            }
+            #endregion
 
-        #region Disable These
-        void DisableOnStart()
-        {
-            EnableSimGrid(false);
-        }
+            #region Disable These
+            void DisableOnStart()
+            {
+                EnableSimGrid(false);
+            }
 
-        #endregion
+            #endregion
 
-        #region On Config Window Events
-        private void ConfigurationWindow1_Loaded(object sender, RoutedEventArgs e)
-        {
-            /// <summary>
-            /// On Configuration Window is Loaded
-            /// </summary>
+            #region On Config Window Events
+            private void ConfigurationWindow1_Loaded(object sender, RoutedEventArgs e)
+            {
+                /// <summary>
+                /// On Configuration Window is Loaded
+                /// </summary>
+
+                fadeInPreview.Begin();
+                DisableOnStart();
+            }
+            #endregion
+
+            #region Menu Bar Events
+            void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+            {
+                this.Close();
+            }
+
+
+            #endregion
+
+            #region Left Side Options Bar Events
+            private void HomeButton_Border_MouseDown(object sender, MouseButtonEventArgs e)
+            {
+                EnableSimGrid(true);
+                EnableParamGrid(false);
+                EnableMetricsGrid(false);
+            }
+
+            private void ParametersButton_Border_MouseDown(object sender, MouseButtonEventArgs e)
+            {
+                EnableParamGrid(true);
+                EnableSimGrid(false);
+                EnableMetricsGrid(false);
+            }
+
+            private void MetricsButton_Border_MouseDown(object sender, MouseButtonEventArgs e)
+            {
+                EnableMetricsGrid(true);
+                EnableParamGrid(false);
+                EnableSimGrid(false);
             
-            fadeInPreview.Begin();
-            DisableOnStart();
-        }
-        #endregion
+            }
+            private void AboutButton_Border_MouseDown(object sender, MouseButtonEventArgs e)
+            {
 
-        #region Menu Bar Events
-        void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-
-        #endregion
-
-        #region Left Side Options Bar Events
-        private void HomeButton_Border_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
+            }
 
         #endregion
 
@@ -89,42 +133,45 @@ namespace NEATDrive_WPF
 
         private void Start_Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //EnableSimGrid(true);
-            //ApplicationManager.instance?.FocusCanvas(SimulationCanvas);
-            //driveManager = new(this);
-            /*if (driveManager.isSimStart())
-            {*/
-            //driveManager.InitTimer();
-                
-            //driveManager.StartSim();
-            
-            
-        }
+                ApplicationManager.instance.simWindow.Show();
+                ApplicationManager.instance.configWindow.Hide();
+                //EnableSimGrid(true);
+                //ApplicationManager.instance?.FocusCanvas(SimulationCanvas);
+                //driveManager = new(this);
+                /*if (driveManager.isSimStart())
+                {*/
+                //driveManager.InitTimer();
 
-        internal void SimLoop(object? sender, EventArgs e)
-        {
-            //driveManager.UpdateCarPosition();
-        }
-
-        #endregion
-
-        #region Window Sim Controls
-        private void ConfigurationWindow1_KeyDown(object sender, KeyEventArgs e)
-        {
-            //driveManager.DirectionalDrivePress(e);
-
-        }
-        private void ConfigurationWindow1_KeyUp(object sender, KeyEventArgs e)
-        {
-            //driveManager.DirectionalDriveRelease(e);
+                //driveManager.StartSim();
 
         }
 
-        #endregion
+            internal void SimLoop(object? sender, EventArgs e)
+            {
+                //driveManager.UpdateCarPosition();
+            }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+            #endregion
 
-        }
+            #region Window Sim Controls
+            private void ConfigurationWindow1_KeyDown(object sender, KeyEventArgs e)
+            {
+                //driveManager.DirectionalDrivePress(e);
+
+            }
+            private void ConfigurationWindow1_KeyUp(object sender, KeyEventArgs e)
+            {
+                //driveManager.DirectionalDriveRelease(e);
+
+            }
+
+            #endregion
+
+            private void Button_Click(object sender, RoutedEventArgs e)
+            {
+
+            }
+
+        
     }
-}
+    }
