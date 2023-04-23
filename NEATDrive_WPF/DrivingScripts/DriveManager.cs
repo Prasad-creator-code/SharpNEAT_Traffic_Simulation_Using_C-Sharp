@@ -132,7 +132,7 @@ namespace NEATDrive_WPF.DrivingScripts
 
             return randomPoint;
         }
-        private bool IsColliding(double x, double y, double width, double height)
+        /*private bool IsColliding(double x, double y, double width, double height)
         {
             Rect carRect = new Rect(x, y, width, height);
             Rect collisionRect = new Rect(simWindow.CollisionRect.RadiusX, simWindow.CollisionRect.RadiusY, simWindow.CollisionRect.Width, simWindow.CollisionRect.Height);
@@ -275,7 +275,7 @@ namespace NEATDrive_WPF.DrivingScripts
 
             }
 
-        }
+        }*/
         #endregion
 
 

@@ -19,6 +19,10 @@
     <None Remove="Resources\Images\Props\Taxi Open Left.png" />
     <None Remove="Resources\Images\Props\Taxi Open Right.png" />
     <None Remove="Resources\Images\Roads\Road_1.png" />
+    <None Remove="Resources\Images\Roads\SystemicRoads\Chowk.png" />
+    <None Remove="Resources\Images\Roads\SystemicRoads\Straight_Road.png" />
+    <None Remove="Resources\Images\Roads\SystemicRoads\Tri_Road.png" />
+    <None Remove="Resources\Images\Roads\SystemicRoads\Turn_Road.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +51,10 @@
     <Resource Include="Resources\Images\Logos\Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\Roads\SystemicRoads\Chowk.png" />
+    <Resource Include="Resources\Images\Roads\SystemicRoads\Straight_Road.png" />
+    <Resource Include="Resources\Images\Roads\SystemicRoads\Tri_Road.png" />
+    <Resource Include="Resources\Images\Roads\SystemicRoads\Turn_Road.png" />
   </ItemGroup>
 
 </Project>

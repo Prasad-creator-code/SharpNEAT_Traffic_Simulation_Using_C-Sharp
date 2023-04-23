@@ -14,8 +14,7 @@ namespace NEATDrive_WPF.DrivingScripts
     // Define the Cell class to represent each cell in the road grid
     public class Cell
     {
-        public RoadConfiguration Road_Config { get; set; } // Property to store the road configuration for this cell
-                                                             // Add other properties or methods as needed for your specific requirements
+        public RoadConfiguration Road_Config { get; set; } 
     }
 
 

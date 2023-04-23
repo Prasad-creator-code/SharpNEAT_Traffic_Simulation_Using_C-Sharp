@@ -103,7 +103,7 @@ namespace NEATDrive_WPF
 
         internal void SimLoop(object? sender, EventArgs e)
         {
-            driveManager.UpdateCarPosition();
+            //driveManager.UpdateCarPosition();
         }
 
         #endregion
@@ -111,16 +111,20 @@ namespace NEATDrive_WPF
         #region Window Sim Controls
         private void ConfigurationWindow1_KeyDown(object sender, KeyEventArgs e)
         {
-            driveManager.DirectionalDrivePress(e);
+            //driveManager.DirectionalDrivePress(e);
 
         }
         private void ConfigurationWindow1_KeyUp(object sender, KeyEventArgs e)
         {
-            driveManager.DirectionalDriveRelease(e);
+            //driveManager.DirectionalDriveRelease(e);
 
         }
+
         #endregion
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
