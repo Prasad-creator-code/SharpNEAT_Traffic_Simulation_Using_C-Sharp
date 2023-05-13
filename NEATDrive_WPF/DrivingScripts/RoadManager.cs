@@ -11,11 +11,7 @@ namespace NEATDrive_WPF.DrivingScripts
         public static RoadManager? instance;
     }
 
-    // Define the Cell class to represent each cell in the road grid
-    public class Cell
-    {
-        public RoadConfiguration Road_Config { get; set; } 
-    }
+    
 
 
 

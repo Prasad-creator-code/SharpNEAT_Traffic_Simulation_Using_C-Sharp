@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEATDrive_WPF.DrivingScripts.RoadSlots;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,15 +15,17 @@ namespace NEATDrive_WPF.DrivingScripts
     // In your Road class, use a List<Cell> to represent the cells in the road grid
     public class Road
     {
-        private List<Cell> cells; // List to store the cells in the road grid
+        private List<RoadSlot> roadSlots; // List to store the cells in the road grid
+
+        
 
         // Constructor to initialize the road grid with empty cells
         public Road()
         {
-            cells = new List<Cell>();
+            roadSlots = new List<RoadSlot>();
             for (int i = 0; i < 9; i++)
             {
-                cells.Add(new Cell());
+                //roadSlots.Add(new RoadSlot());
             }
         }
 
@@ -30,7 +33,7 @@ namespace NEATDrive_WPF.DrivingScripts
         public void UpdateCell(int index, RoadConfiguration configuration)
         {
             // Update the configuration of the cell at the specified index in the list
-            cells[index].Road_Config = configuration;
+            //roadSlots[index].Road_Config = configuration;
         }
 
         // Other methods or properties as needed for your specific requirements
