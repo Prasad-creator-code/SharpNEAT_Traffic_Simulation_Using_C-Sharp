@@ -63,4 +63,9 @@
     <Resource Include="Resources\Images\Roads\SystemicRoads\Turn_Road.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DrivingScripts\RoadSlots\OptionSlots\" />
+    <Folder Include="DrivingScripts\RoadSlots\Slots\" />
+  </ItemGroup>
+
 </Project>

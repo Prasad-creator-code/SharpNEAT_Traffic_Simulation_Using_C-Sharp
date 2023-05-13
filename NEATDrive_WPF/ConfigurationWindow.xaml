@@ -127,7 +127,7 @@
                 </Border.Effect>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="START"/>
             </Border>
-            <Grid x:Name="HomeGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80" d:IsHidden="True">
+            <Grid x:Name="HomeGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80">
                 <Grid x:Name="CanvasGrid" Grid.Row="3" Grid.Column="3" Grid.RowSpan="3" Grid.ColumnSpan="3" Width="500" Height="500" HorizontalAlignment="Right" Margin="0,0,50,0" Focusable="True">
                     <Border x:Name="Row1_1" BorderBrush="White" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" CornerRadius="20,20,20,20" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
                         <Border.RenderTransform>
@@ -259,7 +259,7 @@
                 </StackPanel>
                 <Label x:Name="Home_Help" Content="Drag and Drop Road Types on the slots to the right. Click Right Mouse Button to delete and Left Mouse Button to Rotate Roads" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
             </Grid>
-            <Grid x:Name="ParametersGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80">
+            <Grid x:Name="ParametersGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80" d:IsHidden="True">
                 <StackPanel x:Name="Left_SettingsMenuStack" Margin="100,50,0,0" HorizontalAlignment="Left" Width="250">
                     <Grid x:Name="Population_Size_Grid" Height="50">
                         <Label x:Name="Population_Size" Content="Population Size" HorizontalAlignment="Left" VerticalAlignment="Center"/>
