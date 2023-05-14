@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace NEATDrive_WPF.DrivingScripts.RoadSlots
 {
     class RoadSlot
     {
-        public Image? Image { get; set; }
+        public BitmapImage? SelectedImage { get; set; }
+        public double currentRotationAngle { get; set; }
+
+        public RoadSlot(Uri imageUri)
+        {
+            SelectedImage = new BitmapImage(imageUri);
+        }
         //public RoadConfiguration Road_Config { get; set; }
     }
 }
