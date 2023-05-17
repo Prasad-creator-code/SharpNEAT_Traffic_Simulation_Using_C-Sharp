@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace NEATDrive_WPF
 {
@@ -22,6 +12,35 @@ namespace NEATDrive_WPF
         public SimulationWindow()
         {
             InitializeComponent();
+            AddRoadBordersToList();
+
+        }
+        public List<Canvas> roadCanvasList = new List<Canvas>();
+
+        public void AddRoadBordersToList()
+        {
+            for (int i = 1; i <= 3; i++)
+            {
+                for (int j = 1; j <= 3; j++)
+                {
+                    string canvasName = "Road" + i.ToString() + "_" + j.ToString();
+                    Canvas canvas = (Canvas)FindName(canvasName);
+
+                    if (canvas != null && !roadCanvasList.Contains(canvas))
+                    {
+                        roadCanvasList.Add(canvas);
+                    }
+                }
+            }
+        }
+
+
+        private void OnWindowClose(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //ApplicationManager.instance?.simWindow.Hide();
+            this.Hide();
+            ApplicationManager.instance?.configWindow.Show();
+            //ApplicationManager.instance?.configWindow.Focus();
         }
     }
 }

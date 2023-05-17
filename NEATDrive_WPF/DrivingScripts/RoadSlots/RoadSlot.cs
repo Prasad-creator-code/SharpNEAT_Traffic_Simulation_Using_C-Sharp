@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 
 namespace NEATDrive_WPF.DrivingScripts.RoadSlots
 {
-    class RoadSlot
+    public class RoadSlot
     {
         public BitmapImage? SelectedImage { get; set; }
         public double currentRotationAngle { get; set; }

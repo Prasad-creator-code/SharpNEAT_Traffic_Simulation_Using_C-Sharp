@@ -1,6 +1,8 @@
 ﻿using NEATDrive_WPF.DrivingScripts;
 using NEATDrive_WPF.DrivingScripts.RoadSlots;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -25,26 +27,29 @@ namespace NEATDrive_WPF
         private RoadOptionSlot? centerRoadOption;
         private RoadOptionSlot? threeWayRoadOption;
 
-        private RoadSlot? RoadSlot1_1;
-        private RoadSlot? RoadSlot1_2;
-        private RoadSlot? RoadSlot1_3;
-        private RoadSlot? RoadSlot2_1;
-        private RoadSlot? RoadSlot2_2;
-        private RoadSlot? RoadSlot2_3;
-        private RoadSlot? RoadSlot3_1;
-        private RoadSlot? RoadSlot3_2;
-        private RoadSlot? RoadSlot3_3;
+        public RoadSlot? RoadSlot1_1;
+        public RoadSlot? RoadSlot1_2;
+        public RoadSlot? RoadSlot1_3;
+        public RoadSlot? RoadSlot2_1;
+        public RoadSlot? RoadSlot2_2;
+        public RoadSlot? RoadSlot2_3;
+        public RoadSlot? RoadSlot3_1;
+        public RoadSlot? RoadSlot3_2;
+        public RoadSlot? RoadSlot3_3;
 
         Thickness originalThickness = new Thickness(2);
         Thickness increasedThickness = new Thickness(10);
 
         private BitmapImage nullSlotImage = new BitmapImage(new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute));
 
+        public List<RoadSlot> roadSlotList = new List<RoadSlot>();
 
 
         public ConfigurationWindow()
         {
             InitializeComponent();
+
+            AddRoadSlotsToList();
 
             DisableOnStart();
             fadeInPreview = (Storyboard)FindResource("PreviewPageAnim");
@@ -187,8 +192,13 @@ namespace NEATDrive_WPF
 
         private void Start_Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ApplicationManager.instance?.simWindow.Show();
-            ApplicationManager.instance?.configWindow.Hide();
+            //RoadManager.instance?.roadConfiguration.
+            RoadManager.instance?.RefreshRoadConfig();
+            this.Hide();
+            ApplicationManager.instance?.simWindow.ShowDialog();
+            //ApplicationManager.instance?.simWindow.Focus();
+
+            //ApplicationManager.instance?.configWindow.Hide();
             //EnableSimGrid(true);
             //ApplicationManager.instance?.FocusCanvas(SimulationCanvas);
             //driveManager = new(this);
@@ -328,6 +338,7 @@ namespace NEATDrive_WPF
                     Row1_1.Background = new ImageBrush(nullSlotImage);
                 }
             }
+            //RoadManager.instance?.RefreshRoadConfig();
         }
 
         private void Row1_2_MouseDown(object sender, MouseButtonEventArgs e)
@@ -556,6 +567,27 @@ namespace NEATDrive_WPF
 
         #endregion
 
+        #region Slot Selection
+
+        public void AddRoadSlotsToList()
+        {
+
+            for (int i = 1; i <= 3; i++)
+            {
+                for (int j = 1; j <= 3; j++)
+                {
+                    RoadSlot? roadSlot = FindName("RoadSlot" + i + "_" + j) as RoadSlot;
+                    Debug.WriteLine(roadSlot);
+                    if (!roadSlotList.Contains(roadSlot))
+                    {
+                        roadSlotList.Add(roadSlot);
+                    }
+                }
+            }
+        }
+
+
+        #endregion
 
 
 

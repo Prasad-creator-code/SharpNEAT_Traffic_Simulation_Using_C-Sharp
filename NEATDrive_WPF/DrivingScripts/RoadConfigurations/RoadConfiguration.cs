@@ -1,9 +1,5 @@
 ﻿using NEATDrive_WPF.DrivingScripts.RoadSlots;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NEATDrive_WPF.DrivingScripts
 {
@@ -17,14 +13,15 @@ namespace NEATDrive_WPF.DrivingScripts
     {
         private List<RoadSlot> roadSlots; // List to store the cells in the road grid
 
-        
+
 
         // Constructor to initialize the road grid with empty cells
         public Road()
         {
-            roadSlots = new List<RoadSlot>();
+            //roadSlots = new List<RoadSlot>();
             for (int i = 0; i < 9; i++)
             {
+
                 //roadSlots.Add(new RoadSlot());
             }
         }
