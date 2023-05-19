@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:NEATDrive_WPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="ChakraPetchRegular"> pack://application:,,,/NEATDrive_WPF;component/Resources/Fonts/ChakraPetch-Regular.ttf#ChakraPetch</FontFamily>
+        <FontFamily x:Key="ChakraPetchItalic">pack://application:,,,/NEATDrive_WPF;component/Resources/Fonts/ChakraPetch-Italic.ttf#ChakraPetch</FontFamily>
+        <FontFamily x:Key="ChakraPetchBold">pack://application:,,,/NEATDrive_WPF;component/Resources/Fonts/ChakraPetch-Bold.ttf#ChakraPetch</FontFamily>
+        <FontFamily x:Key="ChakraPetchBoldItalic">pack://application:,,,/NEATDrive_WPF;component/Resources/Fonts/ChakraPetch-BoldItalic.ttf#ChakraPetch</FontFamily>
+        <FontFamily x:Key="ChakraPetchSemiBold">pack://application:,,,/NEATDrive_WPF;component/Resources/Fonts/ChakraPetch-SemiBold.ttf#ChakraPetch</FontFamily>
     </Application.Resources>
 </Application>

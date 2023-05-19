@@ -42,5 +42,10 @@ namespace NEATDrive_WPF
             ApplicationManager.instance?.configWindow.Show();
             //ApplicationManager.instance?.configWindow.Focus();
         }
+
+        private void Start_Sim_Text_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

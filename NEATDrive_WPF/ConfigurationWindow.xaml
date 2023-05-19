@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NEATDrive_WPF"
         x:Name="ConfigurationWindow1" x:Class="NEATDrive_WPF.ConfigurationWindow"
         mc:Ignorable="d"
-        Title="NEATDrive 0.69 Configuration" Cursor="Arrow" FontFamily="Artifakt Element Light" FontSize="16" Icon="/Resources/Images/Logos/Logo.png" RenderTransformOrigin="0.5,0.5" Left="0" Top="0" AllowDrop="True" WindowState="Maximized" Topmost="True" Width="1366" Height="768" SnapsToDevicePixels="True" WindowStartupLocation="CenterOwner" WindowStyle="ThreeDBorderWindow" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" Loaded="ConfigurationWindow1_Loaded" BorderThickness="10,10,10,10" KeyDown="ConfigurationWindow1_KeyDown" KeyUp="ConfigurationWindow1_KeyUp">
+        Title="NEATDrive 0.69 Configuration" Cursor="Arrow" FontFamily="Artifakt Element Light" FontSize="16" Icon="/Resources/Images/Logos/Logo.png" RenderTransformOrigin="0.5,0.5" Left="0" Top="0" AllowDrop="True" WindowState="Maximized" Width="1366" Height="768" SnapsToDevicePixels="True" WindowStartupLocation="CenterOwner" WindowStyle="ThreeDBorderWindow" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" Loaded="ConfigurationWindow1_Loaded" BorderThickness="10,10,10,10" KeyDown="ConfigurationWindow1_KeyDown" KeyUp="ConfigurationWindow1_KeyUp">
 
 
     <Window.BorderBrush>
@@ -98,25 +98,25 @@
                 <Border.Effect>
                     <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
                 </Border.Effect>
-                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="Home"/>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch" FontSize="36" Text="Home"/>
             </Border>
             <Border x:Name="ParametersButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0" MouseDown="ParametersButton_Border_MouseDown">
                 <Border.Effect>
                     <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
                 </Border.Effect>
-                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="Parameters"/>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch" FontSize="36" Text="Parameters"/>
             </Border>
             <Border x:Name="MetricsButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0" MouseDown="MetricsButton_Border_MouseDown">
                 <Border.Effect>
                     <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
                 </Border.Effect>
-                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="Metrics"/>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch" FontSize="36" Text="Metrics"/>
             </Border>
             <Border x:Name="AboutButton_Border"  Height="100" CornerRadius="0,20,0,20" Cursor="Hand" Width="200" UseLayoutRounding="True" Background="#FFF0F0F0" Margin="0,20,0,0" MouseDown="AboutButton_Border_MouseDown">
                 <Border.Effect>
                     <DropShadowEffect Color="#FF33AFFF" RenderingBias="Performance" ShadowDepth="10" Direction="320" />
                 </Border.Effect>
-                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="About"/>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch" FontSize="36" Text="About"/>
             </Border>
         </StackPanel>
         <Grid x:Name="RightPreviewGrid" HorizontalAlignment="Left" VerticalAlignment="Center" Width="994" Height="660" Margin="302,0,0,0" Grid.ColumnSpan="2" Grid.Row="1">
@@ -175,7 +175,7 @@
                             <TransformGroup>
                                 <ScaleTransform/>
                                 <SkewTransform/>
-                                <RotateTransform Angle="90"/>
+                                <RotateTransform Angle="0"/>
                                 <TranslateTransform/>
                             </TransformGroup>
                         </Border.RenderTransform>
@@ -185,7 +185,7 @@
                             <TransformGroup>
                                 <ScaleTransform/>
                                 <SkewTransform/>
-                                <RotateTransform Angle="180"/>
+                                <RotateTransform Angle="0"/>
                                 <TranslateTransform/>
                             </TransformGroup>
                         </Border.RenderTransform>
@@ -196,7 +196,7 @@
                             <TransformGroup>
                                 <ScaleTransform/>
                                 <SkewTransform/>
-                                <RotateTransform Angle="90"/>
+                                <RotateTransform Angle="0"/>
                                 <TranslateTransform/>
                             </TransformGroup>
                         </Border.RenderTransform>
@@ -206,7 +206,7 @@
                             <TransformGroup>
                                 <ScaleTransform/>
                                 <SkewTransform/>
-                                <RotateTransform Angle="180"/>
+                                <RotateTransform Angle="0"/>
                                 <TranslateTransform/>
                             </TransformGroup>
                         </Border.RenderTransform>
@@ -217,7 +217,7 @@
                             <TransformGroup>
                                 <ScaleTransform/>
                                 <SkewTransform/>
-                                <RotateTransform Angle="270"/>
+                                <RotateTransform Angle="0"/>
                                 <TranslateTransform/>
                             </TransformGroup>
                         </Border.RenderTransform>
@@ -227,13 +227,13 @@
                             <TransformGroup>
                                 <ScaleTransform/>
                                 <SkewTransform/>
-                                <RotateTransform Angle="270"/>
+                                <RotateTransform Angle="0"/>
                                 <TranslateTransform/>
                             </TransformGroup>
                         </Border.RenderTransform>
                     </Border>
                 </Grid>
-                <Label x:Name="Home_Help" Content="Drag and Drop Road Types on the slots to the right. Click Right Mouse Button to delete and Left Mouse Button to Rotate Roads" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="Home_Help" Content="Select Road Types on the slots to the right. Click LMB to Paste Selected Road, MMB to Rotate and RMB to Delete Roads" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Chakra Petch"/>
             </Grid>
             <Grid x:Name="ParametersGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80" d:IsHidden="True">
                 <StackPanel x:Name="Left_SettingsMenuStack" Margin="100,50,0,0" HorizontalAlignment="Left" Width="250">
@@ -398,29 +398,22 @@
                         </Border.RenderTransform>
                     </Border>
                 </Grid>
-                <StackPanel x:Name="MetricsMenuStack" Margin="100,50,0,0" HorizontalAlignment="Left" Width="200">
-                    <Border x:Name="TurnRoad_Border2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,20,0,0">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
-                        </Border.Background>
-                    </Border>
-                    <Border x:Name="StraightRoad_Border2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Padding="0,50,0,0" Margin="0,10,0,0">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Straight_Road.png"/>
-                        </Border.Background>
-                    </Border>
-                    <Border x:Name="CenterRoad_Border2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,10,0,0">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Chowk.png"/>
-                        </Border.Background>
-                    </Border>
-                    <Border x:Name="ThreeWayRoad_Border2" BorderBrush="Black" BorderThickness="5,5,5,5" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,10,0,0">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
-                        </Border.Background>
-                    </Border>
+                <StackPanel x:Name="MetricsMenuStack" Margin="50,50,0,0" HorizontalAlignment="Left" Width="400" Height="400">
+                    <Grid x:Name="Metrics_Menu_Grid" Height="100">
+                        <TextBlock x:Name="SpreadSheet_Optn_Text" TextWrapping="Wrap" Text="Spreadsheet Export Format" Margin="0,0,0,80" FontFamily="Chakra Petch" Height="20"/>
+                        <ComboBox x:Name="SpreadSheet_Option" BorderBrush="White" BorderThickness="2,2,2,2" FontFamily="Chakra Petch" HorizontalAlignment="Right" Margin="0,-10,15,70" Width="180" SelectedIndex="0" Cursor="Hand">
+                            <ComboBox.Background>
+                                <LinearGradientBrush EndPoint="0,1">
+                                    <GradientStop Color="#FFF0F0F0"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                </LinearGradientBrush>
+                            </ComboBox.Background>
+                            <MenuItem Cursor="Hand" Header="Excel (.xlsx)" FontFamily="Chakra Petch" IsHitTestVisible="False" UseLayoutRounding="False"/>
+                            <MenuItem Header="CSV (.csv)" FontFamily="Chakra Petch" IsHitTestVisible="False"/>
+                        </ComboBox>
+                    </Grid>
                 </StackPanel>
-                <Label x:Name="Metrics_Help" Content="Drag and Drop Road Types on the slots to the right. Click Right Mouse Button to delete and Left Mouse Button to Rotate Roads" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="Metrics_Help" Content="Drag and Drop Road Types on the slots to the right. Click Right Mouse Button to delete and Left Mouse Button to Rotate Roads" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Chakra Petch"/>
             </Grid>
         </Grid>
     </Grid>

@@ -1,11 +1,4 @@
 ﻿using NEATDrive_WPF.DrivingScripts;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace NEATDrive_WPF
@@ -18,19 +11,24 @@ namespace NEATDrive_WPF
         public App()
         {
             InitializeComponent();
-            if(ApplicationManager.instance== null)
+
+            if (ApplicationManager.instance == null)
             {
                 ApplicationManager.instance = new();
             }
-            if(RoadManager.instance==null)
+            if (RoadManager.instance == null)
             {
                 RoadManager.instance = new();
             }
-            if(SimulationManager.instance==null)
+            if (SimulationManager.instance == null)
             {
                 SimulationManager.instance = new();
             }
-            
+            if (SaveManager.instance == null)
+            {
+                SaveManager.instance = new();
+            }
+
         }
     }
 }

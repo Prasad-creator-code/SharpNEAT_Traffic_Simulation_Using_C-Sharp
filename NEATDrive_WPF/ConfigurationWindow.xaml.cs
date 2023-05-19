@@ -26,6 +26,7 @@ namespace NEATDrive_WPF
         private RoadOptionSlot? straightRoadOption;
         private RoadOptionSlot? centerRoadOption;
         private RoadOptionSlot? threeWayRoadOption;
+        private RoadOptionSlot? nullRoadOption;
 
         public RoadSlot? RoadSlot1_1;
         public RoadSlot? RoadSlot1_2;
@@ -40,7 +41,7 @@ namespace NEATDrive_WPF
         Thickness originalThickness = new Thickness(2);
         Thickness increasedThickness = new Thickness(10);
 
-        private BitmapImage nullSlotImage = new BitmapImage(new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute));
+        //public BitmapImage nullSlotImage = new BitmapImage(new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute));
 
         public List<RoadSlot> roadSlotList = new List<RoadSlot>();
 
@@ -49,7 +50,10 @@ namespace NEATDrive_WPF
         {
             InitializeComponent();
 
-            AddRoadSlotsToList();
+            //AddRoadSlotsToList();
+
+            //selectedRoadOptionSlot = new RoadOptionSlot(new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute));            //selectedRoadOptionSlot = new RoadOptionSlot(new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute));
+
 
             DisableOnStart();
             fadeInPreview = (Storyboard)FindResource("PreviewPageAnim");
@@ -62,11 +66,13 @@ namespace NEATDrive_WPF
             if (state)
             {
                 HomeGrid.Visibility = Visibility.Visible;
+                Start_Border.Visibility = Visibility.Visible;
                 InitializeRoadOptions();
             }
             else
             {
                 HomeGrid.Visibility = Visibility.Hidden;
+                Start_Border.Visibility = Visibility.Collapsed;
             }
 
         }
@@ -95,15 +101,7 @@ namespace NEATDrive_WPF
 
         void InitializeRoadOptions()
         {
-            Row1_1.Background = new ImageBrush(nullSlotImage);
-            Row1_2.Background = new ImageBrush(nullSlotImage);
-            Row1_3.Background = new ImageBrush(nullSlotImage);
-            Row2_1.Background = new ImageBrush(nullSlotImage);
-            Row2_2.Background = new ImageBrush(nullSlotImage);
-            Row2_3.Background = new ImageBrush(nullSlotImage);
-            Row3_1.Background = new ImageBrush(nullSlotImage);
-            Row3_2.Background = new ImageBrush(nullSlotImage);
-            Row3_3.Background = new ImageBrush(nullSlotImage);
+
 
             //Uri turnRoadUri = new Uri("../../../Resources/Images/Roads/SystemicRoads/Turn_Road.png", UriKind.Relative);
             Uri turnRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Turn_Road.png", UriKind.Absolute);
@@ -117,6 +115,30 @@ namespace NEATDrive_WPF
 
             Uri threeWayRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Tri_Road.png", UriKind.Absolute);
             threeWayRoadOption = new RoadOptionSlot(threeWayRoadUri);
+
+            Uri nullRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute);
+            nullRoadOption = new RoadOptionSlot(nullRoadUri);
+
+            Row1_1.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
+            Row1_2.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
+            Row1_3.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
+            Row2_1.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
+            Row2_2.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
+            Row2_3.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
+            Row3_1.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
+            Row3_2.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
+            Row3_3.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
+
+            RoadSlot1_1 = new RoadSlot(nullRoadOption.BitmapUri, 1, 1);
+            RoadSlot1_2 = new RoadSlot(nullRoadOption.BitmapUri, 1, 2);
+            RoadSlot1_3 = new RoadSlot(nullRoadOption.BitmapUri, 1, 3);
+            RoadSlot2_1 = new RoadSlot(nullRoadOption.BitmapUri, 2, 1);
+            RoadSlot2_2 = new RoadSlot(nullRoadOption.BitmapUri, 2, 2);
+            RoadSlot2_3 = new RoadSlot(nullRoadOption.BitmapUri, 2, 3);
+            RoadSlot3_1 = new RoadSlot(nullRoadOption.BitmapUri, 3, 1);
+            RoadSlot3_2 = new RoadSlot(nullRoadOption.BitmapUri, 3, 2);
+            RoadSlot3_3 = new RoadSlot(nullRoadOption.BitmapUri, 3, 3);
+            selectedRoadOptionSlot = nullRoadOption;
         }
 
         #endregion
@@ -193,7 +215,9 @@ namespace NEATDrive_WPF
         private void Start_Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             //RoadManager.instance?.roadConfiguration.
+            AddRoadSlotsToList();
             RoadManager.instance?.RefreshRoadConfig();
+
             this.Hide();
             ApplicationManager.instance?.simWindow.ShowDialog();
             //ApplicationManager.instance?.simWindow.Focus();
@@ -316,7 +340,7 @@ namespace NEATDrive_WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                RoadSlot1_1 = new RoadSlot(selectedRoadOptionSlot.BitmapUri);
+                RoadSlot1_1 = new RoadSlot(selectedRoadOptionSlot.BitmapUri, 1, 1);
                 Row1_1.Background = new ImageBrush(RoadSlot1_1.SelectedImage);
             }
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -335,7 +359,8 @@ namespace NEATDrive_WPF
             {
                 if (Row1_1.Background != null)
                 {
-                    Row1_1.Background = new ImageBrush(nullSlotImage);
+                    RoadSlot1_1 = new RoadSlot(nullRoadOption.BitmapUri, 1, 1);
+                    Row1_1.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
                 }
             }
             //RoadManager.instance?.RefreshRoadConfig();
@@ -345,7 +370,7 @@ namespace NEATDrive_WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                RoadSlot1_2 = new RoadSlot(selectedRoadOptionSlot.BitmapUri);
+                RoadSlot1_2 = new RoadSlot(selectedRoadOptionSlot.BitmapUri, 1, 2);
                 Row1_2.Background = new ImageBrush(RoadSlot1_2.SelectedImage);
             }
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -364,7 +389,8 @@ namespace NEATDrive_WPF
             {
                 if (Row1_2.Background != null)
                 {
-                    Row1_2.Background = new ImageBrush(nullSlotImage);
+                    RoadSlot1_2 = new RoadSlot(nullRoadOption.BitmapUri, 1, 2);
+                    Row1_2.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
                 }
             }
         }
@@ -373,7 +399,7 @@ namespace NEATDrive_WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                RoadSlot1_3 = new RoadSlot(selectedRoadOptionSlot.BitmapUri);
+                RoadSlot1_3 = new RoadSlot(selectedRoadOptionSlot.BitmapUri, 1, 3);
                 Row1_3.Background = new ImageBrush(RoadSlot1_3.SelectedImage);
             }
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -392,7 +418,8 @@ namespace NEATDrive_WPF
             {
                 if (Row1_3.Background != null)
                 {
-                    Row1_3.Background = new ImageBrush(nullSlotImage);
+                    RoadSlot1_3 = new RoadSlot(nullRoadOption.BitmapUri, 1, 3);
+                    Row1_3.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
                 }
             }
         }
@@ -401,7 +428,7 @@ namespace NEATDrive_WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                RoadSlot2_1 = new RoadSlot(selectedRoadOptionSlot.BitmapUri);
+                RoadSlot2_1 = new RoadSlot(selectedRoadOptionSlot.BitmapUri, 2, 1);
                 Row2_1.Background = new ImageBrush(RoadSlot2_1.SelectedImage);
             }
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -420,7 +447,8 @@ namespace NEATDrive_WPF
             {
                 if (Row2_1.Background != null)
                 {
-                    Row2_1.Background = new ImageBrush(nullSlotImage);
+                    RoadSlot2_1 = new RoadSlot(nullRoadOption.BitmapUri, 2, 1);
+                    Row2_1.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
                 }
             }
         }
@@ -429,7 +457,7 @@ namespace NEATDrive_WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                RoadSlot2_2 = new RoadSlot(selectedRoadOptionSlot.BitmapUri);
+                RoadSlot2_2 = new RoadSlot(selectedRoadOptionSlot.BitmapUri, 2, 2);
                 Row2_2.Background = new ImageBrush(RoadSlot2_2.SelectedImage);
             }
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -448,7 +476,8 @@ namespace NEATDrive_WPF
             {
                 if (Row2_2.Background != null)
                 {
-                    Row2_2.Background = new ImageBrush(nullSlotImage);
+                    RoadSlot2_2 = new RoadSlot(nullRoadOption.BitmapUri, 2, 2);
+                    Row2_2.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
                 }
             }
         }
@@ -457,7 +486,7 @@ namespace NEATDrive_WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                RoadSlot2_3 = new RoadSlot(selectedRoadOptionSlot.BitmapUri);
+                RoadSlot2_3 = new RoadSlot(selectedRoadOptionSlot.BitmapUri, 2, 3);
                 Row2_3.Background = new ImageBrush(RoadSlot2_3.SelectedImage);
             }
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -476,7 +505,8 @@ namespace NEATDrive_WPF
             {
                 if (Row2_3.Background != null)
                 {
-                    Row2_3.Background = new ImageBrush(nullSlotImage);
+                    RoadSlot2_3 = new RoadSlot(nullRoadOption.BitmapUri, 2, 3);
+                    Row2_3.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
                 }
             }
         }
@@ -485,7 +515,7 @@ namespace NEATDrive_WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                RoadSlot3_1 = new RoadSlot(selectedRoadOptionSlot.BitmapUri);
+                RoadSlot3_1 = new RoadSlot(selectedRoadOptionSlot.BitmapUri, 3, 1);
                 Row3_1.Background = new ImageBrush(RoadSlot3_1.SelectedImage);
             }
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -504,7 +534,8 @@ namespace NEATDrive_WPF
             {
                 if (Row3_1.Background != null)
                 {
-                    Row3_1.Background = new ImageBrush(nullSlotImage);
+                    RoadSlot3_1 = new RoadSlot(nullRoadOption.BitmapUri, 3, 1);
+                    Row3_1.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
                 }
             }
         }
@@ -513,7 +544,7 @@ namespace NEATDrive_WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                RoadSlot3_2 = new RoadSlot(selectedRoadOptionSlot.BitmapUri);
+                RoadSlot3_2 = new RoadSlot(selectedRoadOptionSlot.BitmapUri, 3, 2);
                 Row3_2.Background = new ImageBrush(RoadSlot3_2.SelectedImage);
             }
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -532,7 +563,8 @@ namespace NEATDrive_WPF
             {
                 if (Row3_2.Background != null)
                 {
-                    Row3_2.Background = new ImageBrush(nullSlotImage);
+                    RoadSlot3_2 = new RoadSlot(nullRoadOption.BitmapUri, 3, 2);
+                    Row3_2.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
                 }
             }
         }
@@ -541,7 +573,7 @@ namespace NEATDrive_WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                RoadSlot3_3 = new RoadSlot(selectedRoadOptionSlot.BitmapUri);
+                RoadSlot3_3 = new RoadSlot(selectedRoadOptionSlot.BitmapUri, 3, 3);
                 Row3_3.Background = new ImageBrush(RoadSlot3_3.SelectedImage);
             }
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -560,7 +592,8 @@ namespace NEATDrive_WPF
             {
                 if (Row3_3.Background != null)
                 {
-                    Row3_2.Background = new ImageBrush(nullSlotImage);
+                    RoadSlot3_3 = new RoadSlot(nullRoadOption.BitmapUri, 3, 3);
+                    Row3_3.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
                 }
             }
         }
@@ -569,21 +602,66 @@ namespace NEATDrive_WPF
 
         #region Slot Selection
 
+        private void AddRoadSlotIfNotExists(List<RoadSlot> roadSlotList, RoadSlot roadSlot)
+        {
+            if (!roadSlotList.Equals(roadSlot))
+            {
+                roadSlotList.Add(roadSlot);
+            }
+        }
+
+        private void UpdateRoadSlotInList(List<RoadSlot> roadSlotList, RoadSlot roadSlotToUpdate)
+        {
+            int index = roadSlotList.IndexOf(roadSlotToUpdate);
+            if (index >= 0)
+            {
+                // Modify the existing RoadSlot instance within the list
+                roadSlotList[index] = roadSlotToUpdate;
+            }
+            else
+            {
+                // Handle the case when the RoadSlot instance is not found in the list
+                // Example: HandleNotFound();
+            }
+        }
+        public void UpdateRoadSlotsList()
+        {
+            UpdateRoadSlotInList(roadSlotList, RoadSlot1_1);
+            UpdateRoadSlotInList(roadSlotList, RoadSlot1_2);
+            UpdateRoadSlotInList(roadSlotList, RoadSlot1_3);
+            UpdateRoadSlotInList(roadSlotList, RoadSlot2_1);
+            UpdateRoadSlotInList(roadSlotList, RoadSlot2_2);
+            UpdateRoadSlotInList(roadSlotList, RoadSlot2_3);
+            UpdateRoadSlotInList(roadSlotList, RoadSlot3_1);
+            UpdateRoadSlotInList(roadSlotList, RoadSlot3_2);
+            UpdateRoadSlotInList(roadSlotList, RoadSlot3_3);
+        }
+
         public void AddRoadSlotsToList()
         {
+            AddRoadSlotIfNotExists(roadSlotList, RoadSlot1_1);
+            AddRoadSlotIfNotExists(roadSlotList, RoadSlot1_2);
+            AddRoadSlotIfNotExists(roadSlotList, RoadSlot1_3);
+            AddRoadSlotIfNotExists(roadSlotList, RoadSlot2_1);
+            AddRoadSlotIfNotExists(roadSlotList, RoadSlot2_2);
+            AddRoadSlotIfNotExists(roadSlotList, RoadSlot2_3);
+            AddRoadSlotIfNotExists(roadSlotList, RoadSlot3_1);
+            AddRoadSlotIfNotExists(roadSlotList, RoadSlot3_2);
+            AddRoadSlotIfNotExists(roadSlotList, RoadSlot3_3);
+            Debug.WriteLine(roadSlotList.Count + "This is Sparta!");
 
-            for (int i = 1; i <= 3; i++)
-            {
-                for (int j = 1; j <= 3; j++)
-                {
-                    RoadSlot? roadSlot = FindName("RoadSlot" + i + "_" + j) as RoadSlot;
-                    Debug.WriteLine(roadSlot);
-                    if (!roadSlotList.Contains(roadSlot))
-                    {
-                        roadSlotList.Add(roadSlot);
-                    }
-                }
-            }
+            //for (int i = 1; i <= 3; i++)
+            //{
+            //    for (int j = 1; j <= 3; j++)
+            //    {
+            //        RoadSlot? roadSlot = FindName("RoadSlot" + i + "_" + j) as RoadSlot;
+            //        Debug.WriteLine(roadSlot);
+            //        if (!roadSlotList.Contains(roadSlot))
+            //        {
+            //            roadSlotList.Add(roadSlot);
+            //        }
+            //    }
+            //}
         }
 
 

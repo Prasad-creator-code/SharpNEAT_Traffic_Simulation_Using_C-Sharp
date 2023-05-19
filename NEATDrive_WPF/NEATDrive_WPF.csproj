@@ -10,6 +10,11 @@
   <ItemGroup>
     <None Remove="Logo Rotator.png" />
     <None Remove="Logo_Mix.png" />
+    <None Remove="Resources\Fonts\ChakraPetch-Bold.ttf" />
+    <None Remove="Resources\Fonts\ChakraPetch-BoldItalic.ttf" />
+    <None Remove="Resources\Fonts\ChakraPetch-Italic.ttf" />
+    <None Remove="Resources\Fonts\ChakraPetch-Regular.ttf" />
+    <None Remove="Resources\Fonts\ChakraPetch-SemiBold.ttf" />
     <None Remove="Resources\Images\BackgroundTextures\Grass-1.jpg" />
     <None Remove="Resources\Images\Props\Cross.png" />
     <None Remove="Resources\Images\Props\Grass_Cute.png" />
@@ -29,6 +34,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Fonts\ChakraPetch-Bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\ChakraPetch-BoldItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\ChakraPetch-Italic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\ChakraPetch-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\ChakraPetch-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\Images\BackgroundTextures\Grass-1.jpg" />
     <Resource Include="Resources\Images\Props\Cross.png" />
     <Resource Include="Resources\Images\Props\Grass_Cute.png" />
@@ -46,6 +66,7 @@
   <ItemGroup>
     <PackageReference Include="Allegro" Version="5.2.8" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0-preview2" />
+    <PackageReference Include="EPPlus" Version="6.2.4" />
   </ItemGroup>
 
   <ItemGroup>
