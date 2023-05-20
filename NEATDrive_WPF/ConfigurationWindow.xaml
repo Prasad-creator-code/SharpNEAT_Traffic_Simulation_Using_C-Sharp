@@ -238,170 +238,85 @@
             <Grid x:Name="ParametersGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80" d:IsHidden="True">
                 <StackPanel x:Name="Left_SettingsMenuStack" Margin="100,50,0,0" HorizontalAlignment="Left" Width="250">
                     <Grid x:Name="Population_Size_Grid" Height="50">
-                        <Label x:Name="Population_Size" Content="Population Size" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label x:Name="Population_Size" Content="Population Size" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Population_Size_Box" TextWrapping="Wrap" Text="220" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid x:Name="Initial_Conn_Prop_Grid" Height="50">
-                        <Label x:Name="Initial_Conn_Proportion" Content="Init Conn Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label x:Name="Initial_Conn_Proportion" Content="Init Conn Proportion" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Initial_Conn_Proportion_Box" TextWrapping="Wrap" Text="0.05" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid x:Name="No_of_Species_Grid" Height="50">
-                        <Label x:Name="No_of_Species_Text" Content="Number of Species" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label x:Name="No_of_Species_Text" Content="Number of Species" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="No_of_Species_Box" TextWrapping="Wrap" Text="10" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid x:Name="Elitism_Proportion_Grid" Height="50">
-                        <Label x:Name="Elitism_Proportion_Text" Content="Elitism Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label x:Name="Elitism_Proportion_Text" Content="Elitism Proportion" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Elitism_Prop_Box" TextWrapping="Wrap" Text="0.2" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid x:Name="Selection_Proportion_Grid" Height="50">
-                        <Label x:Name="Selection_Proportion_Text" Content="Selection Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label x:Name="Selection_Proportion_Text" Content="Selection Proportion" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Selection_Proportion_Box" TextWrapping="Wrap" Text="0.2" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid x:Name="Asexual_Repr_Grid" Height="200" Width="250">
                         <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
-                            <Label x:Name="Asexual_Repr" Content="Asexual Reproduction Settings" FontWeight="Bold"/>
+                            <Label x:Name="Asexual_Repr" Content="Asexual Reproduction Settings" FontWeight="Bold" FontFamily="Chakra Petch SemiBold"/>
                         </Border>
-                        <Label x:Name="Mutate_Weights_Text" Content="Mutate Weights" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0"/>
+                        <Label x:Name="Mutate_Weights_Text" Content="Mutate Weights" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Mutate_Weights_Box" TextWrapping="Wrap" Text="0.988" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,5,0"/>
-                        <Label x:Name="Add_Neuron_Text" Content="Add Neuron" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,50"/>
+                        <Label x:Name="Add_Neuron_Text" Content="Add Neuron" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,50" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Add_Neuron_Box" TextWrapping="Wrap" Text="0.001" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,50"/>
-                        <Label x:Name="Add_Connection_Text" Content="Add Connection" HorizontalAlignment="Left" Height="140" VerticalAlignment="Bottom" Margin="1,0,0,-29"/>
+                        <Label x:Name="Add_Connection_Text" Content="Add Connection" HorizontalAlignment="Left" Height="140" VerticalAlignment="Bottom" Margin="1,0,0,-29" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Add_Connection_Box" TextWrapping="Wrap" Text="0.01" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,85"/>
-                        <Label x:Name="Delete_Connection_Text" Content="Delete Connection" HorizontalAlignment="Left" Height="140" VerticalAlignment="Bottom" Margin="1,0,0,-60"/>
+                        <Label x:Name="Delete_Connection_Text" Content="Delete Connection" HorizontalAlignment="Left" Height="140" VerticalAlignment="Bottom" Margin="1,0,0,-60" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Delete_Connection_Box" TextWrapping="Wrap" Text="0.001" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,57"/>
                     </Grid>
                 </StackPanel>
                 <StackPanel x:Name="Right_SettingsMenuStack" Margin="0,50,100,0" HorizontalAlignment="Right" Width="300">
                     <Grid x:Name="Asexual_Offspring_Prop_Grid" Height="50">
-                        <Label x:Name="Asexual_Offspring_Prop_Text" Content="Asexual Offspring Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label x:Name="Asexual_Offspring_Prop_Text" Content="Asexual Offspring Proportion" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Asexual_Offspring_Prop_Box" TextWrapping="Wrap" Text="0.5" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid x:Name="Sexual_Offspring_Prop_Grid" Height="50">
-                        <Label x:Name="Sexual_Offspring_Prop_Text" Content="Sexual Offspring Proportion" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label x:Name="Sexual_Offspring_Prop_Text" Content="Sexual Offspring Proportion" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="Sexual_Offspring_Prop_Box" TextWrapping="Wrap" Text="0.5" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid x:Name="InterSpecies_Mating_Grid" Height="50">
-                        <Label x:Name="InterSpecies_Mating_Text" Content="Inter-species Mating Probability" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label x:Name="InterSpecies_Mating_Text" Content="Inter-species Mating Probability" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Chakra Petch"/>
                         <TextBox x:Name="InterSpecies_Mating_Box" TextWrapping="Wrap" Text="0.01" Background="White" SelectionOpacity="0" BorderThickness="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid x:Name="Genome_Population_Grid" Height="200" Width="250">
                         <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
-                            <Label x:Name="Genome_Population_Label" Content="Genome Population" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                            <Label x:Name="Genome_Population_Label" Content="Genome Population" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Chakra Petch SemiBold"/>
                         </Border>
-                        <Button x:Name="Create_Rand_Popu" Content="Create Random Population" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="50" Margin="0,50,0,0"/>
-                        <Button x:Name="Load_Experiment_Default" Content="Load Experiment Default" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" Margin="0,80,0,0"/>
+                        <Button x:Name="Create_Rand_Popu" Content="Create Random Population" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="50" Margin="0,50,0,0" FontFamily="Chakra Petch SemiBold" FontSize="14"/>
+                        <Button x:Name="Load_Experiment_Default" Content="Load Experiment Default" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" Margin="0,80,0,0" FontFamily="Chakra Petch" FontSize="14"/>
                     </Grid>
                 </StackPanel>
-                <Label x:Name="Param_Help" Content="Adjust NEAT Parameters for fine tuning and Performance Tweaking of the Application" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="Param_Help" Content="Adjust NEAT Parameters for fine tuning and Performance Tweaking of the Application" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Chakra Petch"/>
             </Grid>
             <Grid x:Name="MetricsGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80" d:IsHidden="True">
                 <Grid x:Name="PerformanceGrid" Grid.Row="3" Grid.Column="3" Grid.RowSpan="3" Grid.ColumnSpan="3" Width="500" Height="500" HorizontalAlignment="Right" Margin="0,0,50,0" Focusable="True">
-                    <Border x:Name="Row1_7" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" CornerRadius="20,20,20,20" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
-                        </Border.Background>
-                    </Border>
-                    <Border x:Name="Row1_8" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
-                        </Border.Background>
-                    </Border>
-                    <Border x:Name="Row1_9" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.RowSpan="1" Grid.ColumnSpan="1" Panel.ZIndex="-1" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
-                        </Border.Background>
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="180"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                    </Border>
-                    <Border x:Name="Row2_7" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" Margin="-5,0,0,0" HorizontalAlignment="Left">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
-                        </Border.Background>
-                    </Border>
-                    <Border x:Name="Row2_8" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Chowk.png"/>
-                        </Border.Background>
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                    </Border>
-                    <Border x:Name="Row2_9" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
-                        </Border.Background>
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="180"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                    </Border>
-                    <Border x:Name="Row3_7" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Left" CornerRadius="20,20,20,20">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
-                        </Border.Background>
-                    </Border>
-                    <Border x:Name="Row3_8" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" CornerRadius="20,20,20,20" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Tri_Road.png"/>
-                        </Border.Background>
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="270"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                    </Border>
-                    <Border x:Name="Row3_9" BorderBrush="Black" BorderThickness="5,5,5,5" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" CornerRadius="20,20,20,20" RenderTransformOrigin="0.5,0.5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png"/>
-                        </Border.Background>
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="270"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                    </Border>
+                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="Chakra Petch" BorderThickness="10,10,10,10" SelectedIndex="0" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" UseLayoutRounding="True">
+                        <DataGrid.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFC8C8C8" Offset="1"/>
+                                <GradientStop Color="#FF9696FF" Offset="0"/>
+                            </LinearGradientBrush>
+                        </DataGrid.Background>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="0" FontFamily="Chakra Petch" Header="ID"/>
+                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="1" FontFamily="Chakra Petch" Header="Avg Crash Time (in mins)"/>
+                            <DataGridTextColumn CanUserReorder="True" DisplayIndex="2" FontFamily="Chakra Petch" Header="Crossings"/>
+                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="3" FontFamily="Chakra Petch" Header="Pedestrian Interactions"/>
+                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="4" FontFamily="Chakra Petch" Header="Max Generations"/>
+                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="5" FontFamily="Chakra Petch" Header="Crashes"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
                 <StackPanel x:Name="MetricsMenuStack" Margin="50,50,0,0" HorizontalAlignment="Left" Width="400" Height="400">
                     <Grid x:Name="Metrics_Menu_Grid" Height="100">
                         <TextBlock x:Name="SpreadSheet_Optn_Text" TextWrapping="Wrap" Text="Spreadsheet Export Format" Margin="0,0,0,80" FontFamily="Chakra Petch" Height="20"/>
-                        <ComboBox x:Name="SpreadSheet_Option" BorderBrush="White" BorderThickness="2,2,2,2" FontFamily="Chakra Petch" HorizontalAlignment="Right" Margin="0,-10,15,70" Width="180" SelectedIndex="0" Cursor="Hand">
+                        <ComboBox x:Name="SpreadSheet_Option" BorderBrush="White" BorderThickness="2,2,2,2" FontFamily="Chakra Petch" HorizontalAlignment="Right" Margin="0,0,15,70" Width="180" SelectedIndex="0" Cursor="Hand">
                             <ComboBox.Background>
                                 <LinearGradientBrush EndPoint="0,1">
                                     <GradientStop Color="#FFF0F0F0"/>
@@ -412,8 +327,9 @@
                             <MenuItem Header="CSV (.csv)" FontFamily="Chakra Petch" IsHitTestVisible="False"/>
                         </ComboBox>
                     </Grid>
+                    <Button Content="Export" FontFamily="Chakra Petch" FontSize="20" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" Width="100" Height="30" HorizontalAlignment="Right" Margin="0,-60,50,0" VerticalAlignment="Top"/>
                 </StackPanel>
-                <Label x:Name="Metrics_Help" Content="Drag and Drop Road Types on the slots to the right. Click Right Mouse Button to delete and Left Mouse Button to Rotate Roads" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Chakra Petch"/>
+                <Label x:Name="Metrics_Help" Content="View Metrics and Export in a SpreadSheet format in order to use the data for ML Applications" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Chakra Petch"/>
             </Grid>
         </Grid>
     </Grid>

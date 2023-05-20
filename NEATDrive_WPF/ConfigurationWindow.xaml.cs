@@ -234,10 +234,7 @@ namespace NEATDrive_WPF
 
         }
 
-        internal void SimLoop(object? sender, EventArgs e)
-        {
-            //driveManager.UpdateCarPosition();
-        }
+
 
         #endregion
 
@@ -666,7 +663,6 @@ namespace NEATDrive_WPF
 
 
         #endregion
-
 
 
     }

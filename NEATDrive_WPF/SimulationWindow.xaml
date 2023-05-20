@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NEATDrive_WPF"
         mc:Ignorable="d"
-        Title="NEAT Simulation" Height="735" Width="885" ResizeMode="NoResize" WindowState="Maximized" WindowStartupLocation="CenterOwner" Closing="OnWindowClose">
+        Title="NEAT Simulation" Height="735" Width="885" ResizeMode="NoResize" WindowState="Maximized" WindowStartupLocation="CenterOwner" Closed="OnWindowClose">
     <Window.Background>
         <ImageBrush ImageSource="/Resources/Images/Props/Grass_Cute.png" Opacity="1" Stretch="Fill" TileMode="Tile">
             <ImageBrush.RelativeTransform>
@@ -74,26 +74,26 @@
                 <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Straight_Road.png"/>
             </Canvas.Background>
         </Canvas>
-        <Border x:Name="Start_Sim_Button_Border" BorderThickness="5,5,5,5" Padding="0,5,0,5" Grid.Column="2" Margin="198,0,-223,100" Grid.Row="2" CornerRadius="0,20,0,20" Background="#FFC3FFF5" Cursor="Hand">
+        <Border x:Name="Start_Sim_Button_Border" BorderThickness="5,5,5,5" Padding="0,5,0,5" Grid.Column="2" Margin="198,0,-223,100" Grid.Row="2" CornerRadius="0,20,0,20" Background="#FFC3FFF5" Cursor="Hand" MouseLeftButtonDown="Start_Sim_Button_Border_MouseLeftButtonDown" MouseEnter="Start_Sim_Button_Border_MouseEnter" MouseLeave="Start_Sim_Button_Border_MouseLeave">
             <Border.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
                     <GradientStop Color="#FF10B7B3" Offset="1"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
-            <TextBlock x:Name="Start_Sim_Text" TextWrapping="Wrap" Text="Start Simulation" FontFamily="Chakra Petch" FontSize="20" TextAlignment="Center" LineHeight="11" Padding="0,10,0,10" Width="150" Height="50" UseLayoutRounding="False" MouseLeftButtonDown="Start_Sim_Text_MouseLeftButtonDown"/>
+            <TextBlock x:Name="Start_Sim_Text" TextWrapping="Wrap" Text="Start Simulation" FontFamily="Chakra Petch" FontSize="18" TextAlignment="Center" LineHeight="11" Padding="0,10,0,10" Width="150" Height="50" UseLayoutRounding="False"/>
         </Border>
-        <Border x:Name="Stop_Sim_Button_Border" BorderThickness="5,5,5,5" Padding="0,5,0,5" Grid.Column="2" Margin="198,100,-223,0" Grid.Row="2" CornerRadius="0,20,0,20" Background="#FFC3FFF5" Cursor="Hand">
+        <Border x:Name="Stop_Sim_Button_Border" BorderThickness="5,5,5,5" Padding="0,5,0,5" Grid.Column="2" Margin="198,100,-223,0" Grid.Row="2" CornerRadius="0,20,0,20" Background="#FFC3FFF5" Cursor="Hand" MouseEnter="Stop_Sim_Button_Border_MouseEnter" MouseLeave="Stop_Sim_Button_Border_MouseLeave" MouseLeftButtonDown="Stop_Sim_Button_Border_MouseLeftButtonDown">
             <Border.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
                     <GradientStop Color="#FF10B7B3" Offset="1"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
-            <TextBlock x:Name="Stop_Sim_Text" TextWrapping="Wrap" Text="Stop Simulation" FontFamily="Chakra Petch" FontSize="20" TextAlignment="Center" LineHeight="11" Padding="0,10,0,10" Width="150" Height="50" UseLayoutRounding="False" MouseLeftButtonDown="Start_Sim_Text_MouseLeftButtonDown"/>
+            <TextBlock x:Name="Stop_Sim_Text" TextWrapping="Wrap" Text="Stop Simulation" FontFamily="Chakra Petch" FontSize="18" TextAlignment="Center" LineHeight="11" Padding="0,10,0,10" Width="150" Height="50" UseLayoutRounding="False"/>
         </Border>
         <Rectangle x:Name="RoadBorder" Stroke="Black" StrokeThickness="10.6" Grid.ColumnSpan="3" Margin="0,-6,-6,0" Grid.RowSpan="3" Tag="BoundBorder" StrokeDashCap="Square"/>
-        <Canvas x:Name="HeroCar" Tag="HeroCar" Width="50" Height="50" Margin="35,36,85,84" RenderTransformOrigin="0.5,0.5">
+        <Canvas x:Name="HeroCar_Sprite" Tag="HeroCar" Width="50" Height="50" Margin="35,36,85,84" RenderTransformOrigin="0.5,0.5" KeyDown="HeroCar_Sprite_KeyDown" KeyUp="HeroCar_Sprite_KeyUp" Focusable="True" IsHitTestVisible="False">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

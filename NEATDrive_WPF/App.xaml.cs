@@ -24,6 +24,10 @@ namespace NEATDrive_WPF
             {
                 SimulationManager.instance = new();
             }
+            if (DriveManager.instance == null)
+            {
+                DriveManager.instance = new();
+            }
             if (SaveManager.instance == null)
             {
                 SaveManager.instance = new();

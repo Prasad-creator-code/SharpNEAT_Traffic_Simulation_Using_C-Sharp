@@ -1,16 +1,10 @@
-﻿using System;
+﻿using NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Reflection.Metadata;
-using System.Runtime.ConstrainedExecution;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using Point = System.Drawing.Point;
 
 namespace NEATDrive_WPF.DrivingScripts
 {
@@ -24,10 +18,8 @@ namespace NEATDrive_WPF.DrivingScripts
 
         public DispatcherTimer simTimer = new();
         List<Rectangle> itemRemover = new();
-        
-        ConfigurationWindow simWindow;
 
-        Random rand= new();
+        Random rand = new();
 
         ImageBrush playerImage = new();
         ImageBrush starImage = new();
@@ -40,27 +32,23 @@ namespace NEATDrive_WPF.DrivingScripts
         double carMaxSpeed = 5;
         double carFriction = 0.02;
         double carRotation = 0;
-        double carPositionX=0;
-        double carPositionY=0;
+        double carPositionX = 0;
+        double carPositionY = 0;
         double carTurningSpeed = 4;
 
         int playerSpeed = 10;
         int carNum;
         int starCounter = 30;
         int powerModeCounter = 200;
-        
+
         //Text scoreText;
 
         double score;
         double i;
 
-        bool simStart=true,isAccelerating, isBraking, isTurningLeft, isTurningRight, simOver, powerMode;
-            
+        bool simStart = true, isAccelerating, isBraking, isTurningLeft, isTurningRight, simOver, powerMode;
 
-        public DriveManager(ConfigurationWindow windowToRunSimOn)
-        {
-            simWindow=windowToRunSimOn;
-        }
+        public HeroCar heroCar = new HeroCar(ApplicationManager.instance.simWindow.HeroCar_Sprite);
 
         public bool isSimStart()
         {
@@ -70,6 +58,8 @@ namespace NEATDrive_WPF.DrivingScripts
         {
             //carSpeed = 8;
             simTimer.Start();
+            InitTimer();
+            //var car = new HeroCar(ApplicationManager.instance.simWindow.HeroCar_Sprite, new Rectangle());
             //isTurningLeft = false;
             //isTurningRight = false;
             //simOver = false;
@@ -85,16 +75,17 @@ namespace NEATDrive_WPF.DrivingScripts
 
         public void InitTimer()
         {
-            simTimer.Tick += simWindow.SimLoop;
+            simTimer.Tick += ApplicationManager.instance.simWindow.SimLoop;
             simTimer.Interval = TimeSpan.FromMilliseconds(16.66);
         }
 
         public void StopSim()
         {
-
+            simTimer.Stop();
         }
 
         #region DrivePhysics
+        /*
         List<Point> roadPolygon = new List<Point>()
         {
             new Point(0, 0),
@@ -132,6 +123,7 @@ namespace NEATDrive_WPF.DrivingScripts
 
             return randomPoint;
         }
+        */
         /*private bool IsColliding(double x, double y, double width, double height)
         {
             Rect carRect = new Rect(x, y, width, height);
