@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -23,8 +22,8 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
         }
         public void Update()
         {
-            Debug.WriteLine("Jaara na Aage lode!");
-            Debug.WriteLine(speed);
+            //Debug.WriteLine("Jaara na Aage lode!");
+            //Debug.WriteLine(speed);
             // Update the car's position based on speed and angle
             double angleInRadians = angle * Math.PI / 180;
             x += speed * Math.Sin(angleInRadians);

@@ -662,8 +662,26 @@ namespace NEATDrive_WPF
         }
 
 
+
+
+
         #endregion
 
+        private void Export_Metrics_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            //SaveManager.instance?.SaveToCSVSheet();
+            //Debug.WriteLine("Saved to csv");
 
+            if (SpreadSheet_Option.SelectedItem == SpreadSheet_Option.Items[0])
+            {
+                SaveManager.instance?.SaveToExcelSheet();
+                Debug.WriteLine("Saved to excel");
+            }
+            else if (SpreadSheet_Option.SelectedItem == SpreadSheet_Option.Items[1])
+            {
+                SaveManager.instance?.SaveToCSVSheet();
+                Debug.WriteLine("Saved to csv");
+            }
+        }
     }
 }
