@@ -296,7 +296,7 @@
             </Grid>
             <Grid x:Name="MetricsGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80">
                 <Grid x:Name="PerformanceGrid" Grid.Row="3" Grid.Column="3" Grid.RowSpan="3" Grid.ColumnSpan="3" Width="500" Height="500" HorizontalAlignment="Right" Margin="0,0,50,0" Focusable="True">
-                    <DataGrid x:Name="Metrics_DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="Chakra Petch" BorderThickness="10,10,10,10" SelectedIndex="0" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" UseLayoutRounding="True">
+                    <DataGrid x:Name="Metrics_DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="Chakra Petch" BorderThickness="10,10,10,10" SelectedIndex="0" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" UseLayoutRounding="True" RowHeight="30">
                         <DataGrid.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#FFC8C8C8" Offset="1"/>

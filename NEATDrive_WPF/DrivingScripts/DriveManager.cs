@@ -48,7 +48,7 @@ namespace NEATDrive_WPF.DrivingScripts
 
         bool simStart = true, isAccelerating, isBraking, isTurningLeft, isTurningRight, simOver, powerMode;
 
-        public HeroCar heroCar = new HeroCar(ApplicationManager.instance.simWindow.HeroCar_Sprite);
+        public HeroCar heroCar;
 
         public bool isSimStart()
         {
