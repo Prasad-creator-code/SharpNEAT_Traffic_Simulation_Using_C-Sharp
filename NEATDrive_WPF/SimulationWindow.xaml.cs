@@ -9,6 +9,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Color = System.Drawing.Color;
+using Image = System.Windows.Controls.Image;
+using Point = System.Windows.Point;
 
 namespace NEATDrive_WPF
 {
@@ -40,6 +43,9 @@ namespace NEATDrive_WPF
         //protected const double MaxSpeed = 6;
         protected const double TurningAngle = 15;
         //protected const double Handling = 0.15;
+
+        Color underlyingColor = Color.Transparent; // Default color
+        bool isColorCacheValid = false;
 
         public void AddRoadBordersToList()
         {
@@ -133,20 +139,22 @@ namespace NEATDrive_WPF
         {
             double carX = Canvas.GetLeft(HeroCar_Sprite);
             double carY = Canvas.GetTop(HeroCar_Sprite);
-
-            Color underlyingColor = GetUnderlyingColor(HeroCar_Sprite);
+            //            UpdateColorCache();
+            underlyingColor = GetUnderlyingColor();
 
             //// Check if the underlying color is green (grass)
             if (IsColorGreen(underlyingColor))
             {
-                carMaxSpeed = 0.1;
+                carMaxSpeed = 1;
+                //Debug.WriteLine("Yes Color Found " + "R -" + underlyingColor.R + "    G -" + underlyingColor.G + "    B -" + underlyingColor.B);
                 Debug.WriteLine("Yes Color Found ");
             }
             else
             {
 
                 carMaxSpeed = 5;
-                Debug.WriteLine("NO, it is " + "R " + underlyingColor.R + "G " + underlyingColor.G + "B " + underlyingColor.G);
+                //Debug.WriteLine("NO, it is " + "R -" + underlyingColor.R + "    G -" + underlyingColor.G + "    B -" + underlyingColor.B);
+                Debug.WriteLine("NO");
             }
 
 
@@ -234,38 +242,53 @@ namespace NEATDrive_WPF
 
             }
         }
-
-        // Get the color of the underlying image at the specified position in the given canvas
-        Color GetUnderlyingColor(Canvas carCanvas)
+        void UpdateColorCache()
         {
-            // Get the position of the carCanvas within its parent canvas
-            Point carCanvasPosition = carCanvas.TransformToVisual(RoadCanvas).Transform(new Point(0, 0));
 
-            // Convert the carCanvas position to integer coordinates
+            Point carCanvasPosition = HeroCar_Sprite.TransformToVisual(RoadCanvas).Transform(new Point(0, 0));
+
             int carCanvasX = (int)carCanvasPosition.X;
             int carCanvasY = (int)carCanvasPosition.Y;
 
-            // Check if the carCanvas is within the bounds of RoadCanvas
             if (carCanvasX >= 0 && carCanvasX < RoadCanvas.ActualWidth && carCanvasY >= 0 && carCanvasY < RoadCanvas.ActualHeight)
             {
-                // Create a RenderTargetBitmap of RoadCanvas
                 RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)RoadCanvas.ActualWidth, (int)RoadCanvas.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
                 renderBitmap.Render(RoadCanvas);
 
-                // Get the color of the pixel at the carCanvas position
                 CroppedBitmap croppedBitmap = new CroppedBitmap(renderBitmap, new Int32Rect(carCanvasX, carCanvasY, 1, 1));
                 byte[] pixelColor = new byte[4];
                 croppedBitmap.CopyPixels(pixelColor, 4, 0);
 
-                // Check if the color is green
-                if (pixelColor[2] == 0 && pixelColor[1] == 255 && pixelColor[0] == 0)
+                if (pixelColor[2] == 60 && pixelColor[1] == 150 && pixelColor[0] == 60)
                 {
-                    return Colors.Green; // Return green color
+
+                    underlyingColor = Color.FromArgb(255, 60, 150, 60);
+                    //isColorCacheValid = false;
                 }
+                else
+                {
+                    underlyingColor = Color.Transparent;
+                    isColorCacheValid = false;
+
+                }
+                //isColorCacheValid = true;
             }
 
-            // Return a default color (e.g., transparent) if no green color is detected or the carCanvas is outside the bounds of RoadCanvas
-            return Colors.Transparent;
+
+
+        }
+
+
+
+        // Get the color of the underlying image at the specified position in the given canvas
+        Color GetUnderlyingColor()
+        {
+            if (!isColorCacheValid)
+            {
+                UpdateColorCache();
+            }
+
+            return underlyingColor;
         }
 
 
