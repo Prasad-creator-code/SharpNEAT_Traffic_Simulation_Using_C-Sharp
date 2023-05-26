@@ -18,7 +18,6 @@ namespace NEATDrive_WPF
     {
         readonly Storyboard fadeInPreview;
 
-        DriveManager? driveManager;
 
         private RoadOptionSlot? selectedRoadOptionSlot;
 
@@ -116,7 +115,7 @@ namespace NEATDrive_WPF
             Uri threeWayRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Tri_Road.png", UriKind.Absolute);
             threeWayRoadOption = new RoadOptionSlot(threeWayRoadUri);
 
-            Uri nullRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute);
+            Uri nullRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/BackgroundTextures/TiledTexture.jpg", UriKind.Absolute);
             nullRoadOption = new RoadOptionSlot(nullRoadUri);
 
             Row1_1.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));

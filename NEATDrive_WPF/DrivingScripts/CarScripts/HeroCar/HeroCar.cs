@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
 {
     class HeroCar : Vehicle
     {
-        Canvas carCanvas;
 
         public HeroCar(Canvas canvas)
         {
             carCanvas = canvas;
 
-            x = canvas.ActualWidth / 2;
-            y = canvas.ActualHeight / 2;
-            speed = 0;
-            angle = 0;
+            //x = canvas.ActualWidth / 2;
+            //y = canvas.ActualHeight / 2;
+            //speed = 0;
+            //angle = 0;
 
             /*
             // Initialize the car's position
@@ -31,141 +30,144 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
         }
         public void Update()
         {
-            //CarMove();
-            //Debug.WriteLine("Jaara na Aage lode!");
-            //Debug.WriteLine(speed);
-            // Update the car's position based on speed and angle
+            UpdateCarPosition();
 
-            x += speed;
+        }
 
-            // Move the car's canvas using Canvas.SetLeft method
-            Canvas.SetLeft(carCanvas, x);
+        public void UpdateCarPosition()
+        {
+            double carX = Canvas.GetLeft(carCanvas);
+            double carY = Canvas.GetTop(carCanvas);
+            //            UpdateColorCache();
+            underlyingColor = GetUnderlyingColor();
 
-            // Check if the car has reached the window's right edge
-            if (x > carCanvas.ActualWidth)
+            //// Check if the underlying color is green (grass)
+            if (IsColorGreen(underlyingColor))
             {
-                // Reset the car's position
-                x = -carCanvas.Width;
-            }
-
-
-
-            double angleInRadians = angle * Math.PI / 180;
-            x += speed * Math.Sin(angleInRadians);
-            y -= speed * Math.Cos(angleInRadians);
-
-            // Keep the car within the window limits
-            //double windowWidth = ApplicationManager.instance.simWindow.ActualWidth;
-            //double windowHeight = ApplicationManager.instance.simWindow.ActualHeight;
-            double windowWidth = 2; //= ApplicationManager.instance.simWindow.SimGrid.ActualWidth;
-            double windowHeight = 2;// = ApplicationManager.instance.simWindow.SimGrid.ActualHeight;
-            double carWidth = carCanvas.ActualWidth;
-            double carHeight = carCanvas.ActualHeight;
-
-            x = Math.Min(Math.Max(x, carWidth / 2), windowWidth - carWidth / 2);
-            y = Math.Min(Math.Max(y, carHeight / 2), windowHeight - carHeight / 2);
-
-            // Update the car's position on the canvas
-            Canvas.SetLeft(carCanvas, x - carWidth / 2);
-            Canvas.SetTop(carCanvas, y - carHeight / 2);
-            Debug.WriteLine("This is SetLeft Value" + (x - carWidth / 2));
-            Debug.WriteLine("This is SetTop Value" + (y - carHeight / 2));
-
-
-            // Limit the speed to the maximum speed
-            if (speed > MaxSpeed)
-            {
-                speed = MaxSpeed;
-            }
-
-
-            // Decelerate the car when no acceleration key is pressed
-            if (Math.Abs(speed) > 0 && !IsAccelerationKeyDown())
-            {
-                speed -= Math.Sign(speed) * Deceleration;
-                if (Math.Abs(speed) < Deceleration)
+                if (carMaxSpeed != 1)
                 {
-                    speed = 0;
+                    carMaxSpeed = 1;
                 }
 
+
+                //Debug.WriteLine("Yes Color Found " + "R -" + underlyingColor.R + "    G -" + underlyingColor.G + "    B -" + underlyingColor.B);
+                //Debug.WriteLine("Yes Color Found ");
             }
-
-        }
-
-        void CarMove()
-        {
-            double angleInRadians = angle * Math.PI / 180;
-            x += speed * Math.Sin(angleInRadians);
-            y -= speed * Math.Cos(angleInRadians);
-
-            // Keep the car within the window limits
-            double windowWidth = 2; //ApplicationManager.instance.simWindow.SimGrid.ActualWidth;
-            double windowHeight = 2;// ApplicationManager.instance.simWindow.SimGrid.ActualHeight;
-            double carWidth = carCanvas.ActualWidth;
-            double carHeight = carCanvas.ActualHeight;
-
-            x = Math.Min(Math.Max(x, carWidth / 2), windowWidth - carWidth / 2);
-            y = Math.Min(Math.Max(y, carHeight / 2), windowHeight - carHeight / 2);
-
-            // Calculate the position of the car within the grid's canvas children
-            double columnWidth = windowWidth / 2; //ApplicationManager.instance.simWindow.SimGrid.ColumnDefinitions.Count;
-            double rowHeight = windowHeight / 2;// ApplicationManager.instance.simWindow.SimGrid.RowDefinitions.Count;
-            int column = (int)(x / columnWidth);
-            int row = (int)(y / rowHeight);
-
-            // Update the car's position within the grid's canvas children
-            Canvas.SetLeft(ApplicationManager.instance.simWindow.HeroCar_Sprite, column * columnWidth);
-            Canvas.SetTop(ApplicationManager.instance.simWindow.HeroCar_Sprite, row * rowHeight);
-
-            // Limit the speed to the maximum speed
-            if (speed > MaxSpeed)
-                speed = MaxSpeed;
-
-            // Decelerate the car when no acceleration key is pressed
-            if (Math.Abs(speed) > 0 && !IsAccelerationKeyDown())
+            else
             {
-                speed -= Math.Sign(speed) * Deceleration;
-                if (Math.Abs(speed) < Deceleration)
-                    speed = 0;
+                if (carMaxSpeed != 5)
+                {
+                    carMaxSpeed = 5;
+                }
+
+                //Debug.WriteLine("NO, it is " + "R -" + underlyingColor.R + "    G -" + underlyingColor.G + "    B -" + underlyingColor.B);
+                //Debug.WriteLine("NO");
+            }
+
+
+            if (IsTurnLeftKeyDown() && (carSpeed > 0 || carSpeed < 0))
+            {
+                carRotation -= carTurningSpeed;
+            }
+            if (IsTurnRightKeyDown() && (carSpeed > 0 || carSpeed < 0))
+            {
+                carRotation += carTurningSpeed;
+            }
+            if (IsAccelerationKeyDown())
+            {
+
+                carSpeed += Acceleration;
+                if (carSpeed > carMaxSpeed)
+                {
+                    carSpeed = carMaxSpeed;
+                }
+            }
+
+            if (IsBrakeKeyDown())
+            {
+                carSpeed -= BrakingForce;
+                if (carSpeed <= 0)
+                {
+                    carSpeed = -carMaxSpeed / 2;
+                }
+            }
+
+
+
+            double carDirectionX = Math.Cos(carRotation * Math.PI / 180);
+            double carDirectionY = Math.Sin(carRotation * Math.PI / 180);
+
+            carPositionX += carDirectionX * carSpeed;
+            carPositionY += carDirectionY * carSpeed;
+
+            Canvas.SetLeft(carCanvas, carPositionX);
+            Canvas.SetTop(carCanvas, carPositionY);
+
+            double angle = Math.Atan2(carDirectionY, carDirectionX) + Math.PI / 2;
+            angle *= 180 / Math.PI;
+            angle = Math.Round(angle, 2);
+            RotateTransform rotation = new RotateTransform(angle);
+
+            carCanvas.RenderTransform = rotation;
+
+
+
+
+
+            if (IsAccelerationKeyUp() && IsBrakeKeyUp())
+            {
+
+                if (Math.Abs(carSpeed) > 0)
+                {
+                    carSpeed -= Math.Sign(carSpeed) * 0.1;
+
+                    if (Math.Abs(carSpeed) < 0.1)
+                    {
+                        carSpeed = 0;
+                    }
+                }
+                if (Math.Abs(carSpeed) < 0)
+                {
+                    carSpeed += Math.Sign(carSpeed) * 0.1;
+
+                    if (Math.Abs(carSpeed) > 0.1)
+                    {
+                        carSpeed = 0;
+                    }
+                }
+
+
             }
         }
 
-        void CarMove2()
-        {
-            double angleInRadians = angle * Math.PI / 180;
-            x += speed * Math.Sin(angleInRadians);
-            y -= speed * Math.Cos(angleInRadians);
 
-            // Set the updated position of the car on the canvas
-            //Canvas.SetLeft(ApplicationManager.instance.simWindow.HeroCar_Sprite, x);
-            //Canvas.SetTop(ApplicationManager.instance.simWindow.HeroCar_Sprite, y);
-            Debug.WriteLine(y);
+
+        bool IsAccelerationKeyDown()
+        {
+            return Keyboard.IsKeyDown(Key.Up);
         }
 
-        public void Accelerate()
+        bool IsAccelerationKeyUp()
         {
-            speed += Acceleration;
-
+            return Keyboard.IsKeyUp(Key.Up);
+        }
+        bool IsBrakeKeyDown()
+        {
+            return Keyboard.IsKeyDown(Key.Down);
+        }
+        bool IsBrakeKeyUp()
+        {
+            return Keyboard.IsKeyUp(Key.Down);
         }
 
-        public void Decelerate()
+        bool IsTurnRightKeyDown()
         {
-            speed -= Deceleration;
+            return Keyboard.IsKeyDown(Key.Right);
         }
 
-        public void TurnLeft()
+        bool IsTurnLeftKeyDown()
         {
-            angle -= TurnAngle;
-        }
-
-        public void TurnRight()
-        {
-            angle += TurnAngle;
-        }
-
-        private bool IsAccelerationKeyDown()
-        {
-            return Keyboard.IsKeyDown(Key.Up) || Keyboard.IsKeyDown(Key.W) || Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.S);
+            return Keyboard.IsKeyDown(Key.Left);
         }
     }
 }

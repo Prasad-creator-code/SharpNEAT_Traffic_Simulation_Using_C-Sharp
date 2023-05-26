@@ -16,6 +16,10 @@
     <None Remove="Resources\Fonts\ChakraPetch-Regular.ttf" />
     <None Remove="Resources\Fonts\ChakraPetch-SemiBold.ttf" />
     <None Remove="Resources\Images\BackgroundTextures\Grass-1.jpg" />
+    <None Remove="Resources\Images\BackgroundTextures\TiledTexture.jpg" />
+    <None Remove="Resources\Images\BackgroundTextures\TiledTexture2.png" />
+    <None Remove="Resources\Images\BackgroundTextures\TiledTexture3.jpg" />
+    <None Remove="Resources\Images\BackgroundTextures\TiledTexture4.png" />
     <None Remove="Resources\Images\Props\Cross.png" />
     <None Remove="Resources\Images\Props\Grass_Cute.png" />
     <None Remove="Resources\Images\Props\Layer 1.png" />
@@ -50,17 +54,51 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Images\BackgroundTextures\Grass-1.jpg" />
-    <Resource Include="Resources\Images\Props\Cross.png" />
-    <Resource Include="Resources\Images\Props\Grass_Cute.png" />
-    <Resource Include="Resources\Images\Props\Layer 1.png" />
-    <Resource Include="Resources\Images\Props\pedestrian.png" />
-    <Resource Include="Resources\Images\Props\Ped_car.png" />
-    <Resource Include="Resources\Images\Props\PotHole1.png" />
-    <Resource Include="Resources\Images\Props\Sports_car.png" />
-    <Resource Include="Resources\Images\Props\Taxi Closed.png" />
-    <Resource Include="Resources\Images\Props\Taxi Open Left.png" />
-    <Resource Include="Resources\Images\Props\Taxi Open Right.png" />
-    <Resource Include="Resources\Images\Roads\Road_1.png" />
+    <Resource Include="Resources\Images\BackgroundTextures\TiledTexture.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\BackgroundTextures\TiledTexture2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\BackgroundTextures\TiledTexture3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\BackgroundTextures\TiledTexture4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\Cross.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\Grass_Cute.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\Layer 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\pedestrian.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\Ped_car.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\PotHole1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\Sports_car.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\Taxi Closed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\Taxi Open Left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Props\Taxi Open Right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Roads\Road_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -71,18 +109,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Images\Logos\Logo Rotator.png" />
-    <Resource Include="Resources\Images\Logos\Logo_Mix.png" />
+    <Resource Include="Resources\Images\Logos\Logo Rotator.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Logos\Logo_Mix.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Images\Logos\Logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\Roads\SystemicRoads\Chowk.png" />
-    <Resource Include="Resources\Images\Roads\SystemicRoads\Straight_Road.png" />
-    <Resource Include="Resources\Images\Roads\SystemicRoads\Tri_Road.png" />
-    <Resource Include="Resources\Images\Roads\SystemicRoads\Turn_Road.png" />
+    <Resource Include="Resources\Images\Roads\SystemicRoads\Chowk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Roads\SystemicRoads\Straight_Road.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Roads\SystemicRoads\Tri_Road.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Roads\SystemicRoads\Turn_Road.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

@@ -16,7 +16,16 @@ namespace NEATDrive_WPF.DrivingScripts
     {
         public static DriveManager? instance;
 
+
+
+
+
+
+
+
+
         public DispatcherTimer simTimer = new();
+
         List<Rectangle> itemRemover = new();
 
         Random rand = new();
@@ -27,14 +36,14 @@ namespace NEATDrive_WPF.DrivingScripts
         Rect playerHitBox;
         bool isColliding;
 
-        double carSpeed = 0;
+        //double carSpeed = 0;
         double carAcceleration = 0.25;
-        double carMaxSpeed = 5;
-        double carFriction = 0.02;
-        double carRotation = 0;
-        double carPositionX = 0;
-        double carPositionY = 0;
-        double carTurningSpeed = 4;
+        //double carMaxSpeed = 5;
+        //double carFriction = 0.02;
+        //double carRotation = 0;
+        //double carPositionX = 0;
+        //double carPositionY = 0;
+        //double carTurningSpeed = 4;
 
         int playerSpeed = 10;
         int carNum;

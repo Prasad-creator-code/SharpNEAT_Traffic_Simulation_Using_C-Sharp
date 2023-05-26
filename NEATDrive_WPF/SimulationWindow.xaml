@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NEATDrive_WPF"
         mc:Ignorable="d"
-        Title="NEAT Simulation" Height="735" Width="885" ResizeMode="NoResize" WindowState="Maximized" WindowStartupLocation="CenterOwner" Closed="OnWindowClose" Activated="SimulationWindow1_Activated" Deactivated="SimulationWindow1_Deactivated">
+        Title="NEAT Simulation" Height="768" Width="1366" ResizeMode="NoResize" WindowState="Maximized" WindowStartupLocation="CenterOwner" Closed="OnWindowClose" Activated="SimulationWindow1_Activated" Deactivated="SimulationWindow1_Deactivated" BorderThickness="10,10,10,10">
     <Window.Background>
-        <ImageBrush ImageSource="/Resources/Images/Props/Grass_Cute.png" Opacity="1" Stretch="Fill" TileMode="Tile">
+        <ImageBrush ImageSource="/Resources/Images/BackgroundTextures/TiledTexture2.png" Opacity="1" Stretch="Fill" TileMode="Tile">
             <ImageBrush.RelativeTransform>
                 <TransformGroup>
-                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="1" ScaleY="1.5"/>
+                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.5" ScaleY="0.8"/>
                     <SkewTransform CenterX="0.5" CenterY="0.5"/>
                     <RotateTransform CenterX="0.5" CenterY="0.5"/>
                     <TranslateTransform X="0" Y="0"/>
@@ -88,7 +88,7 @@
             <TextBlock x:Name="Stop_Sim_Text" TextWrapping="Wrap" Text="Stop Simulation" FontFamily="Chakra Petch" FontSize="18" TextAlignment="Center" LineHeight="11" Padding="0,10,0,10" Width="150" Height="50" UseLayoutRounding="False"/>
         </Border>
         <Rectangle x:Name="RoadBorder" Stroke="Black" StrokeThickness="10.6" Tag="BoundBorder" StrokeDashCap="Square" Height="620" Canvas.Top="0" Width="620" Canvas.Left="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Canvas x:Name="HeroCar_Sprite" Tag="HeroCar" RenderTransformOrigin="0.5,0.5" KeyDown="HeroCar_Sprite_KeyDown" KeyUp="HeroCar_Sprite_KeyUp" Focusable="True" IsHitTestVisible="False" Height="80" Width="36" Canvas.Left="35" Canvas.Top="36" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Canvas x:Name="HeroCar_Sprite" Tag="HeroCar" RenderTransformOrigin="0.5,0.5" KeyDown="HeroCar_Sprite_KeyDown" KeyUp="HeroCar_Sprite_KeyUp" Focusable="True" IsHitTestVisible="False" Canvas.Left="180" Canvas.Top="75" Width="30" Height="39" UseLayoutRounding="False" VerticalAlignment="Top" HorizontalAlignment="Center">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

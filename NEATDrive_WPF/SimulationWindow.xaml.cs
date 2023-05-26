@@ -39,13 +39,16 @@ namespace NEATDrive_WPF
         private double carPositionY;
         private double carMaxSpeed = 5;
         protected const double Acceleration = 0.25;
-        protected const double Deceleration = 0.05;
+        protected const double Deceleration = 0.1;
         //protected const double MaxSpeed = 6;
         protected const double TurningAngle = 15;
         //protected const double Handling = 0.15;
 
         Color underlyingColor = Color.Transparent; // Default color
         bool isColorCacheValid = false;
+
+        private double colorCheckInterval = 0.1; // Delay between consecutive color checks in seconds
+        private double elapsedColorCheckTime = 0;
 
         public void AddRoadBordersToList()
         {
@@ -131,9 +134,27 @@ namespace NEATDrive_WPF
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
+            double deltaTime = (e as RenderingEventArgs).RenderingTime.TotalSeconds - elapsedColorCheckTime;
+
+            // Accumulate the elapsed time
+            elapsedColorCheckTime += deltaTime;
+
+            // Check if enough time has passed for the color check
+            if (elapsedColorCheckTime >= colorCheckInterval)
+            {
+                // Update the color cache
+                //UpdateColorCache(RoadCanvas, carCanvas);
+                DriveManager.instance?.heroCar.Update();
+
+                // Reset the elapsed time
+                elapsedColorCheckTime = 0;
+            }
+
+
+
             // Update the car's position and perform other game logic
-            //DriveManager.instance?.heroCar.Update();
-            UpdateCarPosition();
+
+            //UpdateCarPosition();
         }
         public void UpdateCarPosition()
         {
@@ -268,10 +289,11 @@ namespace NEATDrive_WPF
                 else
                 {
                     underlyingColor = Color.Transparent;
-                    isColorCacheValid = false;
+                    //isColorCacheValid = false;
 
                 }
-                //isColorCacheValid = true;
+
+                isColorCacheValid = true;
             }
 
 
@@ -288,7 +310,16 @@ namespace NEATDrive_WPF
                 UpdateColorCache();
             }
 
-            return underlyingColor;
+            if (underlyingColor.R >= 50 && underlyingColor.R <= 70 &&
+        underlyingColor.G >= 140 && underlyingColor.G <= 160 &&
+        underlyingColor.B >= 50 && underlyingColor.B <= 70)
+            {
+                return underlyingColor; // Return the color if it falls within the range
+            }
+            else
+            {
+                return Color.Transparent; // Return transparent color if it doesn't fall within the range
+            }
         }
 
 
@@ -299,11 +330,6 @@ namespace NEATDrive_WPF
         {
             return color.R == 60 && color.G == 150 && color.B == 60; // Adjust the color values as needed
         }
-
-
-
-
-        //Debug.WriteLine(carSpeed);
 
 
         RenderTargetBitmap CombineRoadCanvases()
@@ -326,7 +352,6 @@ namespace NEATDrive_WPF
                 }
                 drawingContext.Close();
             }
-
 
             renderBitmap.Render(drawingVisual);
 
