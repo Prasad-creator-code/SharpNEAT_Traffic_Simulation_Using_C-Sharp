@@ -31,8 +31,8 @@ namespace NeatTest.ConsoleApp
                 // Try to load the genome from the XML document.
                 try
                 {
-                    using (XmlReader xr = XmlReader.Create(FILE))
-                        genome = NeatGenomeXmlIO.ReadCompleteGenomeList(xr, false, (NeatGenomeFactory)experiment.CreateGenomeFactory())[0];
+                    using XmlReader xr = XmlReader.Create(FILE);
+                    genome = NeatGenomeXmlIO.ReadCompleteGenomeList(xr, false, (NeatGenomeFactory)experiment.CreateGenomeFactory())[0];
                 }
                 catch (Exception e1)
                 {

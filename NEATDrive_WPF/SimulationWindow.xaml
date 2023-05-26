@@ -88,7 +88,10 @@
             <TextBlock x:Name="Stop_Sim_Text" TextWrapping="Wrap" Text="Stop Simulation" FontFamily="Chakra Petch" FontSize="18" TextAlignment="Center" LineHeight="11" Padding="0,10,0,10" Width="150" Height="50" UseLayoutRounding="False"/>
         </Border>
         <Rectangle x:Name="RoadBorder" Stroke="Black" StrokeThickness="10.6" Tag="BoundBorder" StrokeDashCap="Square" Height="620" Canvas.Top="0" Width="620" Canvas.Left="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Canvas x:Name="HeroCar_Sprite" Tag="HeroCar" RenderTransformOrigin="0.5,0.5" KeyDown="HeroCar_Sprite_KeyDown" KeyUp="HeroCar_Sprite_KeyUp" Focusable="True" IsHitTestVisible="False" Canvas.Left="180" Canvas.Top="75" Width="30" Height="39" UseLayoutRounding="False" VerticalAlignment="Top" HorizontalAlignment="Center">
+        <Canvas x:Name="HeroCar_Sprite" Tag="HeroCar" RenderTransformOrigin="0.25,0.25" KeyDown="HeroCar_Sprite_KeyDown" KeyUp="HeroCar_Sprite_KeyUp" Focusable="True" IsHitTestVisible="False" Canvas.Left="160" Canvas.Top="60" Width="15" Height="30" UseLayoutRounding="False">
+            <Canvas.Background>
+                <ImageBrush Stretch="Uniform" ImageSource="/Resources/Images/Props/Sports_car.png"/>
+            </Canvas.Background>
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -97,9 +100,6 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Canvas.RenderTransform>
-            <Canvas.Background>
-                <ImageBrush ImageSource="/Resources/Images/Props/Sports_car.png" Stretch="Uniform"/>
-            </Canvas.Background>
         </Canvas>
     </Canvas>
 </Window>

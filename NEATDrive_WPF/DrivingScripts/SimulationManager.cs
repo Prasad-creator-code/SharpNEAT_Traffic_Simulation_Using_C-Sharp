@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NEATDrive_WPF.DrivingScripts
+﻿namespace NEATDrive_WPF.DrivingScripts
 {
     /// <summary>
-    /// THis class contains the simulation parameters to be used during the sim
+    /// This class contains the simulation parameters to be used during the sim and the NEAT working scripts
     /// </summary>
     class SimulationManager
     {

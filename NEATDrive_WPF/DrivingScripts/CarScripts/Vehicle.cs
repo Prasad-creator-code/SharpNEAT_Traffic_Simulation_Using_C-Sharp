@@ -10,20 +10,20 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
 {
     abstract class Vehicle
     {
-        protected Canvas carCanvas;
-        protected Canvas RoadCanvas = ApplicationManager.instance?.simWindow.RoadCanvas;
+        protected Canvas? carCanvas;
+        protected Canvas? RoadCanvas = ApplicationManager.instance?.simWindow?.RoadCanvas;
 
 
         protected double carSpeed;
         protected double carRotation;
-        protected double carTurningSpeed = 2.5;
+        protected double carTurningSpeed = 3;
         protected double carFriction;
         protected double carPositionX;
         protected double carPositionY;
         protected double carMaxSpeed = 5;
-        protected const double Acceleration = 0.25;
-        protected const double Deceleration = 0.01;
-        protected const double BrakingForce = 0.1;
+        protected const double Acceleration = 0.1;
+        protected const double Deceleration = 0.005;
+        protected const double BrakingForce = 0.05;
         protected const double TurningAngle = 15;
 
         protected Color underlyingColor = Color.Transparent; // Default color
@@ -41,10 +41,10 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
 
             if (carCanvasX >= 0 && carCanvasX < roadCanvas.ActualWidth && carCanvasY >= 0 && carCanvasY < roadCanvas.ActualHeight)
             {
-                RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)roadCanvas.ActualWidth, (int)roadCanvas.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
+                RenderTargetBitmap renderBitmap = new((int)roadCanvas.ActualWidth, (int)roadCanvas.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
                 renderBitmap.Render(roadCanvas);
 
-                CroppedBitmap croppedBitmap = new CroppedBitmap(renderBitmap, new Int32Rect(carCanvasX, carCanvasY, 1, 1));
+                CroppedBitmap croppedBitmap = new(renderBitmap, new Int32Rect(carCanvasX, carCanvasY, 1, 1));
                 byte[] pixelColor = new byte[4];
                 croppedBitmap.CopyPixels(pixelColor, 4, 0);
 
