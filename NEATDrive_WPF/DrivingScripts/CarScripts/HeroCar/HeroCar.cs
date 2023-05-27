@@ -12,21 +12,6 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
         {
             carCanvas = canvas;
 
-            //x = canvas.ActualWidth / 2;
-            //y = canvas.ActualHeight / 2;
-            //speed = 0;
-            //angle = 0;
-
-            /*
-            // Initialize the car's position
-            x = carCanvas.ActualWidth / 2;
-            y = carCanvas.ActualHeight / 2;
-
-            // Set the initial speed and angle
-            speed = 0;
-            angle = 0;
-            */
-
         }
         public void Update()
         {
@@ -106,7 +91,7 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
             double angle = Math.Atan2(carDirectionY, carDirectionX) + Math.PI / 2;
             angle *= 180 / Math.PI;
             angle = Math.Round(angle, 2);
-            RotateTransform rotation = new RotateTransform(angle);
+            RotateTransform rotation = new(angle);
 
             carCanvas.RenderTransform = rotation;
 
