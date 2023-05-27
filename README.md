@@ -1,6 +1,4 @@
-![alt text](https://github.com/cbinju23/SharpNEAT_Traffic_Simulation_Using_C-Sharp/blob/master/NEATDrive_WPF/Resources/Images/Logos/TrinityLogo.png=400x200 "KJ College Of Engineering")
-
-<img src="https://github.com/cbinju23/SharpNEAT_Traffic_Simulation_Using_C-Sharp/blob/master/NEATDrive_WPF/Resources/Images/Logos/TrinityLogo.png" width="100" height="100">
+<img src="https://github.com/cbinju23/SharpNEAT_Traffic_Simulation_Using_C-Sharp/blob/master/NEATDrive_WPF/Resources/Images/Logos/TrinityLogo.png" width="200" height="100" align=center>
 
 # SharpNEAT Traffic Simulation Using C# and WPF (Windows Presentation Foundation)
 ### In a completely broken state and majorly incomplete codebase. Please wait until major bugs are squashed.
