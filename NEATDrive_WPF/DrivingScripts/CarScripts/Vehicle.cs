@@ -12,6 +12,8 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
     {
         protected Canvas? carCanvas;
         protected Canvas? RoadCanvas = ApplicationManager.instance?.simWindow?.RoadCanvas;
+        protected bool isCarSpawned = false;
+        protected Canvas spawnCanvas;
 
 
         protected double carSpeed;
@@ -91,6 +93,24 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
         {
             return color.R == 60 && color.G == 150 && color.B == 60; // Adjust the color values as needed
         }
+
+        protected void DetectCollision()
+        {
+            // Get the bounding box of the HeroCar_Sprite canvas
+            Rect heroCarBounds = new(Canvas.GetLeft(carCanvas), Canvas.GetTop(carCanvas), carCanvas.ActualWidth, carCanvas.ActualHeight);
+
+            // Get the bounding box of the PotHole_Obstacle canvas, replace with actual dynamic obstacle placements
+            Rect potHoleBounds = new(Canvas.GetLeft(ApplicationManager.instance.simWindow.PotHole_Obstacle), Canvas.GetTop(ApplicationManager.instance.simWindow.PotHole_Obstacle), ApplicationManager.instance.simWindow.PotHole_Obstacle.ActualWidth, ApplicationManager.instance.simWindow.PotHole_Obstacle.ActualHeight);
+
+            // Check if the bounding boxes intersect
+            if (heroCarBounds.IntersectsWith(potHoleBounds))
+            {
+                // Collision detected
+                // Perform desired actions, such as hiding the HeroCar_Sprite canvas
+                carCanvas.Visibility = Visibility.Hidden;
+            }
+        }
+
 
     }
 }

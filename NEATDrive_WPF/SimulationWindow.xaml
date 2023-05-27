@@ -18,7 +18,7 @@
             </ImageBrush.RelativeTransform>
         </ImageBrush>
     </Window.Background>
-    <Canvas x:Name="ParentCanvas" Height="NaN" Margin="50,60,225,49" Width="NaN">
+    <Canvas x:Name="ParentCanvas" Height="NaN" Margin="10,60,-10,49" Width="NaN">
         <Canvas x:Name="RoadCanvas" Width="610" Height="610">
             <Canvas.Background>
                 <ImageBrush ImageSource="/Resources/Images/Roads/SystemicRoads/Turn_Road.png" Stretch="None"/>
@@ -69,7 +69,35 @@
                 </Canvas.Background>
             </Canvas>
         </Canvas>
-        <Border x:Name="Start_Sim_Button_Border" BorderThickness="5,5,5,5" Padding="0,5,0,5" CornerRadius="0,20,0,20" Background="#FFC3FFF5" Cursor="Hand" MouseLeftButtonDown="Start_Sim_Button_Border_MouseLeftButtonDown" MouseEnter="Start_Sim_Button_Border_MouseEnter" MouseLeave="Start_Sim_Button_Border_MouseLeave" Height="100" Canvas.Left="648" Canvas.Top="400" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Canvas x:Name="CarSpawner_Canvas" Height="38" Width="40" RenderTransformOrigin="0.5,0.5" Canvas.Left="145" Canvas.Top="248">
+            <Canvas.LayoutTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.LayoutTransform>
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Canvas.Background>
+                <ImageBrush ImageSource="/Resources/Images/Props/CarSpawn.png" Stretch="Fill"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas x:Name="PotHole_Obstacle" Height="60" Width="40" HorizontalAlignment="Left" Canvas.Left="150" Canvas.Top="154" VerticalAlignment="Top" Tag="Pothole" MouseLeftButtonDown="PotHole_Obstacle_MouseLeftButtonDown"
+            MouseMove="PotHole_Obstacle_MouseMove" MouseEnter="PotHole_MouseEnter" MouseWheel="PotHole_MouseWheel"
+            MouseLeftButtonUp="PotHole_Obstacle_MouseLeftButtonUp">
+            <Canvas.Background>
+                <ImageBrush ImageSource="/Resources/Images/Props/PotHole1.png" Stretch="Uniform"/>
+            </Canvas.Background>
+        </Canvas>
+        <Border x:Name="Start_Sim_Button_Border" BorderThickness="5,5,5,5" Padding="0,5,0,5" CornerRadius="0,20,0,20" Background="#FFC3FFF5" Cursor="Hand" MouseLeftButtonDown="Start_Sim_Button_Border_MouseLeftButtonDown" MouseEnter="Start_Sim_Button_Border_MouseEnter" MouseLeave="Start_Sim_Button_Border_MouseLeave" Height="100" Canvas.Left="673" Canvas.Top="414" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Border.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -78,7 +106,7 @@
             </Border.BorderBrush>
             <TextBlock x:Name="Start_Sim_Text" TextWrapping="Wrap" Text="Start Simulation" FontFamily="Chakra Petch" FontSize="18" TextAlignment="Center" LineHeight="11" Padding="0,10,0,10" Width="150" Height="50" UseLayoutRounding="False"/>
         </Border>
-        <Border x:Name="Stop_Sim_Button_Border" BorderThickness="5,5,5,5" Padding="0,5,0,5" CornerRadius="0,20,0,20" Background="#FFC3FFF5" Cursor="Hand" MouseEnter="Stop_Sim_Button_Border_MouseEnter" MouseLeave="Stop_Sim_Button_Border_MouseLeave" MouseLeftButtonDown="Stop_Sim_Button_Border_MouseLeftButtonDown" Height="100" Canvas.Left="648" Canvas.Top="500" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Border x:Name="Stop_Sim_Button_Border" BorderThickness="5,5,5,5" Padding="0,5,0,5" CornerRadius="0,20,0,20" Background="#FFC3FFF5" Cursor="Hand" MouseEnter="Stop_Sim_Button_Border_MouseEnter" MouseLeave="Stop_Sim_Button_Border_MouseLeave" MouseLeftButtonDown="Stop_Sim_Button_Border_MouseLeftButtonDown" Height="100" Canvas.Left="673" Canvas.Top="514" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Border.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -88,7 +116,7 @@
             <TextBlock x:Name="Stop_Sim_Text" TextWrapping="Wrap" Text="Stop Simulation" FontFamily="Chakra Petch" FontSize="18" TextAlignment="Center" LineHeight="11" Padding="0,10,0,10" Width="150" Height="50" UseLayoutRounding="False"/>
         </Border>
         <Rectangle x:Name="RoadBorder" Stroke="Black" StrokeThickness="10.6" Tag="BoundBorder" StrokeDashCap="Square" Height="620" Canvas.Top="0" Width="620" Canvas.Left="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Canvas x:Name="HeroCar_Sprite" Tag="HeroCar" RenderTransformOrigin="0.25,0.25" KeyDown="HeroCar_Sprite_KeyDown" KeyUp="HeroCar_Sprite_KeyUp" Focusable="True" IsHitTestVisible="False" Canvas.Left="160" Canvas.Top="60" Width="15" Height="30" UseLayoutRounding="False">
+        <Canvas x:Name="HeroCar_Sprite" Tag="HeroCar" RenderTransformOrigin="0.25,0.25" KeyDown="HeroCar_Sprite_KeyDown" KeyUp="HeroCar_Sprite_KeyUp" Focusable="True" IsHitTestVisible="False" Canvas.Left="160" Canvas.Top="60" Width="15" Height="30" UseLayoutRounding="False" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Canvas.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="/Resources/Images/Props/Sports_car.png"/>
             </Canvas.Background>
@@ -101,5 +129,36 @@
                 </TransformGroup>
             </Canvas.RenderTransform>
         </Canvas>
+        <StackPanel x:Name="ObstacleStackPanel" Height="399" Width="300" HorizontalAlignment="Left" Canvas.Left="673" VerticalAlignment="Top" Canvas.Top="15">
+            <Grid x:Name="ObstacleGrid" Height="100" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="47*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Canvas x:Name="Pothole_Option" Width="300" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Grid.RowSpan="2">
+                    <Canvas.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="1"/>
+                            <GradientStop Color="#FF0466A4"/>
+                        </LinearGradientBrush>
+                    </Canvas.Background>
+                    <Border x:Name="Potholes_Button_Border" BorderBrush="White" BorderThickness="2,2,2,2" CornerRadius="20,20,20,20" Width="100" Height="100" Margin="-20,0,0,0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="#FF64FF96" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Canvas x:Name="PotHole_Image" Height="80" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Canvas.Background>
+                                <ImageBrush ImageSource="/Resources/Images/Props/PotHole1.png" Stretch="Uniform"/>
+                            </Canvas.Background>
+                            <TextBlock TextWrapping="Wrap" Text="Pothole" FontFamily="Chakra Petch" Height="20" Canvas.Left="125" Canvas.Top="8" Width="80" Foreground="White" FontSize="20"/>
+                            <TextBlock x:Name="Pothole_Amount" Canvas.Left="153" TextWrapping="Wrap" Text="5" Canvas.Top="39" FontFamily="Chakra Petch" FontSize="20" Foreground="White"/>
+                        </Canvas>
+                    </Border>
+                </Canvas>
+            </Grid>
+        </StackPanel>
     </Canvas>
 </Window>

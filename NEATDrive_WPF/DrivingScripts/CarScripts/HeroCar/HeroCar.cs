@@ -8,9 +8,12 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
     class HeroCar : Vehicle
     {
 
-        public HeroCar(Canvas canvas)
+        public HeroCar(Canvas canvas, Canvas spawnTransform)
         {
+
             carCanvas = canvas;
+            spawnCanvas = spawnTransform;
+
 
         }
         public void Update()
@@ -21,9 +24,23 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
 
         public void UpdateCarPosition()
         {
-            double carX = Canvas.GetLeft(carCanvas);
-            double carY = Canvas.GetTop(carCanvas);
-            //            UpdateColorCache();
+            DetectCollision();
+
+            if (!isCarSpawned)
+            {
+                // Spawn the car at the CarSpawner position
+                carPositionX = Canvas.GetLeft(spawnCanvas);
+                carPositionY = Canvas.GetTop(spawnCanvas);
+
+                // Set the car's position and rotation
+                Canvas.SetLeft(carCanvas, carPositionX);
+                Canvas.SetTop(carCanvas, carPositionY);
+                carCanvas.RenderTransform = spawnCanvas.RenderTransform;
+
+                isCarSpawned = true;
+                return;
+            }
+
             underlyingColor = GetUnderlyingColor();
 
             //// Check if the underlying color is green (grass)
@@ -84,6 +101,7 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
 
             carPositionX += carDirectionX * carSpeed;
             carPositionY += carDirectionY * carSpeed;
+
 
             Canvas.SetLeft(carCanvas, carPositionX);
             Canvas.SetTop(carCanvas, carPositionY);

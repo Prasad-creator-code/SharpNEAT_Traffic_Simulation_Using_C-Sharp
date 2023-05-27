@@ -30,7 +30,7 @@ namespace NEATDrive_WPF
 
 
         }
-        public List<Canvas> roadCanvasList = new List<Canvas>();
+        public List<Canvas> roadCanvasList = new();
         private double carSpeed;
         private double carRotation;
         private double carTurningSpeed = 2.5;
@@ -89,7 +89,7 @@ namespace NEATDrive_WPF
             DriveManager.instance?.StartSim();
             Start_Sim_Button_Border.Visibility = Visibility.Collapsed;
             Stop_Sim_Button_Border.Visibility = Visibility.Visible;
-
+            DriveManager.instance.heroCar = new HeroCar(HeroCar_Sprite, CarSpawner_Canvas);
             CompositionTarget.Rendering += CompositionTarget_Rendering;
             AssignMergedRoadImage();
             HeroCar_Sprite.Focus();
@@ -117,6 +117,7 @@ namespace NEATDrive_WPF
             DriveManager.instance?.StopSim();
             Start_Sim_Button_Border.Visibility = Visibility.Visible;
             Stop_Sim_Button_Border.Visibility = Visibility.Collapsed;
+
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
         }
 
@@ -220,7 +221,7 @@ namespace NEATDrive_WPF
             double angle = Math.Atan2(carDirectionY, carDirectionX) + Math.PI / 2;
             angle *= 180 / Math.PI;
             angle = Math.Round(angle, 2);
-            RotateTransform rotation = new RotateTransform(angle);
+            RotateTransform rotation = new(angle);
 
             HeroCar_Sprite.RenderTransform = rotation;
 
@@ -273,10 +274,10 @@ namespace NEATDrive_WPF
 
             if (carCanvasX >= 0 && carCanvasX < RoadCanvas.ActualWidth && carCanvasY >= 0 && carCanvasY < RoadCanvas.ActualHeight)
             {
-                RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)RoadCanvas.ActualWidth, (int)RoadCanvas.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
+                RenderTargetBitmap renderBitmap = new((int)RoadCanvas.ActualWidth, (int)RoadCanvas.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
                 renderBitmap.Render(RoadCanvas);
 
-                CroppedBitmap croppedBitmap = new CroppedBitmap(renderBitmap, new Int32Rect(carCanvasX, carCanvasY, 1, 1));
+                CroppedBitmap croppedBitmap = new(renderBitmap, new Int32Rect(carCanvasX, carCanvasY, 1, 1));
                 byte[] pixelColor = new byte[4];
                 croppedBitmap.CopyPixels(pixelColor, 4, 0);
 
@@ -334,8 +335,8 @@ namespace NEATDrive_WPF
 
         RenderTargetBitmap CombineRoadCanvases()
         {
-            RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)RoadCanvas.ActualWidth, (int)RoadCanvas.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
-            DrawingVisual drawingVisual = new DrawingVisual();
+            RenderTargetBitmap renderBitmap = new((int)RoadCanvas.ActualWidth, (int)RoadCanvas.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
+            DrawingVisual drawingVisual = new();
 
             using (DrawingContext drawingContext = drawingVisual.RenderOpen())
             {
@@ -364,7 +365,7 @@ namespace NEATDrive_WPF
 
             RenderTargetBitmap mergedBitmap = CombineRoadCanvases();
 
-            Image roadImage = new Image();
+            Image roadImage = new();
             roadImage.Source = mergedBitmap;
 
             RoadCanvas.Children.Clear();
@@ -468,7 +469,7 @@ namespace NEATDrive_WPF
 
         private void SimulationWindow1_Activated(object sender, EventArgs e)
         {
-            DriveManager.instance.heroCar = new HeroCar(HeroCar_Sprite);
+            //DriveManager.instance.heroCar = new HeroCar(HeroCar_Sprite, CarSpawner_Canvas);
 
             //DriveManager.instance.heroCar = new HeroCar(HeroCar_Sprite);
 
@@ -478,5 +479,77 @@ namespace NEATDrive_WPF
         {
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
         }
+
+
+        private bool isDragging = false;
+        private Point dragStartPosition;
+        private double initialLeft;
+        private double initialTop;
+
+        // Event handler for mouse left button down event
+        private void PotHole_Obstacle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Set the dragging flag and store the initial position
+            isDragging = true;
+            dragStartPosition = e.GetPosition(ParentCanvas);
+
+            // Store the initial left and top positions of the PotHole_Obstacle canvas
+            initialLeft = Canvas.GetLeft(PotHole_Obstacle);
+            initialTop = Canvas.GetTop(PotHole_Obstacle);
+
+            // Capture the mouse to the PotHole_Obstacle canvas
+            PotHole_Obstacle.CaptureMouse();
+        }
+
+        // Event handler for mouse move event
+        private void PotHole_Obstacle_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Check if dragging is in progress
+            if (isDragging)
+            {
+                // Get the current mouse position relative to the ParentCanvas
+                Point currentPosition = e.GetPosition(ParentCanvas);
+
+                // Calculate the offset from the drag start position
+                double offsetX = currentPosition.X - dragStartPosition.X;
+                double offsetY = currentPosition.Y - dragStartPosition.Y;
+
+                // Update the position of the PotHole_Obstacle canvas based on the initial position and the offset
+                Canvas.SetLeft(PotHole_Obstacle, initialLeft + offsetX);
+                Canvas.SetTop(PotHole_Obstacle, initialTop + offsetY);
+            }
+        }
+
+        // Event handler for mouse left button up event
+        private void PotHole_Obstacle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            // Reset the dragging flag and release the captured mouse
+            isDragging = false;
+            PotHole_Obstacle.ReleaseMouseCapture();
+        }
+
+
+
+        // Event handler for MouseEnter event
+        private void PotHole_MouseEnter(object sender, MouseEventArgs e)
+        {
+            // Set the MouseWheel event to be handled by the PotHole_Obstacle canvas
+            PotHole_Obstacle.Focus();
+        }
+
+        // Event handler for MouseWheel event
+        private void PotHole_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            // Get the scaling factor based on the mouse wheel delta
+            double scaleFactor = e.Delta > 0 ? 1.1 : 0.9;
+
+            // Scale the PotHole_Obstacle canvas
+            PotHole_Obstacle.Width *= scaleFactor;
+            PotHole_Obstacle.Height *= scaleFactor;
+        }
+
+
+
+
     }
 }
