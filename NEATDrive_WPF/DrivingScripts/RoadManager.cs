@@ -7,8 +7,8 @@ namespace NEATDrive_WPF.DrivingScripts
     {
         public static RoadManager? instance;
 
-        public RoadConfiguration? roadConfiguration = new RoadConfiguration();
-        public Road? road = new Road();
+        public RoadConfiguration? roadConfiguration = new();
+        public Road? road = new();
 
         /// <summary>
         /// Assigns the road configuration to the road (Applies road textures on Roads)
@@ -39,11 +39,7 @@ namespace NEATDrive_WPF.DrivingScripts
             {
                 ImageBrush imageBrush;
 
-
-
                 imageBrush = new ImageBrush(ApplicationManager.instance?.configWindow.roadSlotList[i].SelectedImage);
-
-
 
                 //ImageBrush imageBrush = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute)));
 

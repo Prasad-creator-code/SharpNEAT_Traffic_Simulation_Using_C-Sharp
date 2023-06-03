@@ -127,7 +127,7 @@
                 </Border.Effect>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Chakra Petch Light" FontSize="36" Text="START"/>
             </Border>
-            <Grid x:Name="HomeGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80">
+            <Grid x:Name="HomeGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80" d:IsHidden="True">
                 <StackPanel x:Name="RoadMenuStack" Margin="100,50,0,0" HorizontalAlignment="Left" Width="200">
                     <Border x:Name="TurnRoad_Border" BorderBrush="White" BorderThickness="2,2,2,2" Width="100" Height="100" CornerRadius="20,20,20,20" Margin="0,20,0,0" MouseDown="TurnRoad_Border_MouseDown" MouseUp="TurnRoad_Border_MouseUp">
                         <Border.Background>
@@ -294,23 +294,15 @@
                 </StackPanel>
                 <Label x:Name="Param_Help" Content="Adjust NEAT Parameters for fine tuning and Performance Tweaking of the Application" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Chakra Petch"/>
             </Grid>
-            <Grid x:Name="MetricsGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80" d:IsHidden="True">
+            <Grid x:Name="MetricsGrid" HorizontalAlignment="Center" Width="994" Margin="0,0,0,80">
                 <Grid x:Name="PerformanceGrid" Grid.Row="3" Grid.Column="3" Grid.RowSpan="3" Grid.ColumnSpan="3" Width="500" Height="500" HorizontalAlignment="Right" Margin="0,0,50,0" Focusable="True">
-                    <DataGrid x:Name="Metrics_DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="Chakra Petch" BorderThickness="10,10,10,10" SelectedIndex="0" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" UseLayoutRounding="True" RowHeight="30">
+                    <DataGrid x:Name="Metrics_DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="Chakra Petch" BorderThickness="10,10,10,10" SelectedIndex="0" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" UseLayoutRounding="True" RowHeight="30" SelectionMode="Single" xmlns:drivingScripts="clr-namespace:NEATDrive_WPF.DrivingScripts">
                         <DataGrid.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#FFC8C8C8" Offset="1"/>
                                 <GradientStop Color="#FF9696FF" Offset="0"/>
                             </LinearGradientBrush>
                         </DataGrid.Background>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="0" FontFamily="Chakra Petch" Header="ID"/>
-                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="1" FontFamily="Chakra Petch" Header="Avg Crash Time (in mins)"/>
-                            <DataGridTextColumn CanUserReorder="True" DisplayIndex="2" FontFamily="Chakra Petch" Header="Crossings"/>
-                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="3" FontFamily="Chakra Petch" Header="Pedestrian Interactions"/>
-                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="4" FontFamily="Chakra Petch" Header="Max Generations"/>
-                            <DataGridTextColumn CanUserReorder="False" DisplayIndex="5" FontFamily="Chakra Petch" Header="Crashes"/>
-                        </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
                 <StackPanel x:Name="MetricsMenuStack" Margin="50,50,0,0" HorizontalAlignment="Left" Width="400" Height="400">

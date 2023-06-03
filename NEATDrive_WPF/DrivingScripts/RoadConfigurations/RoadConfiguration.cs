@@ -1,11 +1,17 @@
 ﻿using NEATDrive_WPF.DrivingScripts.RoadSlots;
 using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace NEATDrive_WPF.DrivingScripts
 {
     public class RoadConfiguration
     {
 
+    }
+    public class CanvasData
+    {
+        public Canvas Canvas { get; set; }
+        public double Rotation { get; set; }
     }
 
     // In your Road class, use a List<Cell> to represent the cells in the road grid

@@ -1,9 +1,11 @@
 ﻿using NEATDrive_WPF.DrivingScripts;
+using NEATDrive_WPF.DrivingScripts.CarScripts.CivilianCar;
 using NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar;
 using NEATDrive_WPF.DrivingScripts.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -30,6 +32,11 @@ namespace NEATDrive_WPF
 
 
         }
+        NewRaycast newRaycast;
+
+        double minScale = 0.1;
+        double maxScale = 100;
+
         public List<Canvas> roadCanvasList = new();
         private double carSpeed;
         private double carRotation;
@@ -62,6 +69,7 @@ namespace NEATDrive_WPF
                     if (canvas != null && !roadCanvasList.Contains(canvas))
                     {
                         roadCanvasList.Add(canvas);
+
                     }
                 }
             }
@@ -86,12 +94,20 @@ namespace NEATDrive_WPF
 
         private void Start_Sim_Button_Border_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            //Test
+            List<UIElement> listElements = new();
+            listElements.Add(PotHole_Obstacle_1);
+
             DriveManager.instance?.StartSim();
             Start_Sim_Button_Border.Visibility = Visibility.Collapsed;
             Stop_Sim_Button_Border.Visibility = Visibility.Visible;
-            DriveManager.instance.heroCar = new HeroCar(HeroCar_Sprite, CarSpawner_Canvas);
+            DriveManager.instance.heroCar = new HeroCar(HeroCar_Sprite, CarSpawner_Canvas_1);
+            DriveManager.instance.civilianCar = new CivilianCar(PedCar_1_Sprite, CarSpawner_Canvas_1);
             CompositionTarget.Rendering += CompositionTarget_Rendering;
-            AssignMergedRoadImage();
+            newRaycast = new(HeroCar_Sprite, ObstacleCanvas, 50);
+            //rayCaster = new(HeroCar_Sprite, listElements);
+            //raycastResult = new();
+            //AssignMergedRoadImage(); After all these work, it wasn't even necessary *crying emoji*
             HeroCar_Sprite.Focus();
         }
 
@@ -135,6 +151,9 @@ namespace NEATDrive_WPF
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
+            newRaycast.PerformRaycast();
+            //Debug.WriteLine(raycastResult.Distance);
+
             double deltaTime = (e as RenderingEventArgs).RenderingTime.TotalSeconds - elapsedColorCheckTime;
 
             // Accumulate the elapsed time
@@ -146,10 +165,12 @@ namespace NEATDrive_WPF
                 // Update the color cache
                 //UpdateColorCache(RoadCanvas, carCanvas);
                 DriveManager.instance?.heroCar.Update();
+                DriveManager.instance?.civilianCar.Update();
 
                 // Reset the elapsed time
                 elapsedColorCheckTime = 0;
             }
+
 
 
 
@@ -340,24 +361,47 @@ namespace NEATDrive_WPF
 
             using (DrawingContext drawingContext = drawingVisual.RenderOpen())
             {
+                // Apply the rotation transformation to the DrawingContext
+                RotateTransform rotationTransform = RoadCanvas.RenderTransform as RotateTransform;
+                if (rotationTransform != null)
+                {
+                    drawingContext.PushTransform(rotationTransform);
+                }
+
                 foreach (Canvas roadCanvas in RoadCanvas.Children)
                 {
-                    // Get the position of the roadCanvas within the RoadCanvas
-                    Point roadCanvasPosition = roadCanvas.TransformToAncestor(RoadCanvas).Transform(new Point(0, 0));
+                    // Apply the rotation transformation to the child canvas
+                    RotateTransform childRotationTransform = roadCanvas.RenderTransform as RotateTransform;
+                    if (childRotationTransform != null)
+                    {
+                        drawingContext.PushTransform(childRotationTransform);
+                    }
 
-                    // Get the background image source of the roadCanvas
+                    Point roadCanvasPosition = roadCanvas.TransformToVisual(RoadCanvas).Transform(new Point(0, 0));
                     ImageSource backgroundImage = ((ImageBrush)roadCanvas.Background).ImageSource;
 
                     // Draw the background image onto the RenderTargetBitmap
                     drawingContext.DrawImage(backgroundImage, new Rect(roadCanvasPosition, roadCanvas.RenderSize));
+
+                    // Restore the rotation transformation of the child canvas
+                    if (childRotationTransform != null)
+                    {
+                        drawingContext.Pop();
+                    }
                 }
-                drawingContext.Close();
+
+                // Restore the rotation transformation of the RoadCanvas
+                if (rotationTransform != null)
+                {
+                    drawingContext.Pop();
+                }
             }
 
             renderBitmap.Render(drawingVisual);
 
             return renderBitmap;
         }
+
 
 
         private void AssignMergedRoadImage()
@@ -367,9 +411,41 @@ namespace NEATDrive_WPF
 
             Image roadImage = new();
             roadImage.Source = mergedBitmap;
+            // Remember to remove this
+            //BitmapSaver(mergedBitmap, "");
 
             RoadCanvas.Children.Clear();
             RoadCanvas.Children.Add(roadImage);
+        }
+
+        public void BitmapSaver(RenderTargetBitmap renderTargetBitmap, string filePath)
+        {
+            //string filePath = "pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Turn_Road.png";
+            Uri uri = new(filePath, UriKind.Relative);
+
+            // Create a PngBitmapEncoder
+            PngBitmapEncoder encoder = new();
+
+            // Create a MemoryStream to hold the image data
+            using MemoryStream stream = new();
+            // Save the RenderTargetBitmap to the MemoryStream
+            encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+            encoder.Save(stream);
+
+            // Create a BitmapImage from the MemoryStream
+            BitmapImage image = new();
+            image.BeginInit();
+            image.StreamSource = stream;
+            image.EndInit();
+
+            // Save the BitmapImage to the specified URI
+            using var fileStream = new FileStream(uri.LocalPath, FileMode.Create);
+            PngBitmapEncoder pngEncoder = new();
+            pngEncoder.Frames.Add(BitmapFrame.Create(image));
+            pngEncoder.Save(fileStream);
+
+
+
         }
 
         private void HeroCar_Sprite_KeyDown(object sender, KeyEventArgs e)
@@ -494,11 +570,11 @@ namespace NEATDrive_WPF
             dragStartPosition = e.GetPosition(ParentCanvas);
 
             // Store the initial left and top positions of the PotHole_Obstacle canvas
-            initialLeft = Canvas.GetLeft(PotHole_Obstacle);
-            initialTop = Canvas.GetTop(PotHole_Obstacle);
+            initialLeft = Canvas.GetLeft(PotHole_Obstacle_1);
+            initialTop = Canvas.GetTop(PotHole_Obstacle_1);
 
             // Capture the mouse to the PotHole_Obstacle canvas
-            PotHole_Obstacle.CaptureMouse();
+            PotHole_Obstacle_1.CaptureMouse();
         }
 
         // Event handler for mouse move event
@@ -515,8 +591,8 @@ namespace NEATDrive_WPF
                 double offsetY = currentPosition.Y - dragStartPosition.Y;
 
                 // Update the position of the PotHole_Obstacle canvas based on the initial position and the offset
-                Canvas.SetLeft(PotHole_Obstacle, initialLeft + offsetX);
-                Canvas.SetTop(PotHole_Obstacle, initialTop + offsetY);
+                Canvas.SetLeft(PotHole_Obstacle_1, initialLeft + offsetX);
+                Canvas.SetTop(PotHole_Obstacle_1, initialTop + offsetY);
             }
         }
 
@@ -525,7 +601,7 @@ namespace NEATDrive_WPF
         {
             // Reset the dragging flag and release the captured mouse
             isDragging = false;
-            PotHole_Obstacle.ReleaseMouseCapture();
+            PotHole_Obstacle_1.ReleaseMouseCapture();
         }
 
 
@@ -534,7 +610,7 @@ namespace NEATDrive_WPF
         private void PotHole_MouseEnter(object sender, MouseEventArgs e)
         {
             // Set the MouseWheel event to be handled by the PotHole_Obstacle canvas
-            PotHole_Obstacle.Focus();
+            PotHole_Obstacle_1.Focus();
         }
 
         // Event handler for MouseWheel event
@@ -542,10 +618,30 @@ namespace NEATDrive_WPF
         {
             // Get the scaling factor based on the mouse wheel delta
             double scaleFactor = e.Delta > 0 ? 1.1 : 0.9;
+            //ScaleTransform scaleTransform = new(1.0, 1.0);
+            //PotHole_Obstacle.RenderTransform = scaleTransform;
 
-            // Scale the PotHole_Obstacle canvas
-            PotHole_Obstacle.Width *= scaleFactor;
-            PotHole_Obstacle.Height *= scaleFactor;
+            if (PotHole_Obstacle_1.Width <= 130 && PotHole_Obstacle_1.Height <= 200
+                && PotHole_Obstacle_1.Width >= 20 && PotHole_Obstacle_1.Height >= 30)
+            {
+                //scaleTransform.ScaleX = scaleFactor;
+                // Scale the PotHole_Obstacle canvas
+                PotHole_Obstacle_1.Width *= scaleFactor;
+                PotHole_Obstacle_1.Height *= scaleFactor;
+                //Debug.WriteLine(PotHole_Obstacle.Width + "  " + PotHole_Obstacle.Height);
+            }
+            else if (PotHole_Obstacle_1.Width > 130 || PotHole_Obstacle_1.Height > 200)
+            {
+                PotHole_Obstacle_1.Width = 130;
+                PotHole_Obstacle_1.Height = 200;
+            }
+            else if (PotHole_Obstacle_1.Width < 20 || PotHole_Obstacle_1.Height < 30)
+            {
+                PotHole_Obstacle_1.Width = 20;
+                PotHole_Obstacle_1.Height = 30;
+
+            }
+
         }
 
 

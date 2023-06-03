@@ -16,17 +16,21 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
 
 
         }
-        public void Update()
+        public override void Update()
         {
+            base.Update();
             UpdateCarPosition();
 
         }
 
-        public void UpdateCarPosition()
+        public override void UpdateCarPosition()
         {
+            base.UpdateCarPosition();
+
+
             DetectCollision();
 
-            if (!isCarSpawned)
+            if (!isCarDrivable)
             {
                 // Spawn the car at the CarSpawner position
                 carPositionX = Canvas.GetLeft(spawnCanvas);
@@ -37,7 +41,7 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
                 Canvas.SetTop(carCanvas, carPositionY);
                 carCanvas.RenderTransform = spawnCanvas.RenderTransform;
 
-                isCarSpawned = true;
+                isCarDrivable = true;
                 return;
             }
 
@@ -50,7 +54,6 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar
                 {
                     carMaxSpeed = 1;
                 }
-
 
                 //Debug.WriteLine("Yes Color Found " + "R -" + underlyingColor.R + "    G -" + underlyingColor.G + "    B -" + underlyingColor.B);
                 //Debug.WriteLine("Yes Color Found ");

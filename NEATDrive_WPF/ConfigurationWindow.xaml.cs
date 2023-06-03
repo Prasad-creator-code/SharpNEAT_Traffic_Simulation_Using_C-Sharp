@@ -37,12 +37,12 @@ namespace NEATDrive_WPF
         public RoadSlot? RoadSlot3_2;
         public RoadSlot? RoadSlot3_3;
 
-        Thickness originalThickness = new Thickness(2);
-        Thickness increasedThickness = new Thickness(10);
+        Thickness originalThickness = new(2);
+        Thickness increasedThickness = new(10);
 
         //public BitmapImage nullSlotImage = new BitmapImage(new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute));
 
-        public List<RoadSlot> roadSlotList = new List<RoadSlot>();
+        public List<RoadSlot> roadSlotList = new();
 
 
         public ConfigurationWindow()
@@ -52,7 +52,6 @@ namespace NEATDrive_WPF
             //AddRoadSlotsToList();
 
             //selectedRoadOptionSlot = new RoadOptionSlot(new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute));            //selectedRoadOptionSlot = new RoadOptionSlot(new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Props/Grass_Cute.png", UriKind.Absolute));
-
 
             DisableOnStart();
             fadeInPreview = (Storyboard)FindResource("PreviewPageAnim");
@@ -91,6 +90,7 @@ namespace NEATDrive_WPF
             if (state)
             {
                 MetricsGrid.Visibility = Visibility.Visible;
+                SimulationManager.instance.FillData(Metrics_DataGrid);
             }
             else
             {
@@ -103,19 +103,19 @@ namespace NEATDrive_WPF
 
 
             //Uri turnRoadUri = new Uri("../../../Resources/Images/Roads/SystemicRoads/Turn_Road.png", UriKind.Relative);
-            Uri turnRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Turn_Road.png", UriKind.Absolute);
+            Uri turnRoadUri = new("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Turn_Road.png", UriKind.Absolute);
             turnRoadOption = new RoadOptionSlot(turnRoadUri);
 
-            Uri straightRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Straight_Road.png", UriKind.Absolute);
+            Uri straightRoadUri = new("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Straight_Road.png", UriKind.Absolute);
             straightRoadOption = new RoadOptionSlot(straightRoadUri);
 
-            Uri centerRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Chowk.png", UriKind.Absolute);
+            Uri centerRoadUri = new("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Chowk.png", UriKind.Absolute);
             centerRoadOption = new RoadOptionSlot(centerRoadUri);
 
-            Uri threeWayRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Tri_Road.png", UriKind.Absolute);
+            Uri threeWayRoadUri = new("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/Roads/SystemicRoads/Tri_Road.png", UriKind.Absolute);
             threeWayRoadOption = new RoadOptionSlot(threeWayRoadUri);
 
-            Uri nullRoadUri = new Uri("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/BackgroundTextures/TiledTexture.jpg", UriKind.Absolute);
+            Uri nullRoadUri = new("pack://application:,,,/NEATDrive_WPF;component/Resources/Images/BackgroundTextures/TiledTexture.jpg", UriKind.Absolute);
             nullRoadOption = new RoadOptionSlot(nullRoadUri);
 
             Row1_1.Background = new ImageBrush(new BitmapImage(nullRoadOption.BitmapUri));
@@ -682,5 +682,7 @@ namespace NEATDrive_WPF
                 Debug.WriteLine("Saved to csv");
             }
         }
+
+
     }
 }

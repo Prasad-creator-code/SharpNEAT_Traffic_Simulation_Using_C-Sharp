@@ -1,4 +1,5 @@
-﻿using NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar;
+﻿using NEATDrive_WPF.DrivingScripts.CarScripts.CivilianCar;
+using NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -58,6 +59,7 @@ namespace NEATDrive_WPF.DrivingScripts
         bool simStart = true, isAccelerating, isBraking, isTurningLeft, isTurningRight, simOver, powerMode;
 
         public HeroCar heroCar;
+        public CivilianCar civilianCar;
 
         public bool isSimStart()
         {
