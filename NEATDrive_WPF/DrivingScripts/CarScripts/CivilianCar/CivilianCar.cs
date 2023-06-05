@@ -36,8 +36,13 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.CivilianCar
                 CRASHED = false;
                 CrashTimes += 1;
             }
+            if (REACHED)
+            {
+                REACHED = false;
+                ReachedTimes += 1;
+            }
             double elapsedSeconds = stopwatch.Elapsed.TotalSeconds;
-            SimulationManager.instance.CycleStats(elapsedSeconds, 0, 0, (int)elapsedSeconds + 3 - 7, CrashTimes);
+            SimulationManager.instance.CycleStats(elapsedSeconds, ReachedTimes, 0, (int)elapsedSeconds + 3 - 7, CrashTimes);
 
             DetectCollision();
 
@@ -88,9 +93,9 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.CivilianCar
                 // PUT ROTATION HERE
                 //RotateRight();
                 //carRotation =;
-                TurnAwayFromDetectedObject();
-            }
 
+            }
+            TurnAwayFromDetectedObject();
             double carDirectionX = Math.Cos(carRotation * Math.PI / 180);
             double carDirectionY = Math.Sin(carRotation * Math.PI / 180);
 
@@ -160,16 +165,25 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.CivilianCar
 
         public void TurnAwayFromDetectedObject()
         {
+            if (ApplicationManager.instance.simWindow.newRaycast.closestElement == carDestinationCanvas)
+            {
+                ResetCar(carCanvas, spawnCanvas);
+            }
+            if (ApplicationManager.instance.simWindow.newRaycast.closestElement == null)
+            {
+                carRotation = 90;
+                return;
+            }
             Vector direction = ApplicationManager.instance.simWindow.newRaycast.closestElementDirection;
 
 
 
             if (direction.X < 0)
             {
-                if (hasResetRotation)
-                {
-                    hasResetRotation = false;
-                }
+                //if (hasResetRotation)
+                //{
+                //    hasResetRotation = false;
+                //}
 
                 // Object detected to the left, execute turn right
                 RotateRight();
@@ -177,21 +191,21 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.CivilianCar
             }
             else if (direction.X > 0)
             {
-                if (hasResetRotation)
-                {
-                    hasResetRotation = false;
-                }
+                //if (hasResetRotation)
+                //{
+                //    hasResetRotation = false;
+                //}
                 // Object detected to the right, execute turn left
                 RotateLeft();
                 Debug.WriteLine("Turn Left");
             }
             else
             {
-                if (!hasResetRotation)
-                {
-                    carRotation = 0;
-                    hasResetRotation = true;
-                }
+                //if (!hasResetRotation)
+                //{
+                //    //carRotation = 0;
+                //    hasResetRotation = true;
+                //}
 
                 //Debug.WriteLine("No turn needed");
                 // No object detected or object is directly ahead, no turn needed
@@ -201,7 +215,7 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts.CivilianCar
         }
 
         bool hasResetRotation = false;
-        FrameworkElement carDestinationCanvas = ApplicationManager.instance.simWindow.PotHole_Obstacle_1;
+        FrameworkElement carDestinationCanvas = ApplicationManager.instance.simWindow.CarDestination_Canvas_1;
 
 
         public void ContinueTowardsDestination()

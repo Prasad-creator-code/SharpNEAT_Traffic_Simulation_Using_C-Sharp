@@ -117,7 +117,12 @@ namespace NEATDrive_WPF.DrivingScripts.Utilities
                     closestElementDirection = direction;
                     Debug.WriteLine(direction);
                 }
-                else
+                else if (closestElement.Tag.ToString() == "CarDestination")
+                {
+                    DriveManager.instance.civilianCar.ResetCar(DriveManager.instance.civilianCar.carCanvas, DriveManager.instance.civilianCar.spawnCanvas);
+                    DriveManager.instance.civilianCar.REACHED = true;
+                }
+                else if (closestElement.Tag.ToString() == "")
                 {
                     closestElementDirection = new Vector(0, 0);
                 }

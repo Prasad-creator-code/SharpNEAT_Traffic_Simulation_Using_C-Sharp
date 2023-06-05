@@ -97,6 +97,18 @@ namespace NEATDrive_WPF
                 MetricsGrid.Visibility = Visibility.Hidden;
             }
         }
+        void EnableAboutGrid(bool state)
+        {
+            if (state)
+            {
+                AboutGrid.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                AboutGrid.Visibility = Visibility.Hidden;
+            }
+        }
 
         void InitializeRoadOptions()
         {
@@ -155,6 +167,7 @@ namespace NEATDrive_WPF
             EnableSimGrid(false);
             EnableMetricsGrid(false);
             EnableParamGrid(false);
+            EnableAboutGrid(false);
         }
 
         #endregion
@@ -186,6 +199,7 @@ namespace NEATDrive_WPF
             EnableSimGrid(true);
             EnableParamGrid(false);
             EnableMetricsGrid(false);
+            EnableAboutGrid(false);
         }
 
         private void ParametersButton_Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -193,6 +207,7 @@ namespace NEATDrive_WPF
             EnableParamGrid(true);
             EnableSimGrid(false);
             EnableMetricsGrid(false);
+            EnableAboutGrid(false);
         }
 
         private void MetricsButton_Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -200,11 +215,15 @@ namespace NEATDrive_WPF
             EnableMetricsGrid(true);
             EnableParamGrid(false);
             EnableSimGrid(false);
+            EnableAboutGrid(false);
 
         }
         private void AboutButton_Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            EnableAboutGrid(true);
+            EnableMetricsGrid(false);
+            EnableParamGrid(false);
+            EnableSimGrid(false);
         }
 
         #endregion
