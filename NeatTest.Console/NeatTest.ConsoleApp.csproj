@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpNeatLib" Version="2.4.4" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TitTacToeGame\TitTacToeGame.csproj" />
   </ItemGroup>
 
@@ -21,6 +17,10 @@
     <Content Include="expconfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SharpNeatLib" Version="2.4.4" />
   </ItemGroup>
 
   <ItemGroup>

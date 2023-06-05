@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace NeatTest.ConsoleApp.AI
+namespace NEATDrive_WPF.DrivingScripts.Utilities.SharpNEAT.Legacy.AI.Experiment
 {
     /// <summary>
     /// Helper class that hides most of the details of setting up an experiment.
@@ -112,7 +112,7 @@ namespace NeatTest.ConsoleApp.AI
             _name = name;
             _populationSize = XmlUtils.GetValueAsInt(xmlConfig, "PopulationSize");
             _specieCount = XmlUtils.GetValueAsInt(xmlConfig, "SpecieCount");
-            _activationScheme = SharpNeat.Decoders.NetworkActivationScheme.CreateCyclicFixedTimestepsScheme(2);
+            _activationScheme = NetworkActivationScheme.CreateCyclicFixedTimestepsScheme(2);
             _complexityRegulationStr = XmlUtils.TryGetValueAsString(xmlConfig, "ComplexityRegulationStrategy");
             _complexityThreshold = XmlUtils.TryGetValueAsInt(xmlConfig, "ComplexityThreshold");
             _description = XmlUtils.TryGetValueAsString(xmlConfig, "Description");
@@ -129,7 +129,7 @@ namespace NeatTest.ConsoleApp.AI
         /// </summary>
         public List<NeatGenome> LoadPopulation(XmlReader xr)
         {
-            return NeatGenomeUtils.LoadPopulation(xr, false, this.InputCount, this.OutputCount);
+            return NeatGenomeUtils.LoadPopulation(xr, false, InputCount, OutputCount);
         }
 
         /// <summary>

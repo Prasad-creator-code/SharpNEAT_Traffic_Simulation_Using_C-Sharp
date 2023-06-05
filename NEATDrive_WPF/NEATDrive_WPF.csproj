@@ -8,6 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DrivingScripts\Utilities\SharpNEAT\Legacy\AI\Experiment\GameEvaluator.cs" />
+    <Compile Remove="DrivingScripts\Utilities\SharpNEAT\Legacy\AI\Experiment\GameExperiment.cs" />
+    <Compile Remove="DrivingScripts\Utilities\SharpNEAT\Legacy\AI\Experiment\NeatBrain.cs" />
+    <Compile Remove="DrivingScripts\Utilities\SharpNEAT\Legacy\AI\Experiment\SimpleNeatExperiment.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DrivingScripts\Utilities\SharpNEAT\Legacy\expconfig.xml" />
     <None Remove="Logo Rotator.png" />
     <None Remove="Logo_Mix.png" />
     <None Remove="Resources\Fonts\ChakraPetch-Bold.ttf" />
@@ -41,6 +49,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="DrivingScripts\Utilities\SharpNEAT\Legacy\expconfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Fonts\ChakraPetch-Bold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -118,6 +129,7 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
     <PackageReference Include="EPPlus" Version="7.0.0-preview1" />
     <PackageReference Include="SharpNeat" Version="4.0.0" />
+    <PackageReference Include="SharpNeatLib" Version="2.4.4" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
   </ItemGroup>
 
@@ -151,6 +163,13 @@
   <ItemGroup>
     <Folder Include="DrivingScripts\RoadSlots\OptionSlots\" />
     <Folder Include="DrivingScripts\RoadSlots\Slots\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DrivingScripts\Utilities\SharpNEAT\Legacy\AI\Experiment\GameEvaluator.cs" />
+    <None Include="DrivingScripts\Utilities\SharpNEAT\Legacy\AI\Experiment\GameExperiment.cs" />
+    <None Include="DrivingScripts\Utilities\SharpNEAT\Legacy\AI\Experiment\NeatBrain.cs" />
+    <None Include="DrivingScripts\Utilities\SharpNEAT\Legacy\AI\Experiment\SimpleNeatExperiment.cs" />
   </ItemGroup>
 
 </Project>

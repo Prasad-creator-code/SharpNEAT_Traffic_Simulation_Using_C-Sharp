@@ -1,4 +1,5 @@
 ﻿using NEATDrive_WPF.DrivingScripts;
+using NEATDrive_WPF.DrivingScripts.Utilities.SharpNEAT;
 using System.Windows;
 
 namespace NEATDrive_WPF
@@ -31,6 +32,10 @@ namespace NEATDrive_WPF
             if (SaveManager.instance == null)
             {
                 SaveManager.instance = new();
+            }
+            if (SharpNEATManager.instance == null)
+            {
+                SharpNEATManager.instance = new();
             }
 
         }

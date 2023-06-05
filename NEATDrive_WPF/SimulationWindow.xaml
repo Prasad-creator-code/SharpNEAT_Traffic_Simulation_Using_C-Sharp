@@ -120,9 +120,9 @@
             </Grid>
         </StackPanel>
         <Canvas x:Name="ObstacleCanvas" Height="603" Width="620" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="20" Tag="ObstacleCanvas">
-            <Canvas x:Name="PotHole_Obstacle_1" Height="40" Width="50" Canvas.Left="105" Canvas.Top="349" Tag="Pothole" MouseLeftButtonDown="PotHole_Obstacle_MouseLeftButtonDown"
+            <Canvas x:Name="PotHole_Obstacle_1" Height="40" Width="50" Canvas.Left="310" Canvas.Top="59" Tag="Pothole" MouseLeftButtonDown="PotHole_Obstacle_MouseLeftButtonDown"
             MouseMove="PotHole_Obstacle_MouseMove" MouseEnter="PotHole_MouseEnter" MouseWheel="PotHole_MouseWheel"
-            MouseLeftButtonUp="PotHole_Obstacle_MouseLeftButtonUp" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" ScrollViewer.VerticalScrollBarVisibility="Disabled" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Center">
+            MouseLeftButtonUp="PotHole_Obstacle_MouseLeftButtonUp" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" ScrollViewer.VerticalScrollBarVisibility="Disabled" ClipToBounds="True" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Canvas.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform CenterX="0.5" CenterY="0.5"/>
@@ -132,7 +132,7 @@
                     </TransformGroup>
                 </Canvas.LayoutTransform>
                 <Canvas.Background>
-                    <ImageBrush ImageSource="/Resources/Images/Props/PotHole1.png" Stretch="Fill" TileMode="None">
+                    <ImageBrush ImageSource="/Resources/Images/Props/PotHole1.png" Stretch="Uniform" TileMode="None">
                         <ImageBrush.RelativeTransform>
                             <TransformGroup>
                                 <ScaleTransform CenterY="0.8" CenterX="0.8" ScaleX="1" ScaleY="1"/>
@@ -144,7 +144,7 @@
                     </ImageBrush>
                 </Canvas.Background>
             </Canvas>
-            <Canvas x:Name="CarSpawner_Canvas_1" Height="38" Width="40" RenderTransformOrigin="0.5,0.5" Canvas.Left="130" Canvas.Top="41" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Canvas x:Name="CarSpawner_Canvas_1" Height="38" Width="40" RenderTransformOrigin="0.5,0.5" Canvas.Left="130" Canvas.Top="41" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="CarSpawner" MouseLeftButtonDown="CarSpawner_Canvas_1_MouseLeftButtonDown" MouseLeftButtonUp="CarSpawner_Canvas_1_MouseLeftButtonUp" MouseMove="CarSpawner_Canvas_1_MouseMove" MouseWheel="CarSpawner_Canvas_1_MouseWheel" MouseEnter="CarSpawner_Canvas_1_MouseEnter">
                 <Canvas.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -162,10 +162,10 @@
                     </TransformGroup>
                 </Canvas.RenderTransform>
                 <Canvas.Background>
-                    <ImageBrush ImageSource="/Resources/Images/Props/CarSpawn.png" Stretch="Fill"/>
+                    <ImageBrush ImageSource="/Resources/Images/Props/CarSpawn.png" Stretch="Uniform"/>
                 </Canvas.Background>
             </Canvas>
-            <Canvas x:Name="CarDestination_Canvas_1" Height="38" Width="40" RenderTransformOrigin="0.5,0.5" Canvas.Left="110" Canvas.Top="470" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Canvas x:Name="CarDestination_Canvas_1" Height="38" Width="40" RenderTransformOrigin="0.5,0.5" Canvas.Left="110" Canvas.Top="470" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="CarDestination" MouseLeftButtonDown="CarDestination_Canvas_1_MouseLeftButtonDown" MouseLeftButtonUp="CarDestination_Canvas_1_MouseLeftButtonUp" MouseMove="CarDestination_Canvas_1_MouseMove" MouseEnter="CarDestination_Canvas_1_MouseEnter" MouseWheel="CarDestination_Canvas_1_MouseWheel">
                 <Canvas.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -183,10 +183,10 @@
                     </TransformGroup>
                 </Canvas.RenderTransform>
                 <Canvas.Background>
-                    <ImageBrush ImageSource="/Resources/Images/Props/CarDest.png" Stretch="Fill"/>
+                    <ImageBrush ImageSource="/Resources/Images/Props/CarDest.png" Stretch="Uniform"/>
                 </Canvas.Background>
             </Canvas>
-            <Canvas x:Name="PedSpawner_Canvas_1" Height="38" Width="40" RenderTransformOrigin="0.5,0.5" Canvas.Left="450" Canvas.Top="164" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Canvas x:Name="PedSpawner_Canvas_1" Height="38" Width="40" RenderTransformOrigin="0.5,0.5" Canvas.Left="450" Canvas.Top="164" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="PedSpawner">
                 <Canvas.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -220,7 +220,7 @@
                     </TransformGroup>
                 </Canvas.RenderTransform>
             </Canvas>
-            <Canvas x:Name="PedCar_1_Sprite" Tag="CivilianCar" RenderTransformOrigin="0.25,0.25" KeyDown="HeroCar_Sprite_KeyDown" KeyUp="HeroCar_Sprite_KeyUp" Focusable="True" Canvas.Left="145" Canvas.Top="109.04" Width="15" Height="30" UseLayoutRounding="False" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Canvas x:Name="PedCar_1_Sprite" Tag="CivilianCar" RenderTransformOrigin="0.25,0.25" KeyDown="HeroCar_Sprite_KeyDown" KeyUp="HeroCar_Sprite_KeyUp" Canvas.Left="145" Canvas.Top="109.04" Width="15" Height="30" UseLayoutRounding="False" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Canvas.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/Resources/Images/Props/Ped_car.png"/>
                 </Canvas.Background>

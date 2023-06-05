@@ -2,6 +2,9 @@
 using NEATDrive_WPF.DrivingScripts.CarScripts.CivilianCar;
 using NEATDrive_WPF.DrivingScripts.CarScripts.HeroCar;
 using NEATDrive_WPF.DrivingScripts.Utilities;
+using NEATDrive_WPF.DrivingScripts.Utilities.SharpNEAT.Legacy.AI;
+using SharpNeat.EvolutionAlgorithms;
+using SharpNeat.Genomes.Neat;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -32,7 +35,11 @@ namespace NEATDrive_WPF
 
 
         }
-        NewRaycast newRaycast;
+        public NewRaycast newRaycast;
+        NeatDriveExperiment experiment = new();
+        static NeatEvolutionAlgorithm<NeatGenome> _ea;
+
+        NEATDriveEvaluator phenomeEvaluator;
 
         double minScale = 0.1;
         double maxScale = 100;
@@ -87,6 +94,7 @@ namespace NEATDrive_WPF
             this.Hide();
             ApplicationManager.instance?.configWindow.Show();
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
+            SimulationManager.instance.AddDataToGridList();
             //ApplicationManager.instance?.configWindow.Focus();
         }
 
@@ -98,17 +106,43 @@ namespace NEATDrive_WPF
             List<UIElement> listElements = new();
             listElements.Add(PotHole_Obstacle_1);
 
-            DriveManager.instance?.StartSim();
+            //DriveManager.instance?.StartSim();
             Start_Sim_Button_Border.Visibility = Visibility.Collapsed;
             Stop_Sim_Button_Border.Visibility = Visibility.Visible;
             DriveManager.instance.heroCar = new HeroCar(HeroCar_Sprite, CarSpawner_Canvas_1);
-            DriveManager.instance.civilianCar = new CivilianCar(PedCar_1_Sprite, CarSpawner_Canvas_1);
+            DriveManager.instance.civilianCar = new CivilianCar(PedCar_1_Sprite, CarSpawner_Canvas_1, CarDestination_Canvas_1);
             CompositionTarget.Rendering += CompositionTarget_Rendering;
-            newRaycast = new(HeroCar_Sprite, ObstacleCanvas, 50);
+            newRaycast = new(PedCar_1_Sprite, ObstacleCanvas, 50);
             //rayCaster = new(HeroCar_Sprite, listElements);
             //raycastResult = new();
             //AssignMergedRoadImage(); After all these work, it wasn't even necessary *crying emoji*
             HeroCar_Sprite.Focus();
+            if (DriveManager.instance.civilianCar.stopwatch.ElapsedMilliseconds > 0)
+            {
+                DriveManager.instance.civilianCar.stopwatch.Restart();
+                DriveManager.instance.civilianCar.CrashTimes = 0;
+            }
+            else
+            {
+                DriveManager.instance.civilianCar.stopwatch.Start();
+                DriveManager.instance.civilianCar.CrashTimes = 0;
+            }
+
+
+            //phenomeEvaluator = new(DriveManager.instance.civilianCar,
+            //    DriveManager.instance.civilianCar.carSpeed,
+            //    DriveManager.instance.civilianCar.carRotation,
+            //    1,
+            //    2);
+            //XmlDocument xmlConfig = new();
+            //xmlConfig.Load("expconfig.xml");
+            //experiment.Initialize("NEATDrive", xmlConfig.DocumentElement);
+
+            //_ea = experiment.CreateEvolutionAlgorithm();
+            SimulationManager.instance.Car = DriveManager.instance.civilianCar;
+
+            // Start the car simulation
+            //phenomeEvaluator.StartCarSimulation();
         }
 
 
@@ -133,8 +167,12 @@ namespace NEATDrive_WPF
             DriveManager.instance?.StopSim();
             Start_Sim_Button_Border.Visibility = Visibility.Visible;
             Stop_Sim_Button_Border.Visibility = Visibility.Collapsed;
+            DriveManager.instance.civilianCar.stopwatch.Stop();
+
 
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
+
+
         }
 
         private void Stop_Sim_Button_Border_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -151,6 +189,12 @@ namespace NEATDrive_WPF
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
+            //if (phenomeEvaluator?.Car != null)
+            //{
+            //    phenomeEvaluator?.UpdateCarSimulation();
+            //}
+            //SimulationManager.instance.MoveCar();
+
             newRaycast.PerformRaycast();
             //Debug.WriteLine(raycastResult.Distance);
 
@@ -166,6 +210,8 @@ namespace NEATDrive_WPF
                 //UpdateColorCache(RoadCanvas, carCanvas);
                 DriveManager.instance?.heroCar.Update();
                 DriveManager.instance?.civilianCar.Update();
+
+                //UpdateCarSimulation();
 
                 // Reset the elapsed time
                 elapsedColorCheckTime = 0;
@@ -548,6 +594,10 @@ namespace NEATDrive_WPF
             //DriveManager.instance.heroCar = new HeroCar(HeroCar_Sprite, CarSpawner_Canvas);
 
             //DriveManager.instance.heroCar = new HeroCar(HeroCar_Sprite);
+            HeroCar_Sprite.Visibility = Visibility.Hidden;
+            PedSpawner_Canvas_1.Visibility = Visibility.Hidden;
+            ObstacleGrid.Visibility = Visibility.Hidden;
+
 
         }
 
@@ -565,43 +615,22 @@ namespace NEATDrive_WPF
         // Event handler for mouse left button down event
         private void PotHole_Obstacle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // Set the dragging flag and store the initial position
-            isDragging = true;
-            dragStartPosition = e.GetPosition(ParentCanvas);
-
-            // Store the initial left and top positions of the PotHole_Obstacle canvas
-            initialLeft = Canvas.GetLeft(PotHole_Obstacle_1);
-            initialTop = Canvas.GetTop(PotHole_Obstacle_1);
-
-            // Capture the mouse to the PotHole_Obstacle canvas
-            PotHole_Obstacle_1.CaptureMouse();
+            EnableDrag(e, PotHole_Obstacle_1);
         }
 
         // Event handler for mouse move event
         private void PotHole_Obstacle_MouseMove(object sender, MouseEventArgs e)
         {
-            // Check if dragging is in progress
-            if (isDragging)
-            {
-                // Get the current mouse position relative to the ParentCanvas
-                Point currentPosition = e.GetPosition(ParentCanvas);
-
-                // Calculate the offset from the drag start position
-                double offsetX = currentPosition.X - dragStartPosition.X;
-                double offsetY = currentPosition.Y - dragStartPosition.Y;
-
-                // Update the position of the PotHole_Obstacle canvas based on the initial position and the offset
-                Canvas.SetLeft(PotHole_Obstacle_1, initialLeft + offsetX);
-                Canvas.SetTop(PotHole_Obstacle_1, initialTop + offsetY);
-            }
+            DraggingProcess(e, PotHole_Obstacle_1);
         }
 
         // Event handler for mouse left button up event
         private void PotHole_Obstacle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            DisableDrag(PotHole_Obstacle_1);
             // Reset the dragging flag and release the captured mouse
-            isDragging = false;
-            PotHole_Obstacle_1.ReleaseMouseCapture();
+            //isDragging = false;
+            //PotHole_Obstacle_1.ReleaseMouseCapture();
         }
 
 
@@ -616,36 +645,137 @@ namespace NEATDrive_WPF
         // Event handler for MouseWheel event
         private void PotHole_MouseWheel(object sender, MouseWheelEventArgs e)
         {
+            ScrollScaling(e, PotHole_Obstacle_1);
+        }
+
+        #region Reusable Effects
+
+        public void EnableDrag(MouseButtonEventArgs e, Canvas canvasToStartDrag)
+        {
+            // Set the dragging flag and store the initial position
+            isDragging = true;
+            dragStartPosition = e.GetPosition(ParentCanvas);
+
+            // Store the initial left and top positions of the PotHole_Obstacle canvas
+            initialLeft = Canvas.GetLeft(canvasToStartDrag);
+            initialTop = Canvas.GetTop(canvasToStartDrag);
+
+            // Capture the mouse to the PotHole_Obstacle canvas
+            canvasToStartDrag.CaptureMouse();
+        }
+
+
+        public void DraggingProcess(MouseEventArgs e, Canvas canvasToBeDragged)
+        {
+            // Check if dragging is in progress
+            if (isDragging)
+            {
+                // Get the current mouse position relative to the ParentCanvas
+                Point currentPosition = e.GetPosition(ParentCanvas);
+
+                // Calculate the offset from the drag start position
+                double offsetX = currentPosition.X - dragStartPosition.X;
+                double offsetY = currentPosition.Y - dragStartPosition.Y;
+
+                // Update the position of the PotHole_Obstacle canvas based on the initial position and the offset
+                Canvas.SetLeft(canvasToBeDragged, initialLeft + offsetX);
+                Canvas.SetTop(canvasToBeDragged, initialTop + offsetY);
+            }
+        }
+
+        public void DisableDrag(Canvas canvasToDrag)
+        {
+            // Reset the dragging flag and release the captured mouse
+            isDragging = false;
+            canvasToDrag.ReleaseMouseCapture();
+        }
+
+        public void ScrollScaling(MouseWheelEventArgs e, Canvas canvasToScale)
+        {
             // Get the scaling factor based on the mouse wheel delta
             double scaleFactor = e.Delta > 0 ? 1.1 : 0.9;
             //ScaleTransform scaleTransform = new(1.0, 1.0);
             //PotHole_Obstacle.RenderTransform = scaleTransform;
 
-            if (PotHole_Obstacle_1.Width <= 130 && PotHole_Obstacle_1.Height <= 200
-                && PotHole_Obstacle_1.Width >= 20 && PotHole_Obstacle_1.Height >= 30)
+            if (canvasToScale.Width <= 130 && canvasToScale.Height <= 200
+                && canvasToScale.Width >= 20 && canvasToScale.Height >= 30)
             {
                 //scaleTransform.ScaleX = scaleFactor;
                 // Scale the PotHole_Obstacle canvas
-                PotHole_Obstacle_1.Width *= scaleFactor;
-                PotHole_Obstacle_1.Height *= scaleFactor;
+                canvasToScale.Width *= scaleFactor;
+                canvasToScale.Height *= scaleFactor;
                 //Debug.WriteLine(PotHole_Obstacle.Width + "  " + PotHole_Obstacle.Height);
             }
-            else if (PotHole_Obstacle_1.Width > 130 || PotHole_Obstacle_1.Height > 200)
+            else if (canvasToScale.Width > 130 || canvasToScale.Height > 200)
             {
-                PotHole_Obstacle_1.Width = 130;
-                PotHole_Obstacle_1.Height = 200;
+                canvasToScale.Width = 130;
+                canvasToScale.Height = 200;
             }
-            else if (PotHole_Obstacle_1.Width < 20 || PotHole_Obstacle_1.Height < 30)
+            else if (canvasToScale.Width < 20 || canvasToScale.Height < 30)
             {
-                PotHole_Obstacle_1.Width = 20;
-                PotHole_Obstacle_1.Height = 30;
+                canvasToScale.Width = 20;
+                canvasToScale.Height = 30;
 
             }
+        }
+        #endregion
 
+        private void CarSpawner_Canvas_1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            EnableDrag(e, CarSpawner_Canvas_1);
+        }
+
+        private void CarSpawner_Canvas_1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            DisableDrag(CarSpawner_Canvas_1);
+        }
+
+        private void CarSpawner_Canvas_1_MouseMove(object sender, MouseEventArgs e)
+        {
+            DraggingProcess(e, CarSpawner_Canvas_1);
+        }
+
+        private void CarSpawner_Canvas_1_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollScaling(e, CarSpawner_Canvas_1);
+        }
+
+        private void CarSpawner_Canvas_1_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CarSpawner_Canvas_1.Focus();
         }
 
 
 
 
+
+
+
+
+
+        private void CarDestination_Canvas_1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            EnableDrag(e, CarDestination_Canvas_1);
+        }
+
+        private void CarDestination_Canvas_1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            DisableDrag(CarDestination_Canvas_1);
+        }
+
+        private void CarDestination_Canvas_1_MouseMove(object sender, MouseEventArgs e)
+        {
+            DraggingProcess(e, CarDestination_Canvas_1);
+        }
+
+        private void CarDestination_Canvas_1_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CarDestination_Canvas_1.Focus();
+        }
+
+        private void CarDestination_Canvas_1_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollScaling(e, CarDestination_Canvas_1);
+        }
     }
 }

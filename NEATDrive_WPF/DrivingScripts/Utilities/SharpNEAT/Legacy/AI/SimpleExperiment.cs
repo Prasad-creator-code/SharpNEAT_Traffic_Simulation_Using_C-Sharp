@@ -1,56 +1,64 @@
-﻿/* ***************************************************************************
- * This file is part of the NashCoding tutorial on SharpNEAT 2.
- * 
- * Copyright 2010, Wesley Tansey (wes@nashcoding.com)
- * 
- * Some code in this file may have been copied directly from SharpNEAT,
- * for learning purposes only. Any code copied from SharpNEAT 2 is 
- * copyright of Colin Green (sharpneat@gmail.com).
- *
- * Both SharpNEAT and this tutorial are free software: you can redistribute
- * it and/or modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation, either version 3 of the 
- * License, or (at your option) any later version.
- *
- * SharpNEAT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with SharpNEAT.  If not, see <http://www.gnu.org/licenses/>.
- */
-using SharpNeat.Core;
+﻿using SharpNeat.Core;
 using SharpNeat.Decoders;
 using SharpNeat.Decoders.Neat;
 using SharpNeat.DistanceMetrics;
-using SharpNeat.Domains;
+using SharpNeat.Evaluation;
+//using SharpNeat.Evaluation;
 using SharpNeat.EvolutionAlgorithms;
 using SharpNeat.EvolutionAlgorithms.ComplexityRegulation;
+using SharpNeat.Experiments;
+//using SharpNeat.Experiments;
 using SharpNeat.Genomes.Neat;
+using SharpNeat.Neat.EvolutionAlgorithm;
+using SharpNeat.Neat.Reproduction.Asexual;
+using SharpNeat.Neat.Reproduction.Sexual;
+//using SharpNeat.Neat.ComplexityRegulation;
+//using SharpNeat.Neat.EvolutionAlgorithm;
+//using SharpNeat.Neat.Reproduction.Asexual;
+//using SharpNeat.Neat.Reproduction.Sexual;
 using SharpNeat.Phenomes;
 using SharpNeat.SpeciationStrategies;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace NeatTest.ConsoleApp.AI
+namespace NEATDrive_WPF.DrivingScripts.Utilities.SharpNEAT.Legacy.AI
 {
-    /// <summary>
-    /// Helper class that hides most of the details of setting up an experiment.
-    /// If you're just doing a simple console-based experiment, this is probably
-    /// what you want to inherit from. However, if you need more flexibility
-    /// (e.g., custom genome/phenome creation or performing complex population
-    /// evaluations) then you probably want to implement your own INeatExperiment
-    /// class.
-    /// </summary>
-    public abstract class SimpleNeatExperiment : INeatExperiment
+    internal abstract class SimpleExperiment : INeatExperiment<double>
     {
+        public string FactoryId => throw new NotImplementedException();
+
+        public string Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public IBlackBoxEvaluationScheme<double> EvaluationScheme => throw new NotImplementedException();
+
+        public bool IsAcyclic { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int CyclesPerActivation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ActivationFnName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public NeatEvolutionAlgorithmSettings EvolutionAlgorithmSettings => throw new NotImplementedException();
+
+        public NeatReproductionAsexualSettings ReproductionAsexualSettings => throw new NotImplementedException();
+
+        public NeatReproductionSexualSettings ReproductionSexualSettings => throw new NotImplementedException();
+
+        public int PopulationSize { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double InitialInterconnectionsProportion { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double ConnectionWeightScale { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IComplexityRegulationStrategy ComplexityRegulationStrategy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int DegreeOfParallelism { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool EnableHardwareAcceleratedNeuralNets { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool EnableHardwareAcceleratedActivationFunctions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+
         NeatEvolutionAlgorithmParameters _eaParams;
         NeatGenomeParameters _neatGenomeParams;
         string _name;
-        int _populationSize;
-        int _specieCount;
+        int _populationSize = 100;
+        int _specieCount = 100;
         NetworkActivationScheme _activationScheme;
         string _complexityRegulationStr;
         int? _complexityThreshold;
@@ -58,7 +66,7 @@ namespace NeatTest.ConsoleApp.AI
         ParallelOptions _parallelOptions;
 
         #region Abstract properties that subclasses must implement
-        public abstract IPhenomeEvaluator<IBlackBox> PhenomeEvaluator { get; }
+        public abstract SharpNeat.Core.IPhenomeEvaluator<IBlackBox> PhenomeEvaluator { get; }
         public abstract int InputCount { get; }
         public abstract int OutputCount { get; }
         public abstract bool EvaluateParents { get; }
@@ -67,15 +75,7 @@ namespace NeatTest.ConsoleApp.AI
 
 
         #region INeatExperiment Members
-        public string Description
-        {
-            get { return _description; }
-        }
 
-        public string Name
-        {
-            get { return _name; }
-        }
 
         /// <summary>
         /// Gets the default population size to use for the experiment.
@@ -104,23 +104,30 @@ namespace NeatTest.ConsoleApp.AI
             get { return _neatGenomeParams; }
         }
 
+        public ComplexityRegulationMode CurrentMode => throw new NotImplementedException();
+
+        SharpNeat.Neat.ComplexityRegulation.IComplexityRegulationStrategy INeatExperiment<double>.ComplexityRegulationStrategy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+
+
         /// <summary>
         /// Initialize the experiment with some optional XML configutation data.
         /// </summary>
         public void Initialize(string name, XmlElement xmlConfig)
         {
             _name = name;
-            _populationSize = XmlUtils.GetValueAsInt(xmlConfig, "PopulationSize");
-            _specieCount = XmlUtils.GetValueAsInt(xmlConfig, "SpecieCount");
+            _populationSize = 100;// XmlUtils.GetValueAsInt(xmlConfig, "PopulationSize");
+            _specieCount = 20;//XmlUtils.GetValueAsInt(xmlConfig, "SpecieCount");
             _activationScheme = SharpNeat.Decoders.NetworkActivationScheme.CreateCyclicFixedTimestepsScheme(2);
-            _complexityRegulationStr = XmlUtils.TryGetValueAsString(xmlConfig, "ComplexityRegulationStrategy");
-            _complexityThreshold = XmlUtils.TryGetValueAsInt(xmlConfig, "ComplexityThreshold");
-            _description = XmlUtils.TryGetValueAsString(xmlConfig, "Description");
-            _parallelOptions = ExperimentUtils.ReadParallelOptions(xmlConfig);
+            _complexityRegulationStr = 50.ToString(); //XmlUtils.TryGetValueAsString(xmlConfig, "ComplexityRegulationStrategy");
+            _complexityThreshold = 50; //XmlUtils.TryGetValueAsInt(xmlConfig, "ComplexityThreshold");
+            _description = 50.ToString();//XmlUtils.TryGetValueAsString(xmlConfig, "Description");
+            //_parallelOptions = (int)50;//ExperimentUtils.ReadParallelOptions(xmlConfig);
 
             _eaParams = new NeatEvolutionAlgorithmParameters();
             _eaParams.SpecieCount = _specieCount;
             _neatGenomeParams = new NeatGenomeParameters();
+
         }
 
         /// <summary>
@@ -129,7 +136,8 @@ namespace NeatTest.ConsoleApp.AI
         /// </summary>
         public List<NeatGenome> LoadPopulation(XmlReader xr)
         {
-            return NeatGenomeUtils.LoadPopulation(xr, false, this.InputCount, this.OutputCount);
+            //return LoadPopulation(xr, false, this.InputCount, this.OutputCount);
+            return LoadPopulation(xr);
         }
 
         /// <summary>
@@ -147,6 +155,13 @@ namespace NeatTest.ConsoleApp.AI
         /// </summary>
         public IGenomeFactory<NeatGenome> CreateGenomeFactory()
         {
+            if (_neatGenomeParams == null)
+            {
+                _neatGenomeParams = new NeatGenomeParameters();
+                // Handle the case where _neatGenomeParams is not initialized
+                //throw new InvalidOperationException("NeatGenomeParameters has not been initialized.");
+            }
+
             return new NeatGenomeFactory(InputCount, OutputCount, _neatGenomeParams);
         }
 
@@ -155,7 +170,7 @@ namespace NeatTest.ConsoleApp.AI
         /// of the algorithm are also constructed and connected up.
         /// This overload requires no parameters and uses the default population size.
         /// </summary>
-        public NeatEvolutionAlgorithm<NeatGenome> CreateEvolutionAlgorithm()
+        public SharpNeat.EvolutionAlgorithms.NeatEvolutionAlgorithm<NeatGenome> CreateEvolutionAlgorithm()
         {
             return CreateEvolutionAlgorithm(DefaultPopulationSize);
         }
@@ -166,7 +181,7 @@ namespace NeatTest.ConsoleApp.AI
         /// This overload accepts a population size parameter that specifies how many genomes to create in an initial randomly
         /// generated population.
         /// </summary>
-        public NeatEvolutionAlgorithm<NeatGenome> CreateEvolutionAlgorithm(int populationSize)
+        public SharpNeat.EvolutionAlgorithms.NeatEvolutionAlgorithm<NeatGenome> CreateEvolutionAlgorithm(int populationSize)
         {
             // Create a genome2 factory with our neat genome2 parameters object and the appropriate number of input and output neuron genes.
             IGenomeFactory<NeatGenome> genomeFactory = CreateGenomeFactory();
@@ -183,23 +198,23 @@ namespace NeatTest.ConsoleApp.AI
         /// of the algorithm are also constructed and connected up.
         /// This overload accepts a pre-built genome2 population and their associated/parent genome2 factory.
         /// </summary>
-        public NeatEvolutionAlgorithm<NeatGenome> CreateEvolutionAlgorithm(IGenomeFactory<NeatGenome> genomeFactory, List<NeatGenome> genomeList)
+        public SharpNeat.EvolutionAlgorithms.NeatEvolutionAlgorithm<NeatGenome> CreateEvolutionAlgorithm(IGenomeFactory<NeatGenome> genomeFactory, List<NeatGenome> genomeList)
         {
             // Create distance metric. Mismatched genes have a fixed distance of 10; for matched genes the distance is their weigth difference.
             IDistanceMetric distanceMetric = new ManhattanDistanceMetric(1.0, 0.0, 10.0);
             ISpeciationStrategy<NeatGenome> speciationStrategy = new ParallelKMeansClusteringStrategy<NeatGenome>(distanceMetric, _parallelOptions);
 
             // Create complexity regulation strategy.
-            IComplexityRegulationStrategy complexityRegulationStrategy = ExperimentUtils.CreateComplexityRegulationStrategy(_complexityRegulationStr, _complexityThreshold);
+            //IComplexityRegulationStrategy complexityRegulationStrategy =  ExperimentUtils.CreateComplexityRegulationStrategy(_complexityRegulationStr, _complexityThreshold);
 
             // Create the evolution algorithm.
-            NeatEvolutionAlgorithm<NeatGenome> ea = new NeatEvolutionAlgorithm<NeatGenome>(_eaParams, speciationStrategy, complexityRegulationStrategy);
+            SharpNeat.EvolutionAlgorithms.NeatEvolutionAlgorithm<NeatGenome> ea = new(_eaParams, speciationStrategy, (SharpNeat.EvolutionAlgorithms.ComplexityRegulation.IComplexityRegulationStrategy)_parallelOptions);
 
             // Create genome2 decoder.
-            IGenomeDecoder<NeatGenome, IBlackBox> genomeDecoder = new NeatGenomeDecoder(_activationScheme);
+            SharpNeat.Core.IGenomeDecoder<NeatGenome, IBlackBox> genomeDecoder = new NeatGenomeDecoder(_activationScheme);
 
             // Create a genome2 list evaluator. This packages up the genome2 decoder with the genome2 evaluator.
-            IGenomeListEvaluator<NeatGenome> genomeListEvaluator = new ParallelGenomeListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, PhenomeEvaluator, _parallelOptions);
+            SharpNeat.Core.IGenomeListEvaluator<NeatGenome> genomeListEvaluator = new SharpNeat.Core.ParallelGenomeListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, PhenomeEvaluator, _parallelOptions);
 
             // Wrap the list evaluator in a 'selective' evaulator that will only evaluate new genomes. That is, we skip re-evaluating any genomes
             // that were in the population in previous generations (elite genomes). This is determiend by examining each genome2's evaluation info object.
@@ -217,7 +232,7 @@ namespace NeatTest.ConsoleApp.AI
         /// <summary>
         /// Creates a new genome decoder that can be used to convert a genome into a phenome.
         /// </summary>
-        public IGenomeDecoder<NeatGenome, IBlackBox> CreateGenomeDecoder()
+        public SharpNeat.Core.IGenomeDecoder<NeatGenome, IBlackBox> CreateGenomeDecoder()
         {
             return new NeatGenomeDecoder(_activationScheme);
         }

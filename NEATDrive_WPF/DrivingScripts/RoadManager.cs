@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace NEATDrive_WPF.DrivingScripts
 {
@@ -27,8 +26,8 @@ namespace NEATDrive_WPF.DrivingScripts
             //ApplicationManager.instance.configWindow.UpdateRoadSlotsList();
             //if (ApplicationManager.instance?.configWindow.roadSlotList.Count > 0)
             //{
-            Debug.WriteLine(ApplicationManager.instance?.configWindow.roadSlotList.Count + "    Gandu Mat Ban");
-            Debug.WriteLine(ApplicationManager.instance?.simWindow.roadCanvasList.Count + "    Gandu Ban Le");
+            //Debug.WriteLine(ApplicationManager.instance?.configWindow.roadSlotList.Count + "    Gandu Mat Ban");
+            //Debug.WriteLine(ApplicationManager.instance?.simWindow.roadCanvasList.Count + "    Gandu Ban Le");
             //Debug.WriteLine(ApplicationManager.instance?.configWindow.roadSlotList[0].SelectedImage + "Loda Lassan");
             //}
 

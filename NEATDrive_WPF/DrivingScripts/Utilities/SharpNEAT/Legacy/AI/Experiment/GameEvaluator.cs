@@ -1,8 +1,7 @@
 ﻿using SharpNeat.Core;
 using SharpNeat.Phenomes;
-using TitTacToeGame;
 
-namespace NeatTest.ConsoleApp.AI
+namespace NEATDrive_WPF.DrivingScripts.Utilities.SharpNEAT.Legacy.AI.Experiment
 {
     public class GameEvaluator : IPhenomeEvaluator<IBlackBox>
     {

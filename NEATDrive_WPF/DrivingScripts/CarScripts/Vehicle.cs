@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEATDrive_WPF.DrivingScripts.Utilities;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,16 +10,21 @@ using Color = System.Drawing.Color;
 
 namespace NEATDrive_WPF.DrivingScripts.CarScripts
 {
-    abstract class Vehicle
+    public abstract class Vehicle
     {
         protected Canvas? carCanvas;
         protected Canvas? RoadCanvas = ApplicationManager.instance?.simWindow?.RoadCanvas;
         protected bool isCarDrivable = false;
         protected Canvas spawnCanvas;
+        protected Canvas destinationCanvas;
+        protected Canvas obstacleCanvas = ApplicationManager.instance.simWindow.ObstacleCanvas;
 
+        public int CrashTimes = 0;
+        public Stopwatch stopwatch = new();
+        public bool CRASHED = false;
 
-        protected double carSpeed;
-        protected double carRotation;
+        public double carSpeed;
+        public double carRotation;
         protected double carTurningSpeed = 3;
         protected double carFriction;
         protected double carPositionX;
@@ -33,6 +39,9 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
         protected bool isColorCacheValid = false;
 
         protected Grid rayContainer;
+
+
+        protected RaycastResult raycastResult = new();
 
         //protected readonly Canvas canvas;
         //protected readonly System.Drawing.Rectangle carRect;
@@ -56,6 +65,7 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
 
         protected void UpdateColorCache(Canvas roadCanvas, Canvas carCanvas)
         {
+            /*
             Point carCanvasPosition = carCanvas.TranslatePoint(new Point(0, 0), roadCanvas);
 
             int carCanvasX = (int)carCanvasPosition.X;
@@ -82,6 +92,64 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
                 }
                 else
                 {
+                    //if (pixelColor[2] <= 1 &&
+                    //pixelColor[1] <= 1 &&
+                    //pixelColor[0] <= 1)
+                    //{
+                    //    underlyingColor = Color.Black;
+                    //    if (isColorCacheValid)
+                    //    {
+                    //        isColorCacheValid = false;
+                    //    }
+                    //    ResetCar(carCanvas, spawnCanvas);
+                    //}
+                    //= dataList.Last<MyData>().ID
+                    underlyingColor = Color.White;
+                    if (isColorCacheValid)
+                    {
+                        isColorCacheValid = false;
+                    }
+                }
+
+            }*/
+
+
+
+            Point carCanvasPosition = carCanvas.TranslatePoint(new Point(0, 0), roadCanvas);
+
+            int carCanvasX = (int)carCanvasPosition.X;
+            int carCanvasY = (int)carCanvasPosition.Y;
+
+            if (carCanvasX >= 0 && carCanvasX < roadCanvas.ActualWidth && carCanvasY >= 0 && carCanvasY < roadCanvas.ActualHeight)
+            {
+                RenderTargetBitmap renderBitmap = new((int)roadCanvas.ActualWidth, (int)roadCanvas.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
+                renderBitmap.Render(roadCanvas);
+
+                CroppedBitmap croppedBitmap = new(renderBitmap, new Int32Rect(carCanvasX, carCanvasY, 1, 1));
+                byte[] pixelColor = new byte[4];
+                croppedBitmap.CopyPixels(pixelColor, 4, 0);
+
+                if (pixelColor[2] >= 50 && pixelColor[2] <= 70 &&
+                    pixelColor[1] >= 140 && pixelColor[1] <= 160 &&
+                    pixelColor[0] >= 50 && pixelColor[0] <= 70)
+                {
+                    underlyingColor = Color.FromArgb(255, 60, 150, 60);
+                    if (isColorCacheValid)
+                    {
+                        isColorCacheValid = false;
+                    }
+                }
+                else if (pixelColor[2] == 0 && pixelColor[1] == 0 && pixelColor[0] == 0)
+                {
+                    underlyingColor = Color.FromArgb(255, 0, 0, 0);
+                    if (isColorCacheValid)
+                    {
+                        isColorCacheValid = false;
+                        ResetCar(carCanvas, spawnCanvas); // Call ResetCar method when black color is detected
+                    }
+                }
+                else
+                {
                     underlyingColor = Color.White;
                     if (isColorCacheValid)
                     {
@@ -89,6 +157,8 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
                     }
                 }
             }
+
+
         }
 
 
@@ -111,6 +181,10 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
         protected bool IsColorGreen(Color color)
         {
             return color.R == 60 && color.G == 150 && color.B == 60; // Adjust the color values as needed
+        }
+        protected bool IsColorBlack(Color color)
+        {
+            return color.R == 0 && color.G == 0 && color.B == 0; // Adjust the color values as needed
         }
         private Rect GetRectOfObject(FrameworkElement _element)
         {
@@ -136,15 +210,32 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
 
                 // Collision detected
                 // Perform desired actions, such as hiding the HeroCar_Sprite canvas
-                //ResetCar(carCanvas, spawnCanvas);
+                ResetCar(carCanvas, spawnCanvas);
                 //carCanvas.Visibility = Visibility.Hidden;
             }
         }
+        private void CheckBounds()
+        {
+            // Get the bounds of the obstacleCanvas
+            Rect obstacleBounds = new(0, 0, obstacleCanvas.ActualWidth, obstacleCanvas.ActualHeight);
+
+            // Check if the carCanvas is outside the obstacleCanvas bounds
+            Rect carBounds = new(Canvas.GetLeft(carCanvas), Canvas.GetTop(carCanvas), carCanvas.ActualWidth, carCanvas.ActualHeight);
+
+            if (!obstacleBounds.Contains(carBounds))
+            {
+                // Call the ResetCar method
+                ResetCar(carCanvas, spawnCanvas);
+            }
+        }
+
 
         protected void ResetCar(Canvas carSprite, Canvas spawnCanvas)
         {
             // In the case of NEAT, you must also add the Logic to restart the NEAT algo from beginning
             isCarDrivable = false;
+            CRASHED = true;
+
             //double spawnerPositionX = Canvas.GetLeft(spawnCanvas);
             //double spawnerPositionY = Canvas.GetTop(spawnCanvas);
             System.Windows.Point spawnerPosition = new(Canvas.GetLeft(spawnCanvas), Canvas.GetTop(spawnCanvas));
@@ -283,10 +374,10 @@ namespace NEATDrive_WPF.DrivingScripts.CarScripts
 
 
         // Calculate the endpoint of a ray based on the starting position and direction
-        System.Windows.Point CalculateRayEndpoint(System.Windows.Point startPoint, Vector direction)
+        Point CalculateRayEndpoint(Point startPoint, Vector direction)
         {
             double rayLength = 10.0; // Adjust this value to the desired maximum length of the rays
-            System.Windows.Point endPoint = new(startPoint.X + direction.X * rayLength, startPoint.Y + direction.Y * rayLength);
+            Point endPoint = new(startPoint.X + direction.X * rayLength, startPoint.Y + direction.Y * rayLength);
             return endPoint;
         }
 
